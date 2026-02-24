@@ -1,0 +1,16 @@
+{
+	"Metadata": {
+		"home": "Home",
+		"activities": "Attività",
+		"rentals": "Case Vacanze",
+		"future_home": "La tua futura casa",
+		"residence": "Residenza",
+		"studying": "Studiare a Malta",
+		"blog": "Blog"
+	},
+	"NotFound": {
+		"heading": "Pagina non trovata",
+		"description": "Spiacenti, ma questa pagina non esiste.",
+		"backHome": "Tornare alla home"
+	}
+}
