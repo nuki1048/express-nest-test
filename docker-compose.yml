@@ -1,0 +1,50 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: appartaments-rent-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: appartaments_rent
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 2s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: appartaments-rent-api
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/appartaments_rent
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # One-off: run seed against Docker Postgres (no ts-node in api image, so use builder)
+  seed:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      target: builder
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/appartaments_rent
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: sh -c "yarn seed"
+    profiles:
+      - tools
+
+volumes:
+  postgres_data:
