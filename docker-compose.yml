@@ -25,23 +25,16 @@ services:
     restart: unless-stopped
     ports:
       - "3000:3000"
-    environment:
-      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/appartaments_rent
-    depends_on:
-      postgres:
-        condition: service_healthy
+    env_file:
+      - ./backend/.env
 
-  # One-off: run seed against Docker Postgres (no ts-node in api image, so use builder)
   seed:
     build:
       context: ./backend
       dockerfile: Dockerfile
       target: builder
-    environment:
-      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/appartaments_rent
-    depends_on:
-      postgres:
-        condition: service_healthy
+    env_file:
+      - ./backend/.env
     command: sh -c "yarn seed"
     profiles:
       - tools

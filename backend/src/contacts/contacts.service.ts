@@ -31,21 +31,19 @@ export class ContactsService {
   }
 
   async updateContact(data: UpdateContactDto) {
-    const payload = {
+    const createPayload = {
       phoneNumbers: data.phoneNumbers ?? [],
       email: data.email ?? '',
       address: data.address ?? '',
       links: data.links,
     };
-    const update = Object.fromEntries(
-      (Object.entries(data) as [keyof UpdateContactDto, unknown][]).filter(
-        ([, v]) => v !== undefined,
-      ),
-    );
+    const updatePayload = Object.fromEntries(
+      Object.entries(data).filter(([, v]) => v !== undefined),
+    ) as Partial<UpdateContactDto>;
     return this.db.contact.upsert({
       where: { id: CONTACT_SINGLETON_ID },
-      create: { id: CONTACT_SINGLETON_ID, ...payload },
-      update,
+      create: { id: CONTACT_SINGLETON_ID, ...createPayload },
+      update: updatePayload,
     });
   }
 }
