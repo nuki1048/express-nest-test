@@ -1,7 +1,7 @@
 import { Provider } from '@/providers/Provider'
 import { getMessages } from 'next-intl/server'
 import '../globals.css'
-import { Header } from '@/components/shared'
+import { Footer, Header } from '@/components/shared'
 
 export default async function LocaleLayout({
 	children,
@@ -15,8 +15,13 @@ export default async function LocaleLayout({
 
 	return (
 		<Provider locale={locale} messages={messages}>
-			<Header/>
-			<main>{children}</main>
+			<div className="flex flex-col min-h-screen">
+				<Header />
+				<main className="flex-1">
+					{children}
+				</main>
+				<Footer />
+			</div>
 		</Provider>
 	)
 }
