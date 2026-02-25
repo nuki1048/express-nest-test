@@ -1,6 +1,15 @@
 {
 	"Metadata": {
-		"home": "Главная",
+		"general": "ГЛАВНАЯ",
+		"activities": "МЕРОПРИЯТИЯ",
+		"rentals": "АРЕНДА НА ПРАЗДНИКИ",
+		"future_home": "ВАШ БУДУЩИЙ ДОМ",
+		"residence": "РЕЗИДЕНЦИЯ",
+		"studying": "ОБУЧЕНИЕ НА МАЛЬТЕ",
+		"blog": "БЛОГ"
+	},
+	"Header": {
+		"general": "Главная",
 		"activities": "Мероприятия",
 		"rentals": "Аренда на праздники",
 		"future_home": "Ваш будущий дом",

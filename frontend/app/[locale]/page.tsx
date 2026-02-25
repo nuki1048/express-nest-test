@@ -9,14 +9,14 @@ export async function generateMetadata({
 	const t = await getTranslations({ locale, namespace: 'Metadata' })
 
 	return {
-		title: t('home'),
+		title: t('general'),
 	}
 }
 
-export default function HomePage() {
+export default function GeneralPage() {
 	return (
 		<div>
-			<h1>HOLIDAY RENTAL</h1>
+			<h1>GeneralPage</h1>
 		</div>
 	)
 }
