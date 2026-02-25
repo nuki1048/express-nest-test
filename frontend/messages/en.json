@@ -1,6 +1,15 @@
 {
 	"Metadata": {
-		"home": "Home",
+		"general": "GENERAL",
+		"activities": "ACTIVITIES",
+		"rentals": "HOLIDAY RENTALS",
+		"future_home": "YOUR FUTURE HOME",
+		"residence": "RESIDENCE",
+		"studying": "STUDYING IN MALTA",
+		"blog": "BLOG"
+	},
+	"Header": {
+		"general": "General",
 		"activities": "Activities",
 		"rentals": "Holiday Rentals",
 		"future_home": "Your Future Home",

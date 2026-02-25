@@ -1,5 +1,5 @@
 class DASHBOARD {
-	HOME = '/'
+	GENERAL = '/'
 	ACTIVITIES = '/activities'
 	HOLIDAY_RENTALS = '/holiday-rentals'
 	YOUR_FUTURE_HOME = '/your-future-home'

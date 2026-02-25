@@ -11,12 +11,12 @@
 
 @theme inline {
 	--color-background: var(--background);
-	--color-background-brown: var(--background-brown);
-	--color-background-gray-light: var(--background-gray-light);
-	--color-background-gray-dark: var(--background-gray-dark);
+	--color-brown: var(--background-brown);
+	--color-gray-light: var(--background-gray-light);
+	--color-gray-dark: var(--background-gray-dark);
 	--color-primary: var(--primary);
 	--color-secondary: var(--secondary);
-	--font-sans: 'Wix Madefor Text', ui-sans-serif, system-ui;
+	--font-sans: 'Wix Madefor Text', serif;
 	--font-rouge: 'Rouge Script', serif;
 	--font-engravers: 'Cinzel', serif;
 	--font-didot: 'Didot', serif;
@@ -153,6 +153,6 @@
 	}
 
 	.text-links {
-		@apply font-sans text-base font-normal text-primary transition-colors duration-300 hover:text-secondary cursor-pointer;
+		@apply font-sans text-[18px] transition-colors duration-300 hover:text-secondary cursor-pointer;
 	}
 }

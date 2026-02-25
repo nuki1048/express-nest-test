@@ -1,5 +1,7 @@
 import { Provider } from '@/providers/Provider'
 import { getMessages } from 'next-intl/server'
+import '../globals.css'
+import { Header } from '@/components/shared'
 
 export default async function LocaleLayout({
 	children,
@@ -13,6 +15,7 @@ export default async function LocaleLayout({
 
 	return (
 		<Provider locale={locale} messages={messages}>
+			<Header/>
 			<main>{children}</main>
 		</Provider>
 	)

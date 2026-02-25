@@ -11,7 +11,7 @@ interface Props {
 
 export function Provider({ children, locale, messages }: Props) {
 	return (
-		<NextIntlClientProvider locale={locale} messages={messages}>
+		<NextIntlClientProvider locale={locale} messages={messages} timeZone="UTC">
 			{children}
 		</NextIntlClientProvider>
 	)

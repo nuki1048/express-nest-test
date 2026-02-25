@@ -1,6 +1,15 @@
 {
 	"Metadata": {
-		"home": "Home",
+		"general": "GENERAL",
+		"activities": "ATTIVITÀ",
+		"rentals": "CASE VACANZE",
+		"future_home": "LA TUA FUTURA CASA",
+		"residence": "RESIDENZA",
+		"studying": "STUDIARE A MALTA",
+		"blog": "BLOG"
+	},
+	"Header": {
+		"general": "General",
 		"activities": "Attività",
 		"rentals": "Case Vacanze",
 		"future_home": "La tua futura casa",
