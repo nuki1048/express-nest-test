@@ -15,7 +15,7 @@ export const Footer: React.FC<Props> = ({ className }) => {
 				'container mx-auto flex flex-row items-center justify-between py-10 transition-all duration-300',
 				'h-72 max-2xl:h-64 max-xl:h-60 max-lg:h-52 max-md:h-auto max-md:flex-col max-md:gap-y-10'
 			)}>
-				<div className="flex-1 flex justify-start max-md:justify-center">
+				<div className="flex-1 flex justify-center">
 					<Link href='/'>
 						<div className="relative w-[300px] max-2xl:w-[250px] max-xl:w-[200px] max-lg:w-[160px]">
 							<Image

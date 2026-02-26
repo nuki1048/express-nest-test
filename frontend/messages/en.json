@@ -17,6 +17,10 @@
 		"studying": "Studying in Malta",
 		"blog": "Blog"
 	},
+	"HeroSection": {
+		"title": "largo estate",
+		"subtitle": "Discover our world"
+	},
 	"NotFound": {
 		"heading": "Page not found",
 		"description": "Sorry, but this page does not exist.",

@@ -17,6 +17,10 @@
 		"studying": "Studiare a Malta",
 		"blog": "Blog"
 	},
+	"HeroSection": {
+		"title": "largo estate",
+		"subtitle": "Scopri il nostro mondo"
+	},
 	"NotFound": {
 		"heading": "Pagina non trovata",
 		"description": "Spiacenti, ma questa pagina non esiste.",

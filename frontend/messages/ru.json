@@ -17,6 +17,10 @@
 		"studying": "Обучение на Мальте",
 		"blog": "Блог"
 	},
+	"HeroSection": {
+		"title": "largo estate",
+		"subtitle": "Откройте для себя наш мир"
+	},
 	"NotFound": {
 		"heading": "Страницу не найдено",
 		"description": "Извините, но этой страницы не существует.",
