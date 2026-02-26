@@ -31,10 +31,21 @@ export default async function handler(
     server = await bootstrap();
   }
 
-  // Vercel catch-all: req.url is e.g. /api/contacts; Nest has global prefix /api.
-  const path = req.url ?? '/';
-  if (!path.startsWith('/api')) {
-    req.url = '/api' + (path.startsWith('/') ? path : '/' + path);
+  // Vercel catch-all adds ?[...path]=contacts; strip it so Nest sees clean /api/contacts
+  const raw = req.url ?? '/';
+  const [pathname, queryString] = raw.split('?');
+  const pathOnly = pathname.startsWith('/api')
+    ? pathname
+    : '/api' + (pathname.startsWith('/') ? pathname : '/' + pathname);
+
+  const searchParams = queryString ? new URLSearchParams(queryString) : null;
+  if (searchParams) {
+    searchParams.delete('[...path]');
+    searchParams.delete('path');
+    const remaining = searchParams.toString();
+    req.url = remaining ? `${pathOnly}?${remaining}` : pathOnly;
+  } else {
+    req.url = pathOnly;
   }
 
   server(req, res);
