@@ -1,0 +1,6 @@
+{
+  "installCommand": "cd backend && yarn install",
+  "buildCommand": "cd backend && yarn build",
+  "outputDirectory": "backend/dist",
+  "framework": null
+}
