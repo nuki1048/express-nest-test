@@ -30,6 +30,10 @@
 			"footer": "Malta rende ogni soggiorno indimenticabile."
 		}
 	},
+	"ExperienceSection": {
+		"title": "DURANTE IL SOGGIORNO",
+		"subtitle": "Qualità eccezionale"
+	},
 	"NotFound": {
 		"heading": "Pagina non trovata",
 		"description": "Spiacenti, ma questa pagina non esiste.",

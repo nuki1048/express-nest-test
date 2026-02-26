@@ -30,6 +30,10 @@
 			"footer": "Malta makes every stay unforgettable."
 		}
 	},
+	"ExperienceSection": {
+		"title": "DURING YOUR STAY",
+		"subtitle": "Exceptional  quality"
+	},
 	"NotFound": {
 		"heading": "Page not found",
 		"description": "Sorry, but this page does not exist.",

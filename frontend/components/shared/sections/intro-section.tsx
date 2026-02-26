@@ -22,7 +22,7 @@ export const IntroSection: React.FC<Props> = ({ className }) => {
 			)}>
 				<div className="flex-1 flex flex-col justify-center items-center text-center">
 					<div>
-						<h2 className="text-title border-b border-black inline-block pb-1">
+						<h2 className="text-title border-b border-primary inline-block pb-1">
 							{t('title')}
 						</h2>
 						<p className="text-subtitle mt-4 max-xl:mt-2">
