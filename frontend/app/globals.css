@@ -7,6 +7,21 @@
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
 
+html {
+  margin-right: 0 !important;
+  overflow-y: scroll !important;
+}
+
+body {
+  width: 100vw !important;
+  overflow-x: hidden !important;
+  position: relative !important;
+}
+
+body[style] {
+  padding-right: 0 !important;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {

@@ -49,10 +49,10 @@ export const BurgerMenu: React.FC<React.PropsWithChildren> = ({ children }) => {
 					<div className="flex gap-x-6">
 						<Link href={"https://www.airbnb.com.ua"}
 							target='_blank'
-							className='bg-primary text-background text-center w-[150px] py-2 rounded-3xl transition-colors duration-400 cursor hover:bg-secondary'>AIRBNB</Link>
+							className='bg-primary text-background text-center w-[130px] py-2 rounded-3xl transition-colors duration-400 cursor hover:bg-secondary text-[14px]'>AIRBNB</Link>
 						<Link href={"https://www.booking.com"}
 							target='_blank'
-							className='bg-primary text-background text-center w-[150px] py-2 rounded-3xl transition-colors duration-400 cursor hover:bg-secondary'>BOOKING</Link>
+							className='bg-primary text-background text-center w-[130px] py-2 rounded-3xl transition-colors duration-400 cursor hover:bg-secondary text-[14px]'>BOOKING</Link>
 					</div>
 				</div>
 

@@ -21,7 +21,7 @@ export const Header: React.FC<Props> = ({ className }) => {
 
 	return (
 		<header className={cn(
-			'h-[90px] bg-gray-dark flex items-center transition-all duration-300',
+			'sticky top-0 z-100 w-full h-[90px] bg-gray-dark flex items-center transition-all duration-300',
 			'max-2xl:h-[80px] max-xl:h-[75px] max-lg:h-[70px] max-md:h-[50px]',
 			className
 		)}>
