@@ -31,5 +31,11 @@ export default async function handler(
     server = await bootstrap();
   }
 
+  // Vercel strips the /api prefix when invoking the function; Nest expects /api/*.
+  const path = req.url ?? '/';
+  if (!path.startsWith('/api')) {
+    req.url = '/api' + (path.startsWith('/') ? path : '/' + path);
+  }
+
   server(req, res);
 }
