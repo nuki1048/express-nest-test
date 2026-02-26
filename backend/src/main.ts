@@ -27,7 +27,6 @@ async function bootstrap(): Promise<void> {
   await app.listen(process.env.PORT ?? 3000);
 }
 
-/** Vercel serverless handler (used when builds/routes point here) */
 export default async function handler(
   req: IncomingMessage,
   res: ServerResponse,
