@@ -21,6 +21,15 @@
 		"title": "largo estate",
 		"subtitle": "Discover our world"
 	},
+	"IntroSection": {
+		"title": "largo estate",
+		"subtitle": "Open Malta with us",
+		"description": {
+			"highlight": "Sun, sea, history, adventure — all on one island.",
+			"mainText": "With crystal-clear waters, over 300 days of sunshine, vibrant coastal towns and 7,000 years of history, Malta attracts millions of visitors each year and inspires many to return not only as tourists, but as investors and future residents.",
+			"footer": "Malta makes every stay unforgettable."
+		}
+	},
 	"NotFound": {
 		"heading": "Page not found",
 		"description": "Sorry, but this page does not exist.",

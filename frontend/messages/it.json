@@ -21,6 +21,15 @@
 		"title": "largo estate",
 		"subtitle": "Scopri il nostro mondo"
 	},
+	"IntroSection": {
+		"title": "largo estate",
+		"subtitle": "Scopri Malta con noi",
+		"description": {
+			"highlight": "Sole, mare, storia, avventura — tutto su un'unica isola.",
+			"mainText": "Con acque cristalline, oltre 300 giorni di sole all'anno, vivaci città costiere e 7.000 anni di storia, Malta attira milioni di visitatori ogni anno e spinge molti a tornare non solo come turisti, ma anche come investitori e futuri residenti.",
+			"footer": "Malta rende ogni soggiorno indimenticabile."
+		}
+	},
 	"NotFound": {
 		"heading": "Pagina non trovata",
 		"description": "Spiacenti, ma questa pagina non esiste.",

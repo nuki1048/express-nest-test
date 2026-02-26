@@ -14,6 +14,7 @@ export const useLocaleChange = () => {
 		startTransition(() => {
 			router.replace(`${pathname}?${searchParams.toString()}`, {
 				locale: nextLocale,
+				scroll: false,
 			})
 		})
 	}

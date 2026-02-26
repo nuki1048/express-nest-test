@@ -13,7 +13,7 @@ export const HeroSection: React.FC<Props> = ({ className }) => {
 		<section className={cn('bg-background relative h-[600px] mx-auto overflow-hidden', className)}>
 			<Image
 				alt="hero image"
-				src="/generalPage/hero-section.jpg"
+				src="/generalPage/hero-section.webp"
 				fill
 				priority
 				className="object-cover"

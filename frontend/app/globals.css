@@ -156,15 +156,15 @@ body[style] {
 
 @layer utilities {
 	.text-title {
-		@apply font-engravers text-5xl font-black uppercase tracking-wide;
+		@apply font-engravers text-6xl font-black uppercase tracking-wide max-2xl:text-5xl max-xl:text-4xl max-lg:text-3xl max-md:text-2xl;
 	}
 
 	.text-subtitle {
-		@apply font-great-vibes text-[53px] leading-[68px] font-normal;
+		@apply font-great-vibes text-4xl leading-[58px] font-normal max-2xl:text-3xl max-xl:text-2xl max-md:text-xl max-2xl:leading-tight;
 	}
 
 	.text-text {
-		@apply font-didot text-2xl font-bold;
+		@apply font-didot text-2xl font-bold max-2xl:text-xl max-xl:text-lg max-lg:text-base max-md:text-[14px];
 	}
 
 	.text-links {
