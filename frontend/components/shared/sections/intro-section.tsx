@@ -40,7 +40,7 @@ export const IntroSection: React.FC<Props> = ({ className }) => {
 						<p className="text-center">
 							{t('description.mainText')}
 						</p>
-						<p className="text-center italic">
+						<p className="text-center">
 							{t('description.footer')}
 						</p>
 					</div>
