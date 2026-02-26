@@ -14,7 +14,7 @@ async function bootstrap(): Promise<express.Express> {
     AppModule,
     new ExpressAdapter(expressApp),
     {
-      logger: ['error', 'log'],
+      logger: ['error', 'warn', 'log'],
     },
   );
 
