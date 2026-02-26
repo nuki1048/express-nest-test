@@ -27,5 +27,5 @@ COPY --from=builder /app/dist ./dist
 ENV NODE_ENV=production
 EXPOSE 3000
 
-# Run migrations then start the API (migrate deploy applies pending migrations)
-CMD ["sh", "-c", "npx prisma migrate deploy && node dist/main.js"]
+# DATABASE_URL from env_file at runtime. Migrate then start; exec keeps node as PID 1.
+CMD ["sh", "-c", "if [ -z \"$DATABASE_URL\" ]; then echo 'Error: DATABASE_URL is not set'; exit 1; fi; npx prisma migrate deploy && exec node dist/main.js"]
