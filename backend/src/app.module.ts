@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { AppController } from './app.controller';
 import { adminModulePromise } from './admin/admin.module';
 import { ApartmentsModule } from './apartments/apartments.module';
 import { BlogPostModule } from './blog-post/blog-post.module';
@@ -8,6 +9,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { UploadModule } from './upload/upload.module';
 
 @Module({
+  controllers: [AppController],
   imports: [
     PrismaModule,
     ContactsModule,
