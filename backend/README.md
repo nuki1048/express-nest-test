@@ -20,6 +20,8 @@ cp .env.example .env   # edit DATABASE_URL if not using Docker default
 yarn install
 ```
 
+For **apartment image uploads** in the admin panel, set `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` in `.env`, and create a **public** Storage bucket named `apartments` in the Supabase Dashboard (Storage → New bucket).
+
 Migrations are in `backend/prisma/migrations`. For a **clean database** (e.g. first run or after reset), run once from `backend/`: `npx prisma migrate deploy` (or start the stack with Docker; the API runs it on startup).
 
 `.env` for Docker Postgres:

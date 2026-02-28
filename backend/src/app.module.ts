@@ -5,6 +5,7 @@ import { BlogPostModule } from './blog-post/blog-post.module';
 import { ContactFormModule } from './contact-form/contact-form.module';
 import { ContactsModule } from './contacts/contacts.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { UploadModule } from './upload/upload.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { PrismaModule } from './prisma/prisma.module';
     ContactFormModule,
     ApartmentsModule,
     BlogPostModule,
+    UploadModule,
     adminModulePromise,
   ],
 })

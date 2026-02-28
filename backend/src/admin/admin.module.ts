@@ -1,13 +1,11 @@
 import { DynamicModule } from '@nestjs/common';
-import * as path from 'path';
 import { PrismaService } from '../prisma/prisma.service';
 import { dynamicImport } from '../utils/dynamic-import';
 import { adminConfig } from './config';
 import { getAuthConfig } from './auth';
 import { buildAdminResources, modelWithIdForAdminJS } from './resources';
 import type { PrismaDmmfModel } from './resources';
-
-const adminDir = path.join(__dirname, '..', '..', 'src', 'admin');
+import path from 'path';
 
 export interface AdminModuleFactoryOptions {
   adminJsOptions: {
@@ -44,7 +42,16 @@ export const adminModulePromise: Promise<DynamicModule> = dynamicImport<{
     };
   }>('adminjs');
   const componentLoader = new adminjs.ComponentLoader();
-  componentLoader.add('LinksField', path.join(adminDir, 'LinksField'));
+  const adminDir = path.join(__dirname, '..', '..', 'src', 'admin');
+
+  componentLoader.add(
+    'LinksField',
+    path.join(adminDir, 'components', 'LinksField.tsx'),
+  );
+  componentLoader.add(
+    'ImageUploadField',
+    path.join(adminDir, 'components', 'ImageUpload', 'ImageUploadField'),
+  );
 
   const getModel = (name: string) =>
     modelWithIdForAdminJS(AdminJSPrisma.getModelByName, name);

@@ -61,7 +61,23 @@ export function buildAdminResources(
       },
       options: {
         properties: {
-          photos: { isArray: true },
+          mainPhoto: {
+            components: {
+              edit: 'ImageUploadField',
+              show: 'ImageUploadField',
+              list: 'ImageUploadField',
+            },
+            custom: { uploadPathPrefix: 'apartments' },
+          },
+          photos: {
+            isArray: true,
+            components: {
+              edit: 'ImageUploadField',
+              show: 'ImageUploadField',
+              list: 'ImageUploadField',
+            },
+            custom: { uploadPathPrefix: 'apartments' },
+          },
         },
       },
     },
@@ -72,6 +88,14 @@ export function buildAdminResources(
       },
       options: {
         properties: {
+          mainPhoto: {
+            components: {
+              edit: 'ImageUploadField',
+              show: 'ImageUploadField',
+              list: 'ImageUploadField',
+            },
+            custom: { uploadPathPrefix: 'blog-post' },
+          },
           content: { type: 'richtext' },
           views: {
             isVisible: {
