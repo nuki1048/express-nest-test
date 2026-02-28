@@ -34,6 +34,64 @@
 		"title": "DURING YOUR STAY",
 		"subtitle": "Exceptional  quality"
 	},
+	"Activities": {
+		"title": "ACTIVITIES",
+		"relaxation": {
+			"title": "Seaside relaxation",
+			"subtitle": "Malta’s coastline offers everything from golden sandy beaches to dramatic rocky coves and turquoise swimming spots.",
+			"details": {
+				"p1": "Malta’s coastline offers everything from golden sandy beaches to dramatic rocky coves and turquoise swimming spots.",
+				"p2": "<bold>Golden Sands & Family-Friendly Beaches:</bold>",
+				"p3": "<bold>Mellieħa Bay (Għadira Bay)</bold> and <bold>Golden Bay</bold> - The largest sandy beach in Malta, ideal for families.",
+				"p4": "<bold>Secluded & Hidden Coves</bold>",
+				"p5": "<bold>St. Peter’s Pool</bold> - A natural swimming pool formed by limestone cliffs near Marsaxlokk. Crystal-clear waters, perfect for cliff diving and snorkeling.",
+				"p6": "<bold>Surfing & Water Sports Beaches</bold>",
+				"p7": "<bold>Bugibba and Qawra</bold> - Busy, lively beaches with water sports like jet skiing, paddleboarding, and parasailing. Family-friendly, with restaurants and bars along the promenade.",
+				"p8": "<bold>Għajn Tuffieħa</bold> - Rugged beauty with golden sand and dramatic cliffs, perfect for sunset photography.",
+				"p9": "For those who want to stay nearby, the Gzira, Sliema, St Julian’s promenades are ideal for scenic walks, with stunning sea views.  Within walking distance Beach clubs are ready to offer daily packages with sunbeds, umbrellas and towels,  gourmet food and refreshing cocktails. Top picks include <bold>Café del Mar (St. Paul’s Bay)</bold> – infinity pool, sunset DJ sessions, stylish atmosphere, <bold>MedAsia Playa</bold> for its young vibe, <bold>Manta</bold> for a chic atmosphere, <bold>Aqualuna</bold> for the best poolside relaxation, and <bold>1926 Beach Club</bold>"
+			}
+		},
+		"culture": {
+			"title": "Culture & heritage explorers",
+			"subtitle": "Malta is an open-air museum with ancient temples older than the pyramids, medieval cities, and grand fortifications tell stories of knights, empires, and civilizations. Step into history at these iconic Maltese landmarks",
+			"details": {
+				"p1": "Malta is an open-air museum with ancient temples older than the pyramids, medieval cities, and grand fortifications tell stories of knights, empires, and civilizations. Step into history at these iconic Maltese landmarks:",
+				"p2": "<bold>Valletta (UNESCO World Heritage Site)</bold> – capital city  with grand baroque streets, noble palaces and the magnificent St. John’s Co-Cathedral with Caravaggio masterpieces",
+				"p3": "<bold>Mdina</bold> – the silent medieval city and Malta’s first capital, with narrow alleys, noble houses, and a timeless atmosphere overlooking the island.",
+				"p4": "<bold>Ħaġar Qim & Mnajdra Temples</bold> – prehistoric coastal wonders older than the pyramids, perched dramatically above the open sea.",
+				"p5": "<bold>The Three Cities (Vittoriosa, Senglea & Cospicua)</bold> – authentic maritime towns of the Knights, with historic forts, docks, and centuries of living history.",
+				"p6": "<bold>Gozo’s Citadel</bold> – an ancient fortified hilltop offering sweeping panoramic views across the island and countryside, steeped in military and cultural heritage.",
+				"p7": "<bold>Mosta Dome (Rotunda of St. Marija Assunta)</bold> – one of the largest domed churches in Europe. During WWII, a bomb pierced the dome but did not explode, a miracle still celebrated today.",
+				"p8": "<bold>Fort Rinella</bold> – Victorian coastal artillery fort, offering live historical reenactments.",
+				"p9": "<bold>Tarxien Temples</bold> – prehistoric temples with intricate stone carvings.",
+				"p10": "<bold>Fort St. Angelo (Vittoriosa)</bold> – headquarters of the Knights of St. John, central to Malta’s maritime history.",
+				"p11": "<bold>Casa Rocca Piccola (Valletta)</bold> – living palace of a Maltese noble family open for tours."
+			}
+		},
+		"nightlife": {
+			"title": "Nightlife & Entertainment",
+			"subtitle": "When the sun sets, Malta comes alive. From stylish beach clubs to lively bars and numerous open-air summer festivals, the island offers energy for every taste.",
+			"details": {
+				"p1": "When the sun sets, Malta comes alive. From stylish beach clubs to lively bars and numerous open-air summer festivals, the island offers energy for every taste.",
+				"p2": "<bold>Paceville (St. Julian’s)</bold> – Malta’s nightlife hub",
+				"p3": "<bold>Portomaso Marina</bold> – upscale dining & cocktail bars",
+				"p4": "<bold>Sliema & Valletta waterfronts</bold> – relaxed evening vibes",
+				"p5": "<bold>Beach clubs at Golden Bay & Għajn Tuffieħa</bold> – sunset parties",
+				"p6": "From late May through September every town celebrates its patron saint with fireworks, street decorations and processions, live music, band marches and local food stalls.",
+				"p7": "Whether you prefer elegant cocktails by the sea, dancing until sunrise or experience authentic Maltese culture at village feasts Malta offers unforgettable nights."
+			}
+		},
+		"escape": {
+			"title": "An island-to-island escape",
+			"subtitle": "Discover a different side of Malta by going beyond the typical tourist spots. Begin with a boat trip to Comino with its most iconic spot Blue Lagoon — a shallow bay with incredibly clear water, perfect for swimming and snorkeling.",
+			"details": {
+				"p1": "Discover a different side of Malta by going beyond the typical tourist spots. Begin with a boat trip to Comino with its most iconic spot Blue Lagoon — a shallow bay with incredibly clear water, perfect for swimming and snorkeling. Along the coastline you’ll find caves such as the Santa Maria Caves, where you can explore by boat or snorkel through fascinating rock formations.",
+				"p2": "Then take a ferry to Gozo and head to Dwejra Bay. Although the iconic Azure Window is no longer standing, the area still impresses with dramatic cliffs, sea caves, and stunning coastal scenery.",
+				"p3": "Continue to Victoria, also known as Rabat, and visit the Citadella. This historic hilltop fortress offers sweeping panoramic views across the island and a truly majestic atmosphere. Afterwards, make your way to Xlendi Bay — a beautiful, laid-back spot ideal for a swim or for relaxing by the sea with a refreshing drink.",
+				"p4": "Finish your journey in Marsalforn, a welcoming seaside village known for its excellent restaurants, peaceful ambiance, and spectacular sunsets. Together, these places reveal the true charm of Gozo and make it an unforgettable destination."
+			}
+		}
+	},
 	"NotFound": {
 		"heading": "Page not found",
 		"description": "Sorry, but this page does not exist.",

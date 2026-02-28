@@ -156,7 +156,7 @@ body[style] {
 
 @layer utilities {
 	.text-title {
-		@apply font-engravers text-6xl font-black uppercase tracking-wide max-2xl:text-5xl max-xl:text-4xl max-lg:text-3xl max-md:text-2xl;
+		@apply font-engravers text-6xl font-black uppercase tracking-wide max-2xl:text-4xl max-lg:text-3xl max-md:text-2xl;
 	}
 
 	.text-subtitle {

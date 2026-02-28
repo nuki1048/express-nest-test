@@ -34,6 +34,64 @@
 		"title": "DURANTE IL SOGGIORNO",
 		"subtitle": "Qualità eccezionale"
 	},
+	"Activities": {
+		"title": "ATTIVITÀ",
+		"relaxation": {
+			"title": "Relax al mare",
+			"subtitle": "La costa maltese offre di tutto, dalle spiagge di sabbia dorata alle suggestive insenature rocciose e alle piscine naturali turchesi.",
+			"details": {
+				"p1": "La costa maltese offre di tutto, dalle spiagge di sabbia dorata alle suggestive insenature rocciose e alle piscine naturali turchesi.",
+				"p2": "<bold>Spiagge dorate e adatte alle famiglie:</bold>",
+				"p3": "<bold>Mellieħa Bay (Għadira Bay)</bold> e <bold>Golden Bay</bold> - La spiaggia sabbiosa più grande di Malta, ideale per le famiglie.",
+				"p4": "<bold>Calette appartate e nascoste</bold>",
+				"p5": "<bold>St. Peter’s Pool</bold> - Una piscina naturale formata da scogliere calcaree vicino a Marsaxlokk. Acque cristalline, perfette per i tuffi dalla scogliera e lo snorkeling.",
+				"p6": "<bold>Surf e sport acquatici Spiagge</bold>",
+				"p7": "<bold>Bugibba and Qawra</bold> - Spiagge affollate e vivaci dove praticare sport acquatici come jet ski, paddleboard e parasailing. Adatte alle famiglie, con ristoranti e bar lungo la passeggiata.",
+				"p8": "<bold>Għajn Tuffieħa</bold> - Bellezza selvaggia con sabbia dorata e scogliere spettacolari, perfetta per fotografare il tramonto.",
+				"p9": "Per chi desidera rimanere nelle vicinanze, le passeggiate di Gzira, Sliema e St Julian's sono l'ideale per passeggiate panoramiche con una vista mozzafiato sul mare. A pochi passi, i beach club offrono pacchetti giornalieri con lettini, ombrelloni e asciugamani, cibo gourmet e cocktail rinfrescanti. Tra i migliori citiamo il <bold>Café del Mar (St. Paul's Bay)</bold> – piscina a sfioro, DJ set al tramonto, atmosfera elegante, il <bold>MedAsia Playa</bold> per la sua atmosfera giovane, il <bold>Manta</bold> per l'atmosfera chic, <bold>Aqualuna</bold> per il miglior relax a bordo piscina e il <bold>1926 Club sulla spiaggia</bold>."
+			}
+		},
+		"culture": {
+			"title": "Esploratori di cultura e patrimonio",
+			"subtitle": "Malta è un museo a cielo aperto con antichi templi più antichi delle piramidi, città medievali e grandiose fortificazioni che raccontano storie di cavalieri, imperi e civiltà. Immergiti nella storia visitando questi iconici monumenti maltesi.",
+			"details": {
+				"p1": "Malta è un museo a cielo aperto con antichi templi più antichi delle piramidi, città medievali e grandiose fortificazioni che raccontano storie di cavalieri, imperi e civiltà. Immergiti nella storia visitando questi iconici monumenti maltesi:",
+				"p2": "<bold>Valletta (Sito patrimonio mondiale dell'UNESCO)</bold> – capitale  con grandiose strade barocche, palazzi nobiliari e la magnifica Concattedrale di San Giovanni con i capolavori di Caravaggio",
+				"p3": "<bold>Mdina</bold> – La silenziosa città medievale e prima capitale di Malta, con vicoli stretti, dimore nobiliari e un'atmosfera senza tempo che domina l'isola.",
+				"p4": "<bold>Ħaġar Qim & Mnajdra Temples</bold> – meraviglie costiere preistoriche più antiche delle piramidi, arroccate in modo spettacolare sopra il mare aperto.",
+				"p5": "<bold>Le tre città (Vittoriosa, Senglea & Cospicua)</bold> – autentiche città marittime dei Cavalieri, con fortezze storiche, banchine e secoli di storia vivente.",
+				"p6": "<bold>Gozo’s Citadel</bold> – un'antica collina fortificata che offre una vista panoramica mozzafiato sull'isola e sulla campagna circostante, ricca di storia militare e culturale.",
+				"p7": "<bold>Mosta Dome (Rotonda di Santa Maria Assunta)</bold> – una delle chiese a cupola più grandi d'Europa. Durante la Seconda Guerra Mondiale, una bomba perforò la cupola ma non esplose, un miracolo che ancora oggi viene celebrato.",
+				"p8": "<bold>Fort Rinella</bold> – Forte vittoriano dell'artiglieria costiera, che offre rievocazioni storiche dal vivo.",
+				"p9": "<bold>Tarxien Temples</bold> – templi preistorici con intricate incisioni rupestri.",
+				"p10": "<bold>Fort St. Angelo (Vittoriosa)</bold> – sede dei Cavalieri di San Giovanni, fondamentale nella storia marittima di Malta.",
+				"p11": "<bold>Casa Rocca Piccola (Valletta)</bold> – palazzo residenziale di una famiglia nobile maltese aperto al pubblico."
+			}
+		},
+		"nightlife": {
+			"title": "Vita notturna e intrattenimento",
+			"subtitle": "Quando il sole tramonta, Malta si anima. Dai raffinati beach club ai vivaci bar e ai numerosi festival estivi all'aperto, l'isola offre energia per tutti i gusti.",
+			"details": {
+				"p1": "Quando il sole tramonta, Malta si anima. Dai raffinati beach club ai vivaci bar e ai numerosi festival estivi all'aperto, l'isola offre energia per tutti i gusti.",
+				"p2": "<bold>Paceville (St. Julian’s)</bold> – Il centro della vita notturna di Malta",
+				"p3": "<bold>Portomaso Marina</bold> – ristoranti e cocktail bar di lusso",
+				"p4": "<bold>Sliema & Valletta waterfronts</bold> – atmosfera rilassata serale",
+				"p5": "<bold>Beach clubs at Golden Bay & Għajn Tuffieħa</bold> – feste al tramonto",
+				"p6": "Da fine maggio a settembre ogni città festeggia il proprio santo patrono con fuochi d'artificio, decorazioni stradali e processioni, musica dal vivo, bande musicali e bancarelle di cibo locale.",
+				"p7": "Che tu preferisca eleganti cocktail in riva al mare, ballare fino all'alba o vivere l'autentica cultura maltese durante le feste di paese, Malta ti offre notti indimenticabili."
+			}
+		},
+		"escape": {
+			"title": "Una fuga da un'isola all'altra",
+			"subtitle": "Scoprite un lato diverso di Malta andando oltre le tipiche mete turistiche. Iniziate con una gita in barca a Comino, con il suo luogo più iconico, la Laguna Blu, una baia poco profonda con acque incredibilmente limpide, perfetta per nuotare e fare snorkeling.",
+			"details": {
+				"p1": "Scoprite un lato diverso di Malta andando oltre le tipiche mete turistiche. Iniziate con una gita in barca a Comino, con il suo luogo più iconico, la Laguna Blu, una baia poco profonda con acque incredibilmente limpide, perfetta per nuotare e fare snorkeling. Lungo la costa troverete grotte come quelle di Santa Maria, che potrete esplorare in barca o facendo snorkeling tra affascinanti formazioni rocciose.",
+				"p2": "Quindi prendete un traghetto per Gozo e dirigetevi verso la baia di Dwejra. Anche se l'iconica Finestra Azzurra non esiste più, la zona continua a stupire con le sue scogliere spettacolari, le grotte marine e gli splendidi paesaggi costieri.",
+				"p3": "Proseguite verso Victoria, conosciuta anche come Rabat, e visitate la Cittadella. Questa storica fortezza arroccata su una collina offre una vista panoramica mozzafiato sull'isola e un'atmosfera davvero maestosa. Successivamente, dirigetevi verso la baia di Xlendi, un luogo incantevole e tranquillo, ideale per fare una nuotata o rilassarsi in riva al mare sorseggiando una bevanda rinfrescante.",
+				"p4": "Concludete il vostro viaggio a Marsalforn, un accogliente villaggio sul mare noto per i suoi ottimi ristoranti, l'atmosfera tranquilla e i tramonti spettacolari. Insieme, questi luoghi rivelano il vero fascino di Gozo e la rendono una destinazione indimenticabile."
+			}
+		}
+	},
 	"NotFound": {
 		"heading": "Pagina non trovata",
 		"description": "Spiacenti, ma questa pagina non esiste.",
