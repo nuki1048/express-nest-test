@@ -58,7 +58,7 @@ async function getServer(): Promise<express.Express> {
 }
 
 async function bootstrap(): Promise<void> {
-  await registerAdminJSAdapter();
+  // await registerAdminJSAdapter();
   const app = await NestFactory.create(AppModule);
   configureApp(app);
   await app.listen(process.env.PORT ?? 3000);
