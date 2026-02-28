@@ -3,8 +3,11 @@
  * Used only when process.env.VERCEL is set.
  */
 import type { DynamicModule } from '@nestjs/common';
+// @ts-ignore
 import { AdminModule, type AdminModuleOptions } from '@adminjs/nestjs';
+// @ts-ignore
 import AdminJS from 'adminjs';
+// @ts-ignore
 import * as AdminJSPrisma from '@adminjs/prisma';
 import path from 'path';
 import { PrismaService } from './prisma/prisma.service';
