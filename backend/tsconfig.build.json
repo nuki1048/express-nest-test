@@ -1,11 +1,19 @@
 {
   "extends": "./tsconfig.json",
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "test", "dist", "prisma", "prisma.config.ts", "scripts", "**/*spec.ts"],
+  "exclude": [
+    "node_modules",
+    "test",
+    "dist",
+    "prisma",
+    "prisma.config.ts",
+    "scripts",
+    "**/*spec.ts",
+    "src/admin"
+  ],
   "compilerOptions": {
     "module": "commonjs",
     "moduleResolution": "node",
-    "resolvePackageJsonExports": false,
     "noEmit": false,
     "incremental": false
   }
