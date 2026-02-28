@@ -65,5 +65,32 @@ export function buildAdminResources(
         },
       },
     },
+    {
+      resource: {
+        model: getModel('BlogPost'),
+        client,
+      },
+      options: {
+        properties: {
+          content: { type: 'richtext' },
+          views: {
+            isVisible: {
+              edit: false,
+              show: true,
+              list: true,
+              filter: true,
+            },
+          },
+          likes: {
+            isVisible: {
+              edit: false,
+              show: true,
+              list: true,
+              filter: true,
+            },
+          },
+        },
+      },
+    },
   ];
 }
