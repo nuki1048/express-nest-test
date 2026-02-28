@@ -21,11 +21,39 @@ model Contact {
 }
 
 model ContactFormSubmission {
-  id         String   @id @default(cuid())
-  firstName  String
-  lastName   String
-  email      String
+  id          String   @id @default(cuid())
+  firstName   String
+  lastName    String
+  email       String
   phoneNumber String
-  message    String
-  createdAt  DateTime @default(now())
+  message     String
+  createdAt   DateTime @default(now())
+}
+
+model Apartment {
+  id             String   @id @default(cuid())
+  title          String
+  description    String   @db.Text
+  bedrooms       Int
+  maxPeople      Int
+  couches        Int
+  showers        Int
+  viewFromWindow String
+  hasAc          Boolean  @default(false)
+  mainPhoto      String
+  photos         String[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model BlogPost {
+  id             String   @id @default(cuid())
+  title          String
+  description    String   @db.Text
+  content        String   @db.Text
+  mainPhoto      String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  views          Int      @default(0)
+  likes          Int      @default(0)
 }
