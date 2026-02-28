@@ -24,7 +24,6 @@ export class UploadService {
   /**
    * Upload a file buffer to Supabase Storage and return the public URL.
    * @param file - buffer, originalname, and optional mimetype
-   * @param pathPrefix - folder path inside the bucket, e.g. "apartments/<id>" or "blog-post/<id>"
    */
   async uploadFile(
     file: UploadFilePayload,
