@@ -1,5 +1,9 @@
 import type { IncomingMessage, ServerResponse } from 'http';
-import { RequestMethod, type INestApplication } from '@nestjs/common';
+import {
+  RequestMethod,
+  ValidationPipe,
+  type INestApplication,
+} from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import express from 'express';
@@ -14,6 +18,13 @@ const corsOptions = {
 };
 
 function configureApp(app: INestApplication): void {
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: false,
+      transform: true,
+    }),
+  );
   app.enableCors(corsOptions);
   app.setGlobalPrefix('api', {
     exclude: [{ path: '', method: RequestMethod.GET }],
