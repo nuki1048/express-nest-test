@@ -92,6 +92,29 @@
 			}
 		}
 	},
+	"ContactUs": {
+		"title": "Largo estate",
+		"subtitle": "Divertiamoci con",
+		"ContactForm": {
+			"title": "Contattaci",
+			"firstName": "Nome",
+			"lastName": "Cognome",
+			"email": "E-mail",
+			"phone": "Telefono",
+			"message": "Messaggio",
+			"button": "Contattaci",
+			"errors": {
+				"firstName": "Il nome è troppo corto",
+				"lastName": "Il cognome è troppo corto",
+				"emailRequired": "L'indirizzo e-mail è obbligatorio",
+				"emailInvalid": "Formato e-mail non corretto",
+				"phone": "Inserisci il tuo numero di telefono",
+				"messageRequired": "Inserisci il tuo messaggio",
+				"messageTooShort": "Il messaggio deve contenere almeno 10 caratteri."
+			},
+			"submitSuccess": "La tua candidatura è stata accettata, ti contatteremo al più presto!"
+		}
+	},
 	"NotFound": {
 		"heading": "Pagina non trovata",
 		"description": "Spiacenti, ma questa pagina non esiste.",

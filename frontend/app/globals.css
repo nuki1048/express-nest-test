@@ -31,6 +31,7 @@ body[style] {
 	--color-gray-dark: var(--background-gray-dark);
 	--color-primary: var(--primary);
 	--color-secondary: var(--secondary);
+	--color-bg-form: var(--background-form);
 	--font-sans: 'Wix Madefor Text', serif;
 	--font-great-vibes: 'Great Vibes', serif;
 	--font-engravers: 'Cinzel', serif;
@@ -76,6 +77,7 @@ body[style] {
 	--radius: 0.625rem;
 	--background: rgb(255, 255, 255);
 	--background-brown: rgb(206, 193, 179);
+	--background-form: rgb(209, 209, 203);
 	--background-gray-light: rgb(240, 240, 240);
 	--background-gray-dark: rgb(222, 223, 218);
 	--primary: rgb(0, 0, 0);

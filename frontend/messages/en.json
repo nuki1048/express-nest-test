@@ -92,6 +92,29 @@
 			}
 		}
 	},
+	"ContactUs": {
+		"title": "Largo estate",
+		"subtitle": "Let's have a great time with",
+		"ContactForm": {
+			"title": "Get in touch",
+			"firstName": "First name",
+			"lastName": "Last name",
+			"email": "Email",
+			"phone": "Phone",
+			"message": "Message",
+			"button": "Contact us",
+			"errors": {
+				"firstName": "The name is too short",
+				"lastName": "The last name is too short",
+				"emailRequired": "Email is required",
+				"emailInvalid": "Incorrect email format",
+				"phone": "Enter your phone number",
+				"messageRequired": "Please enter your message",
+				"messageTooShort": "The message must be at least 10 characters long"
+			},
+			"submitSuccess": "Your application has been accepted, we will contact you soon!"
+		}
+	},
 	"NotFound": {
 		"heading": "Page not found",
 		"description": "Sorry, but this page does not exist.",
