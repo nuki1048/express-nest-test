@@ -1,4 +1,4 @@
-import { ActivitiesSection, ContactUsSection, ExperienceSection, HeroSection, IntroSection } from '@/components/shared'
+import { ActivitiesSection, ContactUsSection, ExperienceSection, HeroSection, IntroSection, PhotosSection } from '@/components/shared'
 import { getTranslations } from 'next-intl/server'
 
 export async function generateMetadata({
@@ -22,6 +22,7 @@ export default function GeneralPage() {
 			<ExperienceSection />
 			<ActivitiesSection />
 			<ContactUsSection />
+			<PhotosSection />
 		</div>
 	)
 }
