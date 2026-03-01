@@ -1,6 +1,5 @@
 import type { DynamicModule } from '@nestjs/common';
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
 import { ApartmentsModule } from './apartments/apartments.module';
 import { BlogPostModule } from './blog-post/blog-post.module';
 import { ContactFormModule } from './contact-form/contact-form.module';
@@ -20,7 +19,6 @@ const adminModule: Promise<DynamicModule> | undefined = process.env.VERCEL
 /* eslint-enable @typescript-eslint/no-require-imports */
 
 @Module({
-  controllers: [AppController],
   imports: [
     PrismaModule,
     ContactsModule,
