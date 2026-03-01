@@ -6,12 +6,14 @@ import { usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/utils'
 import { NAV_ITEMS } from '@/constants/navItems'
-import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetTitle } from '../ui'
+import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetTitle, Skeleton } from '../ui'
+import { useContacts } from '@/lib/useContacts'
 
 export const BurgerMenu: React.FC<React.PropsWithChildren> = ({ children }) => {
 	const t = useTranslations('Header')
 	const fullPathname = usePathname()
 	const pathname = fullPathname.replace(/^\/(en|ru|de)(\/|$)/, '/') || '/'
+	const { data: contacts, isLoading } = useContacts()
 
 	return (
 		<Sheet>
@@ -44,18 +46,37 @@ export const BurgerMenu: React.FC<React.PropsWithChildren> = ({ children }) => {
 						)
 					})}
 				</nav>
-
 				<div className="flex-1 flex items-end justify-center w-full">
 					<div className="flex gap-x-6">
-						<Link href={"https://www.airbnb.com.ua"}
-							target='_blank'
-							className='bg-primary text-background text-center w-[130px] py-2 rounded-3xl transition-colors duration-400 cursor text-[14px]'>AIRBNB</Link>
-						<Link href={"https://www.booking.com"}
-							target='_blank'
-							className='bg-primary text-background text-center w-[130px] py-2 rounded-3xl transition-colors duration-400 cursor text-[14px]'>BOOKING</Link>
+						{isLoading ? (
+							<>
+								<Skeleton className="w-[130px] h-[36px] rounded-3xl bg-muted" />
+								<Skeleton className="w-[130px] h-[36px] rounded-3xl bg-muted" />
+							</>
+						) : (
+							<>
+								{contacts?.links.airbnb && (
+									<Link
+										href={contacts.links.airbnb}
+										target='_blank'
+										className='bg-primary text-background text-center w-[130px] py-2 rounded-3xl transition-colors duration-400 cursor text-[14px]'
+									>
+										AIRBNB
+									</Link>
+								)}
+								{contacts?.links.booking && (
+									<Link
+										href={contacts.links.booking}
+										target='_blank'
+										className='bg-primary text-background text-center w-[130px] py-2 rounded-3xl transition-colors duration-400 cursor text-[14px]'
+									>
+										BOOKING
+									</Link>
+								)}
+							</>
+						)}
 					</div>
 				</div>
-
 			</SheetContent>
 		</Sheet>
 	)
