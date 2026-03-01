@@ -112,7 +112,8 @@
 				"messageRequired": "Inserisci il tuo messaggio",
 				"messageTooShort": "Il messaggio deve contenere almeno 10 caratteri."
 			},
-			"submitSuccess": "La tua candidatura è stata accettata, ti contatteremo al più presto!"
+			"successMessage": "Messaggio inviato con successo!",
+			"errorMessage": "Si è verificato un errore. Riprova."
 		}
 	},
 	"NotFound": {

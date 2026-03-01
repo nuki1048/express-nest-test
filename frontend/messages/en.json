@@ -112,7 +112,8 @@
 				"messageRequired": "Please enter your message",
 				"messageTooShort": "The message must be at least 10 characters long"
 			},
-			"submitSuccess": "Your application has been accepted, we will contact you soon!"
+			"successMessage": "Message sent successfully!",
+			"errorMessage": "Something went wrong. Please try again."
 		}
 	},
 	"NotFound": {
