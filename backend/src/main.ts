@@ -1,5 +1,5 @@
 import type { IncomingMessage, ServerResponse } from 'http';
-import type { INestApplication } from '@nestjs/common';
+import { RequestMethod, type INestApplication } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import express from 'express';
@@ -15,7 +15,9 @@ const corsOptions = {
 
 function configureApp(app: INestApplication): void {
   app.enableCors(corsOptions);
-  app.setGlobalPrefix('api');
+  app.setGlobalPrefix('api', {
+    exclude: [{ path: '', method: RequestMethod.GET }],
+  });
 }
 
 async function registerAdminJSAdapter(): Promise<void> {
@@ -42,7 +44,7 @@ let server: express.Express | null = null;
 
 async function getServer(): Promise<express.Express> {
   if (server) return server;
-  await registerAdminJSAdapter();
+  if (!process.env.VERCEL) await registerAdminJSAdapter();
   const expressApp = express();
   const app = await NestFactory.create(
     AppModule,
