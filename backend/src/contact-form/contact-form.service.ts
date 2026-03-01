@@ -7,6 +7,14 @@ export class ContactFormService {
   constructor(private readonly prisma: PrismaService) {}
 
   async submit(data: SubmitContactFormDto) {
-    return this.prisma.contactFormSubmission.create({ data });
+    return this.prisma.contactFormSubmission.create({
+      data: {
+        firstName: data.firstName ?? '',
+        lastName: data.lastName ?? '',
+        email: data.email,
+        phoneNumber: data.phoneNumber ?? '',
+        message: data.message,
+      },
+    });
   }
 }
