@@ -9,7 +9,7 @@
     "prisma.config.ts",
     "scripts",
     "**/*spec.ts",
-    "src/admin/admin.module.ts"
+    "src/admin"
   ],
   "compilerOptions": {
     "module": "commonjs",
