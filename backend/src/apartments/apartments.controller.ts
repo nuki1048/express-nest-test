@@ -20,9 +20,9 @@ export class ApartmentsController {
     return this.apartmentsService.getApartments();
   }
 
-  @Get(':id')
-  getApartment(@Param('id') id: string) {
-    return this.apartmentsService.getApartment(id);
+  @Get(':slug')
+  getApartment(@Param('slug') slug: string) {
+    return this.apartmentsService.getApartment(slug);
   }
 
   @Post()
@@ -30,16 +30,16 @@ export class ApartmentsController {
     return this.apartmentsService.createApartment(createApartmentDto);
   }
 
-  @Patch(':id')
+  @Patch(':slug')
   updateApartment(
-    @Param('id') id: string,
+    @Param('slug') slug: string,
     @Body() updateApartmentDto: UpdateApartmentDto,
   ) {
-    return this.apartmentsService.updateApartment(id, updateApartmentDto);
+    return this.apartmentsService.updateApartment(slug, updateApartmentDto);
   }
 
-  @Delete(':id')
-  deleteApartment(@Param('id') id: string) {
-    return this.apartmentsService.deleteApartment(id);
+  @Delete(':slug')
+  deleteApartment(@Param('slug') slug: string) {
+    return this.apartmentsService.deleteApartment(slug);
   }
 }

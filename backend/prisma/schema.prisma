@@ -14,7 +14,7 @@ model Contact {
   id           String   @id @default(cuid())
   phoneNumbers String[]
   email        String
-  address      String
+  address      Json     // { label: string, url: string }
   links        Json?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
@@ -31,7 +31,7 @@ model ContactFormSubmission {
 }
 
 model Apartment {
-  id             String   @id @default(cuid())
+  slug           String   @id
   title          String
   description    String   @db.Text
   bedrooms       Int
@@ -47,13 +47,13 @@ model Apartment {
 }
 
 model BlogPost {
-  id             String   @id @default(cuid())
-  title          String
-  description    String   @db.Text
-  content        String   @db.Text
-  mainPhoto      String
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  views          Int      @default(0)
-  likes          Int      @default(0)
+  slug          String   @id
+  title         String
+  description   String   @db.Text
+  content       String   @db.Text
+  mainPhoto     String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  views         Int      @default(0)
+  likes         Int      @default(0)
 }

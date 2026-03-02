@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import type { UpdateApartmentDto } from './dto/update-apartment';
 import { CreateApartmentDto } from './dto/create-apartment';
+import { titleToSlug } from '../utils/slug.utils';
 
 type PrismaWithApartment = PrismaService & {
   apartment: {
@@ -25,9 +26,10 @@ export class ApartmentsService {
     const apartments = await this.db.apartment.findMany();
     return apartments;
   }
-  async getApartment(id: string) {
+
+  async getApartment(slug: string) {
     const apartment = await this.db.apartment.findUnique({
-      where: { id },
+      where: { slug },
     });
     if (!apartment) {
       throw new NotFoundException('Apartment not found');
@@ -35,16 +37,31 @@ export class ApartmentsService {
     return apartment;
   }
 
+  private async ensureUniqueSlug(baseSlug: string): Promise<string> {
+    let slug = baseSlug;
+    let counter = 2;
+    while (await this.db.apartment.findUnique({ where: { slug } })) {
+      slug = `${baseSlug}-${counter}`;
+      counter += 1;
+    }
+    return slug;
+  }
+
   async createApartment(data: CreateApartmentDto) {
-    return this.db.apartment.create({ data });
+    const baseSlug =
+      titleToSlug(data.title) || `apartment-${Date.now().toString(36)}`;
+    const slug = await this.ensureUniqueSlug(baseSlug);
+    return this.db.apartment.create({
+      data: { ...data, slug },
+    });
   }
 
-  async updateApartment(id: string, data: UpdateApartmentDto) {
-    return this.db.apartment.update({ where: { id }, data });
+  async updateApartment(slug: string, data: UpdateApartmentDto) {
+    return this.db.apartment.update({ where: { slug }, data });
   }
 
-  async deleteApartment(id: string) {
-    await this.getApartment(id);
-    return this.db.apartment.delete({ where: { id } });
+  async deleteApartment(slug: string) {
+    await this.getApartment(slug);
+    return this.db.apartment.delete({ where: { slug } });
   }
 }

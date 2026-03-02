@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import type { UpdateBlogPostDto } from './dto/update-blog-post';
 import { CreateBlogPostDto } from './dto/create-blog-post';
+import { titleToSlug } from '../utils/slug.utils';
 
 type PrismaWithBlogPost = PrismaService & {
   blogPost: {
@@ -25,29 +26,44 @@ export class BlogPostService {
     return this.db.blogPost.findMany();
   }
 
-  async getBlogPost(id: string) {
+  async getBlogPost(slug: string) {
     const post = await this.db.blogPost.findUnique({
-      where: { id },
+      where: { slug },
     });
     if (!post) {
       throw new NotFoundException('Blog post not found');
     }
     return this.db.blogPost.update({
-      where: { id },
+      where: { slug },
       data: { views: { increment: 1 } },
     });
   }
 
+  private async ensureUniqueSlug(baseSlug: string): Promise<string> {
+    let slug = baseSlug;
+    let counter = 2;
+    while (await this.db.blogPost.findUnique({ where: { slug } })) {
+      slug = `${baseSlug}-${counter}`;
+      counter += 1;
+    }
+    return slug;
+  }
+
   async createBlogPost(data: CreateBlogPostDto) {
-    return this.db.blogPost.create({ data });
+    const baseSlug =
+      titleToSlug(data.title) || `blog-post-${Date.now().toString(36)}`;
+    const slug = await this.ensureUniqueSlug(baseSlug);
+    return this.db.blogPost.create({
+      data: { ...data, slug },
+    });
   }
 
-  async updateBlogPost(id: string, data: UpdateBlogPostDto) {
-    return this.db.blogPost.update({ where: { id }, data });
+  async updateBlogPost(slug: string, data: UpdateBlogPostDto) {
+    return this.db.blogPost.update({ where: { slug }, data });
   }
 
-  async deleteBlogPost(id: string) {
-    await this.getBlogPost(id);
-    return this.db.blogPost.delete({ where: { id } });
+  async deleteBlogPost(slug: string) {
+    await this.getBlogPost(slug);
+    return this.db.blogPost.delete({ where: { slug } });
   }
 }

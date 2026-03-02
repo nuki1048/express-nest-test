@@ -5,7 +5,7 @@ export type PrismaDmmfModel = {
   fields: Array<Record<string, unknown>>;
 };
 
-/** Prisma 7 DMMF fields omit isId; AdminJS Prisma adapter expects it. Normalize so the id field has isId: true. */
+/** Prisma 7 DMMF fields omit isId; AdminJS Prisma adapter expects it. Normalize so the id/slug field has isId: true. */
 export function modelWithIdForAdminJS(
   getModelByName: (name: string) => PrismaDmmfModel,
   modelName: string,
@@ -14,7 +14,7 @@ export function modelWithIdForAdminJS(
   return {
     ...model,
     fields: model.fields.map((f) =>
-      f.name === 'id' ? { ...f, isId: true } : f,
+      f.name === 'id' || f.name === 'slug' ? { ...f, isId: true } : f,
     ),
   };
 }
@@ -37,6 +37,13 @@ export function buildAdminResources(
       options: {
         properties: {
           phoneNumbers: { isArray: true },
+          address: {
+            type: 'json',
+            components: {
+              edit: 'AddressField',
+              show: 'AddressField',
+            },
+          },
           links: {
             type: 'json',
             components: {
