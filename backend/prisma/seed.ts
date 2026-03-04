@@ -27,6 +27,7 @@ async function main() {
         instagram: 'https://instagram.com/example',
         airbnb: 'https://airbnb.com/example',
         booking: 'https://booking.com/example',
+        whatsapp: 'https://wa.me/example',
       },
     },
     update: {},

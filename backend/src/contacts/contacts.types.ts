@@ -8,4 +8,5 @@ export type ContactLinks = {
   instagram?: string;
   airbnb?: string;
   booking?: string;
+  whatsapp?: string;
 };

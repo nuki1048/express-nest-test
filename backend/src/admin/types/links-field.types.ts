@@ -3,6 +3,7 @@ export const LINK_KEYS = [
   'instagram',
   'airbnb',
   'booking',
+  'whatsapp',
 ] as const;
 export type LinkKey = (typeof LINK_KEYS)[number];
 

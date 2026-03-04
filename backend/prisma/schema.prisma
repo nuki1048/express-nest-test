@@ -31,7 +31,8 @@ model ContactFormSubmission {
 }
 
 model Apartment {
-  slug           String   @id
+  id             String   @id @default(cuid())
+  slug           String?   @unique
   title          String
   description    String   @db.Text
   bedrooms       Int
@@ -47,7 +48,8 @@ model Apartment {
 }
 
 model BlogPost {
-  slug          String   @id
+  id            String   @id @default(cuid())
+  slug          String?   @unique
   title         String
   description   String   @db.Text
   content       String   @db.Text
@@ -56,4 +58,5 @@ model BlogPost {
   updatedAt     DateTime @updatedAt
   views         Int      @default(0)
   likes         Int      @default(0)
+  isPublished   Boolean  @default(false)
 }
