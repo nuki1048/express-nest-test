@@ -11,6 +11,10 @@ interface Props {
 export const ContactButton: React.FC<Props> = ({ className }) => {
 	const { data } = useContacts()
 
+	if (!data?.links.whatsApp) {
+		return null
+	}
+
 	return (
 		<a
 			href={data?.links.whatsApp}
