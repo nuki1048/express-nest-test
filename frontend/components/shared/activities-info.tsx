@@ -31,7 +31,7 @@ export const ActivitiesInfo: React.FC<Props> = ({ item }) => {
 				</h2>
 			</div>
 			<div className={cn(
-				"max-w-[1400px] mx-auto px-10 flex gap-20 items-start",
+				"max-w-[1400px] mx-auto px-10 flex gap-20 items-center",
 				item.reversed ? "flex-row-reverse" : "flex-row",
 				"max-lg:flex-col max-lg:items-center max-lg:gap-12",
 				"max-md:px-6"
