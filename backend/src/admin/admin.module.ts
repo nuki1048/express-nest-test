@@ -49,6 +49,10 @@ export const adminModulePromise: Promise<DynamicModule> = dynamicImport<{
     path.join(adminDir, 'components', 'LinksField.tsx'),
   );
   componentLoader.add(
+    'AddressField',
+    path.join(adminDir, 'components', 'AddressField.tsx'),
+  );
+  componentLoader.add(
     'ImageUploadField',
     path.join(adminDir, 'components', 'ImageUpload', 'ImageUploadField'),
   );

@@ -6,6 +6,7 @@ export const LABELS: Record<LinkKey, string> = {
   instagram: 'Instagram',
   airbnb: 'Airbnb',
   booking: 'Booking.com',
+  whatsapp: 'WhatsApp',
 };
 
 export function parseLinks(value: unknown): LinksValue {

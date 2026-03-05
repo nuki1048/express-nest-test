@@ -20,9 +20,9 @@ export class BlogPostController {
     return this.blogPostService.getBlogPosts();
   }
 
-  @Get(':id')
-  getBlogPost(@Param('id') id: string) {
-    return this.blogPostService.getBlogPost(id);
+  @Get(':slug')
+  getBlogPost(@Param('slug') slug: string) {
+    return this.blogPostService.getBlogPost(slug);
   }
 
   @Post()
@@ -30,16 +30,16 @@ export class BlogPostController {
     return this.blogPostService.createBlogPost(createBlogPostDto);
   }
 
-  @Patch(':id')
+  @Patch(':slug')
   updateBlogPost(
-    @Param('id') id: string,
+    @Param('slug') slug: string,
     @Body() updateBlogPostDto: UpdateBlogPostDto,
   ) {
-    return this.blogPostService.updateBlogPost(id, updateBlogPostDto);
+    return this.blogPostService.updateBlogPost(slug, updateBlogPostDto);
   }
 
-  @Delete(':id')
-  deleteBlogPost(@Param('id') id: string) {
-    return this.blogPostService.deleteBlogPost(id);
+  @Delete(':slug')
+  deleteBlogPost(@Param('slug') slug: string) {
+    return this.blogPostService.deleteBlogPost(slug);
   }
 }

@@ -18,12 +18,16 @@ async function main() {
       id: 'default',
       phoneNumbers: ['+380501234567', '+380671234567'],
       email: 'contact@example.com',
-      address: 'Kyiv, vul. Khreshchatyk 1',
+      address: {
+        label: 'Kyiv, vul. Khreshchatyk 1',
+        url: 'https://maps.example.com/kyiv-khreshchatyk-1',
+      },
       links: {
         facebook: 'https://facebook.com/example',
         instagram: 'https://instagram.com/example',
         airbnb: 'https://airbnb.com/example',
         booking: 'https://booking.com/example',
+        whatsapp: 'https://wa.me/example',
       },
     },
     update: {},

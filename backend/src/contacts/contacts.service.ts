@@ -34,7 +34,7 @@ export class ContactsService {
     const createPayload = {
       phoneNumbers: data.phoneNumbers ?? [],
       email: data.email ?? '',
-      address: data.address ?? '',
+      address: data.address ?? { label: '', url: '' },
       links: data.links,
     };
     const updatePayload = Object.fromEntries(
