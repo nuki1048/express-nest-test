@@ -1,13 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { EmailService } from '../email/email.service';
 import type { SubmitContactFormDto } from './dto/submit-contact-form.dto';
 
 @Injectable()
 export class ContactFormService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly emailService: EmailService,
+  ) {}
 
   async submit(data: SubmitContactFormDto) {
-    return this.prisma.contactFormSubmission.create({
+    const submission = await this.prisma.contactFormSubmission.create({
       data: {
         firstName: data.firstName ?? '',
         lastName: data.lastName ?? '',
@@ -16,5 +20,9 @@ export class ContactFormService {
         message: data.message,
       },
     });
+
+    await this.emailService.sendContactFormEmail(data);
+
+    return submission;
   }
 }

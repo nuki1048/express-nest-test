@@ -1669,6 +1669,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@emailjs/nodejs@npm:^5.0.2":
+  version: 5.0.2
+  resolution: "@emailjs/nodejs@npm:5.0.2"
+  checksum: 10c0/597fc7d4766fd9512e00af3f89171fa6a41f9ab1905201fd2826b5aab131c193c8101ba45829332cf754c64134d58276d55b9d93b64466f0fc66d7a2d3731275
+  languageName: node
+  linkType: hard
+
 "@emnapi/core@npm:^1.4.3":
   version: 1.8.1
   resolution: "@emnapi/core@npm:1.8.1"
@@ -5546,6 +5553,7 @@ __metadata:
     "@adminjs/express": "npm:^6.1.1"
     "@adminjs/nestjs": "npm:^7.0.0"
     "@adminjs/prisma": "npm:^5.0.4"
+    "@emailjs/nodejs": "npm:^5.0.2"
     "@eslint/eslintrc": "npm:^3.2.0"
     "@eslint/js": "npm:^9.18.0"
     "@nestjs/cli": "npm:^11.0.0"
