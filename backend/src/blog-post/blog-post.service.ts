@@ -2,7 +2,11 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import type { UpdateBlogPostDto } from './dto/update-blog-post';
 import { CreateBlogPostDto } from './dto/create-blog-post';
-import { titleToSlug } from '../utils/slug.utils';
+import {
+  titleToSlug,
+  ensureUniqueSlug,
+  getSlugForUpdate,
+} from '../utils/slug.utils';
 
 type PrismaWithBlogPost = PrismaService & {
   blogPost: {
@@ -39,27 +43,26 @@ export class BlogPostService {
     });
   }
 
-  private async ensureUniqueSlug(baseSlug: string): Promise<string> {
-    let slug = baseSlug;
-    let counter = 2;
-    while (await this.db.blogPost.findUnique({ where: { slug } })) {
-      slug = `${baseSlug}-${counter}`;
-      counter += 1;
-    }
-    return slug;
-  }
-
   async createBlogPost(data: CreateBlogPostDto) {
     const baseSlug =
       titleToSlug(data.title) || `blog-post-${Date.now().toString(36)}`;
-    const slug = await this.ensureUniqueSlug(baseSlug);
+    const slug = await ensureUniqueSlug(this.db.blogPost, baseSlug);
     return this.db.blogPost.create({
       data: { ...data, slug },
     });
   }
 
   async updateBlogPost(slug: string, data: UpdateBlogPostDto) {
-    return this.db.blogPost.update({ where: { slug }, data });
+    const slugData = await getSlugForUpdate(
+      this.db.blogPost,
+      data.title,
+      slug,
+      'blog-post-',
+    );
+    return this.db.blogPost.update({
+      where: { slug },
+      data: { ...data, ...slugData },
+    });
   }
 
   async deleteBlogPost(slug: string) {

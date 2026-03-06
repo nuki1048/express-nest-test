@@ -1,5 +1,5 @@
 import type { PrismaService } from '../prisma/prisma.service';
-import { titleToSlug } from '../utils/slug.utils';
+import { slugActionHandlers, type SlugDelegate } from './slug-action-handlers';
 
 export type PrismaDmmfModel = {
   name: string;
@@ -23,23 +23,6 @@ export function modelWithIdForAdminJS(
 export interface AdminResource {
   resource: { model: PrismaDmmfModel; client: PrismaService };
   options: Record<string, unknown>;
-}
-
-type DelegateWithFindUnique = {
-  findUnique: (args: { where: { slug: string } }) => Promise<unknown>;
-};
-
-async function ensureUniqueSlug(
-  delegate: DelegateWithFindUnique,
-  baseSlug: string,
-): Promise<string> {
-  let slug = baseSlug;
-  let counter = 2;
-  while (await delegate.findUnique({ where: { slug } })) {
-    slug = `${baseSlug}-${counter}`;
-    counter += 1;
-  }
-  return slug;
 }
 
 export function buildAdminResources(
@@ -85,52 +68,10 @@ export function buildAdminResources(
         client,
       },
       options: {
-        actions: {
-          new: {
-            before: async (request: {
-              method?: string;
-              payload?: { title?: string; slug?: string };
-            }) => {
-              if (request.method === 'post' && request.payload?.title) {
-                const baseSlug =
-                  titleToSlug(request.payload.title) ||
-                  `apartment-${Date.now().toString(36)}`;
-                request.payload.slug = await ensureUniqueSlug(
-                  client.apartment,
-                  baseSlug,
-                );
-              }
-              return request;
-            },
-            after: async (
-              request,
-              response: { getHeader?: (name: string) => string | undefined },
-              context: { record?: unknown },
-            ) => {
-              const record = context.record as
-                | { id?: () => string; get?: (key: string) => unknown }
-                | undefined;
-              const title =
-                (record?.get?.('title') as string | undefined) ??
-                (request as { payload?: { title?: string } }).payload?.title;
-              if (!title) return;
-              let id = record?.id?.();
-              if (!id && response?.getHeader) {
-                const loc = response.getHeader('Location');
-                const match = loc?.match(/\/records\/([^/]+)\//);
-                id = match?.[1];
-              }
-              if (!id) return;
-              const baseSlug =
-                titleToSlug(title) || `apartment-${Date.now().toString(36)}`;
-              const slug = await ensureUniqueSlug(client.apartment, baseSlug);
-              await client.apartment.update({
-                where: { id },
-                data: { slug },
-              });
-            },
-          },
-        },
+        actions: slugActionHandlers(
+          client.apartment as unknown as SlugDelegate,
+          'apartment-',
+        ),
         properties: {
           mainPhoto: {
             components: {
@@ -158,52 +99,10 @@ export function buildAdminResources(
         client,
       },
       options: {
-        actions: {
-          new: {
-            before: async (request: {
-              method?: string;
-              payload?: { title?: string; slug?: string };
-            }) => {
-              if (request.method === 'post' && request.payload?.title) {
-                const baseSlug =
-                  titleToSlug(request.payload.title) ||
-                  `blog-post-${Date.now().toString(36)}`;
-                request.payload.slug = await ensureUniqueSlug(
-                  client.blogPost,
-                  baseSlug,
-                );
-              }
-              return request;
-            },
-            after: async (
-              request,
-              response: { getHeader?: (name: string) => string | undefined },
-              context: { record?: unknown },
-            ) => {
-              const record = context.record as
-                | { id?: () => string; get?: (key: string) => unknown }
-                | undefined;
-              const title =
-                (record?.get?.('title') as string | undefined) ??
-                (request as { payload?: { title?: string } }).payload?.title;
-              if (!title) return;
-              let id = record?.id?.();
-              if (!id && response?.getHeader) {
-                const loc = response.getHeader('Location');
-                const match = loc?.match(/\/records\/([^/]+)\//);
-                id = match?.[1];
-              }
-              if (!id) return;
-              const baseSlug =
-                titleToSlug(title) || `blog-post-${Date.now().toString(36)}`;
-              const slug = await ensureUniqueSlug(client.blogPost, baseSlug);
-              await client.blogPost.update({
-                where: { id },
-                data: { slug },
-              });
-            },
-          },
-        },
+        actions: slugActionHandlers(
+          client.blogPost as unknown as SlugDelegate,
+          'blog-post-',
+        ),
         properties: {
           mainPhoto: {
             components: {

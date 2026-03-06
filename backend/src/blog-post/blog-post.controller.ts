@@ -6,6 +6,8 @@ import {
   Param,
   Patch,
   Post,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { BlogPostService } from './blog-post.service';
 import { CreateBlogPostDto } from './dto/create-blog-post';
@@ -31,6 +33,13 @@ export class BlogPostController {
   }
 
   @Patch(':slug')
+  @UsePipes(
+    new ValidationPipe({
+      whitelist: false,
+      transform: true,
+      forbidNonWhitelisted: false,
+    }),
+  )
   updateBlogPost(
     @Param('slug') slug: string,
     @Body() updateBlogPostDto: UpdateBlogPostDto,
