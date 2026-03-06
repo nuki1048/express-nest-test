@@ -11,13 +11,13 @@ interface Props {
 export const ContactButton: React.FC<Props> = ({ className }) => {
 	const { data } = useContacts()
 
-	if (!data?.links.whatsApp) {
+	if (!data?.links.whatsapp) {
 		return null
 	}
 
 	return (
 		<a
-			href={data?.links.whatsApp}
+			href={data?.links.whatsapp}
 			target="_blank"
 			rel="noopener noreferrer"
 			className={cn(

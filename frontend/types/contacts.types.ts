@@ -11,7 +11,7 @@ export interface IContacts {
     booking: string
     facebook: string
     instagram: string
-    whatsApp: string 
+    whatsapp: string 
   }
 }
 
