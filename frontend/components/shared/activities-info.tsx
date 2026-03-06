@@ -37,11 +37,27 @@ export const ActivitiesInfo: React.FC<Props> = ({ item }) => {
 				"max-md:px-6"
 			)}>
 				<div className={cn(
-					"flex-1 w-full grid grid-cols-2 gap-4",
-					"h-[650px] max-2xl:h-[550px] max-xl:h-[450px]",
-					"max-lg:min-h-[500px] max-lg:max-w-[600px]",
-					"max-md:min-h-[400px] max-md:max-w-[450px]",
-					"max-[480px]:min-h-[350px] max-[480px]:max-w-full"
+					"flex-1 w-full grid grid-cols-2 gap-4 transition-all duration-300",
+					(item.id === 'culture' || item.id === 'relaxation')
+						? [
+							"h-[900px] grid-rows-3",
+							"max-2xl:h-[800px]",
+							"max-xl:h-[700px]",
+							"max-lg:min-h-[750px]",
+							"max-md:min-h-[600px]",
+							"max-[480px]:min-h-[500px]"
+						]
+						: [
+							"h-[650px] grid-rows-2",
+							"max-2xl:h-[550px]",
+							"max-xl:h-[450px]",
+							"max-lg:min-h-[500px]",
+							"max-md:min-h-[400px]",
+							"max-[480px]:min-h-[350px]"
+						],
+					"max-lg:max-w-[600px]",
+					"max-md:max-w-[450px]",
+					"max-[480px]:max-w-full"
 				)}>
 					{item.images.map((img, idx) => (
 						<div
