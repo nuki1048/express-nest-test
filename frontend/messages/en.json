@@ -116,6 +116,12 @@
 			"errorMessage": "Something went wrong. Please try again."
 		}
 	},
+	"Blog": {
+		"allPosts": "All Posts",
+		"updated": "Updated",
+		"recentPosts": "Recent Posts",
+		"seeAll": "See All"
+	},
 	"NotFound": {
 		"heading": "Page not found",
 		"description": "Sorry, but this page does not exist.",

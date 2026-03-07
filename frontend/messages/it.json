@@ -116,6 +116,12 @@
 			"errorMessage": "Si è verificato un errore. Riprova."
 		}
 	},
+	"Blog": {
+		"allPosts": "Tutti i post",
+		"updated": "Aggiornato",
+		"recentPosts": "Post recenti",
+		"seeAll": "Vedi tutto"
+	},
 	"NotFound": {
 		"heading": "Pagina non trovata",
 		"description": "Spiacenti, ma questa pagina non esiste.",
