@@ -55,7 +55,7 @@ let server: express.Express | null = null;
 
 async function getServer(): Promise<express.Express> {
   if (server) return server;
-  if (!process.env.VERCEL) await registerAdminJSAdapter();
+  await registerAdminJSAdapter();
   const expressApp = express();
   const app = await NestFactory.create(
     AppModule,
