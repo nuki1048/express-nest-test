@@ -1,9 +1,10 @@
 import type { IncomingMessage, ServerResponse } from 'http';
 import {
+  type INestApplication,
   Module,
   RequestMethod,
+  type Type,
   ValidationPipe,
-  type INestApplication,
 } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
@@ -67,12 +68,12 @@ const baseImports = [
   UploadModule,
 ];
 
-async function getAppModule() {
+async function getAppModule(): Promise<Type> {
   await registerAdminJSAdapter();
   const adminModule = await adminModulePromise;
-  return Module({
-    imports: [...baseImports, adminModule],
-  })(class AppModule {});
+  class AppModule {}
+  Module({ imports: [...baseImports, adminModule] })(AppModule);
+  return AppModule;
 }
 
 let server: express.Express | null = null;
