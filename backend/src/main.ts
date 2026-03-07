@@ -1,5 +1,6 @@
 import type { IncomingMessage, ServerResponse } from 'http';
 import {
+  Module,
   RequestMethod,
   ValidationPipe,
   type INestApplication,
@@ -8,7 +9,13 @@ import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import express from 'express';
 import 'dotenv/config';
-import { AppModule } from './app.module';
+import { ApartmentsModule } from './apartments/apartments.module';
+import { BlogPostModule } from './blog-post/blog-post.module';
+import { ContactFormModule } from './contact-form/contact-form.module';
+import { ContactsModule } from './contacts/contacts.module';
+import { PrismaModule } from './prisma/prisma.module';
+import { UploadModule } from './upload/upload.module';
+import { adminModulePromise } from './admin/admin.module';
 import { dynamicImport } from './utils/dynamic-import';
 
 const corsOptions = {
@@ -51,11 +58,28 @@ async function registerAdminJSAdapter(): Promise<void> {
   });
 }
 
+const baseImports = [
+  PrismaModule,
+  ContactsModule,
+  ContactFormModule,
+  ApartmentsModule,
+  BlogPostModule,
+  UploadModule,
+];
+
+async function getAppModule() {
+  await registerAdminJSAdapter();
+  const adminModule = await adminModulePromise;
+  return Module({
+    imports: [...baseImports, adminModule],
+  })(class AppModule {});
+}
+
 let server: express.Express | null = null;
 
 async function getServer(): Promise<express.Express> {
   if (server) return server;
-  if (!process.env.VERCEL) await registerAdminJSAdapter();
+  const AppModule = await getAppModule();
   const expressApp = express();
   const app = await NestFactory.create(
     AppModule,
@@ -69,7 +93,7 @@ async function getServer(): Promise<express.Express> {
 }
 
 async function bootstrap(): Promise<void> {
-  await registerAdminJSAdapter();
+  const AppModule = await getAppModule();
   const app = await NestFactory.create(AppModule);
   configureApp(app);
   await app.listen(process.env.PORT ?? 3000);

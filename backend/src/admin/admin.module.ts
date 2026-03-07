@@ -42,7 +42,8 @@ export const adminModulePromise: Promise<DynamicModule> = dynamicImport<{
     };
   }>('adminjs');
   const componentLoader = new adminjs.ComponentLoader();
-  const adminDir = path.join(__dirname, '..', '..', 'src', 'admin');
+  // Use __dirname so paths work in both dev (ts-node) and prod (dist/)
+  const adminDir = __dirname;
 
   componentLoader.add(
     'LinksField',
