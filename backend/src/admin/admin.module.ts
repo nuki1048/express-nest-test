@@ -66,7 +66,7 @@ export const adminModulePromise: Promise<DynamicModule> = dynamicImport<{
     useFactory: (prisma: PrismaService): AdminModuleFactoryOptions => ({
       adminJsOptions: {
         rootPath: '/admin',
-        // componentLoader,
+        componentLoader: new adminjs.ComponentLoader(),
         resources: buildAdminResources(getModel, prisma),
         ...(Object.keys(adminConfig.branding).length > 0 && {
           branding: adminConfig.branding,
