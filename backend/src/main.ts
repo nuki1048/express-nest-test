@@ -32,7 +32,7 @@ function configureApp(app: INestApplication): void {
   );
   app.enableCors(corsOptions);
   app.setGlobalPrefix('api', {
-    exclude: [{ path: '', method: RequestMethod.GET }],
+    exclude: [{ path: '', method: RequestMethod.GET }, 'admin'],
   });
 }
 
