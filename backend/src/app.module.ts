@@ -5,7 +5,7 @@ import { ContactFormModule } from './contact-form/contact-form.module';
 import { ContactsModule } from './contacts/contacts.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { UploadModule } from './upload/upload.module';
-import { adminModulePromise } from './admin/admin.module';
+// import { adminModulePromise } from './admin/admin.module';
 @Module({
   imports: [
     PrismaModule,
@@ -14,7 +14,7 @@ import { adminModulePromise } from './admin/admin.module';
     ApartmentsModule,
     BlogPostModule,
     UploadModule,
-    adminModulePromise,
+    // adminModulePromise,
   ],
 })
 export class AppModule {}
