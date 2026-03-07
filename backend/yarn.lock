@@ -5,6 +5,15 @@ __metadata:
   version: 8
   cacheKey: 10c0
 
+"@adminjs/bundler@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@adminjs/bundler@npm:2.0.0"
+  peerDependencies:
+    adminjs: ">=6.0.0"
+  checksum: 10c0/4fbc73dbbb23972ef79c19fcb5fca2886e70c7b17bb7f9b1bbfe3b7cebc54c753efb7b41da4a386e4bc18e50bace9153bfd65042998c4fea0dd7671ea664f257
+  languageName: node
+  linkType: hard
+
 "@adminjs/design-system@npm:^4.1.0, @adminjs/design-system@npm:^4.1.1":
   version: 4.1.1
   resolution: "@adminjs/design-system@npm:4.1.1"
@@ -5549,6 +5558,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "appartaments-rent-nest@workspace:."
   dependencies:
+    "@adminjs/bundler": "npm:^2.0.0"
     "@adminjs/design-system": "npm:^4.1.1"
     "@adminjs/express": "npm:^6.1.1"
     "@adminjs/nestjs": "npm:^7.0.0"

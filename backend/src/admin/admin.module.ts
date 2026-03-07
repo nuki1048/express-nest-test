@@ -41,33 +41,39 @@ export const adminModulePromise: Promise<DynamicModule> = dynamicImport<{
       add: (name: string, filePath: string) => string;
     };
   }>('adminjs');
-  // const componentLoader = new adminjs.ComponentLoader();
-  // const adminDir = path.join(__dirname, '..', '..', 'src', 'admin');
+  const componentLoader = new adminjs.ComponentLoader();
+  const adminDir = path.join(__dirname, '..', '..', 'src', 'admin');
 
-  // componentLoader.add(
-  //   'LinksField',
-  //   path.join(adminDir, 'components', 'LinksField.tsx'),
-  // );
-  // componentLoader.add(
-  //   'AddressField',
-  //   path.join(adminDir, 'components', 'AddressField.tsx'),
-  // );
-  // componentLoader.add(
-  //   'ImageUploadField',
-  //   path.join(adminDir, 'components', 'ImageUpload', 'ImageUploadField'),
-  // );
+  componentLoader.add(
+    'LinksField',
+    path.join(adminDir, 'components', 'LinksField.tsx'),
+  );
+  componentLoader.add(
+    'AddressField',
+    path.join(adminDir, 'components', 'AddressField.tsx'),
+  );
+  componentLoader.add(
+    'ImageUploadField',
+    path.join(adminDir, 'components', 'ImageUpload', 'ImageUploadField'),
+  );
 
   const getModel = (name: string) =>
     modelWithIdForAdminJS(AdminJSPrisma.getModelByName, name);
 
   const authConfig = getAuthConfig();
 
+  const assetsCDN =
+    process.env.VERCEL && process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}/public/`
+      : undefined;
+
   return AdminModule.createAdminAsync({
     useFactory: (prisma: PrismaService): AdminModuleFactoryOptions => ({
       adminJsOptions: {
         rootPath: '/admin',
-        componentLoader: new adminjs.ComponentLoader(),
+        componentLoader,
         resources: buildAdminResources(getModel, prisma),
+        ...(assetsCDN && { assetsCDN }),
         ...(Object.keys(adminConfig.branding).length > 0 && {
           branding: adminConfig.branding,
         }),

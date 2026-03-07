@@ -8,6 +8,11 @@ import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import express from 'express';
 import 'dotenv/config';
+
+// Required for AdminJS in serverless: prevents bundling at runtime (hangs in immutable filesystem)
+if (process.env.VERCEL) {
+  process.env.ADMIN_JS_SKIP_BUNDLE = 'true';
+}
 import { AppModule } from './app.module';
 import { dynamicImport } from './utils/dynamic-import';
 
