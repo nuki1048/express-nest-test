@@ -44,6 +44,7 @@ let server: express.Express | null = null;
 async function getServer(): Promise<express.Express> {
   if (server) return server;
   const expressApp = express();
+  expressApp.get('/', (_req, res) => res.redirect(302, '/admin'));
   serveAdminPanel(expressApp);
   const app = await NestFactory.create(
     AppModule,
@@ -58,6 +59,7 @@ async function getServer(): Promise<express.Express> {
 
 async function bootstrap(): Promise<void> {
   const expressApp = express();
+  expressApp.get('/', (_req, res) => res.redirect(302, '/admin'));
   serveAdminPanel(expressApp);
   const app = await NestFactory.create(
     AppModule,
