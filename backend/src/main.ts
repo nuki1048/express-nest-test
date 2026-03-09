@@ -43,7 +43,6 @@ function serveFavicon(expressApp: express.Express): void {
 }
 
 function getAdminPath(): string {
-  // Vercel: dist/admin (includeFiles) or process.cwd()/admin; local: admin/dist
   const candidates = [
     path.join(process.cwd(), 'dist', 'admin'),
     path.join(process.cwd(), 'admin'),

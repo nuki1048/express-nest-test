@@ -23,7 +23,9 @@ async function fetchApi(
     credentials: 'include',
   });
   if (!response.ok) {
-    const error = await response.json().catch(() => ({ message: response.statusText }));
+    const error = await response
+      .json()
+      .catch(() => ({ message: response.statusText }));
     throw new Error(error.message || `HTTP ${response.status}`);
   }
   return response;
@@ -53,7 +55,7 @@ export const dataProvider: DataProvider = {
     const res = await fetchApi(url);
     const data = await res.json();
 
-    const list = Array.isArray(data) ? data : data.data ?? [];
+    const list = Array.isArray(data) ? data : (data.data ?? []);
     const total = data.total ?? list.length;
 
     const normalized = list.map((item: Record<string, unknown>) => {
@@ -82,7 +84,8 @@ export const dataProvider: DataProvider = {
       return { data };
     }
 
-    const identifier = resource === 'apartments' || resource === 'blog-posts' ? id : id;
+    const identifier =
+      resource === 'apartments' || resource === 'blog-posts' ? id : id;
     const res = await fetchApi(`${API_URL}/${resource}/${identifier}`);
     const data = await res.json();
 
@@ -128,7 +131,8 @@ export const dataProvider: DataProvider = {
       return { data: { ...data, id: data.id ?? 'contact' } };
     }
 
-    const identifier = resource === 'apartments' || resource === 'blog-posts' ? id : id;
+    const identifier =
+      resource === 'apartments' || resource === 'blog-posts' ? id : id;
     const res = await fetchApi(`${API_URL}/${resource}/${identifier}`, {
       method: 'PATCH',
       body: JSON.stringify(variables),
@@ -144,8 +148,11 @@ export const dataProvider: DataProvider = {
   },
 
   deleteOne: async ({ resource, id }) => {
-    const identifier = resource === 'apartments' || resource === 'blog-posts' ? id : id;
-    await fetchApi(`${API_URL}/${resource}/${identifier}`, { method: 'DELETE' });
+    const identifier =
+      resource === 'apartments' || resource === 'blog-posts' ? id : id;
+    await fetchApi(`${API_URL}/${resource}/${identifier}`, {
+      method: 'DELETE',
+    });
     return { data: { id } };
   },
 
