@@ -1,6 +1,7 @@
+import React from 'react';
 import { useShow } from '@refinedev/core';
-import { List, Show, useTable } from '@refinedev/antd';
-import { Table, Descriptions } from 'antd';
+import { List, Show, ShowButton, useTable } from '@refinedev/antd';
+import { Table, Descriptions, Space } from 'antd';
 
 const columns = [
   { title: 'First Name', dataIndex: 'firstName', key: 'firstName' },
@@ -12,6 +13,17 @@ const columns = [
     dataIndex: 'createdAt',
     key: 'createdAt',
     render: (v: string) => (v ? new Date(v).toLocaleString() : '-'),
+  },
+  {
+    title: 'Actions',
+    key: 'actions',
+    width: 100,
+    render: (_: unknown, record: { id?: string | number }) =>
+      record?.id != null ? (
+        <Space>
+          <ShowButton size="small" recordItemId={record.id} />
+        </Space>
+      ) : null,
   },
 ];
 

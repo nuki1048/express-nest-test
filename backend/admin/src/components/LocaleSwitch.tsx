@@ -1,6 +1,6 @@
 import { Segmented } from 'antd';
 import { ALL_LOCALES } from '../constants/locales';
-
+import React from 'react';
 type LocaleCode = (typeof ALL_LOCALES)[number]['code'];
 
 interface LocaleSwitchProps {

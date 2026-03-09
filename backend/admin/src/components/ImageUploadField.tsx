@@ -1,3 +1,4 @@
+import React from 'react';
 import { Upload } from 'antd';
 import type { UploadFile, UploadProps } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';

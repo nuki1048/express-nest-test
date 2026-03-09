@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
   List,
   Create,
@@ -24,12 +24,13 @@ const apartmentColumns = [
     title: 'Actions',
     key: 'actions',
     width: 150,
-    render: (_, record: { id: string }) => (
-      <Space>
-        <EditButton size="small" recordItemId={record.id} />
-        <DeleteButton size="small" recordItemId={record.id} />
-      </Space>
-    ),
+    render: (_: unknown, record: { id?: string | number }) =>
+      record?.id != null ? (
+        <Space>
+          <EditButton size="small" recordItemId={record.id} />
+          <DeleteButton size="small" recordItemId={record.id} />
+        </Space>
+      ) : null,
   },
 ];
 
@@ -76,7 +77,11 @@ const ApartmentMainFields = () => (
   </>
 );
 
-const ApartmentTranslationFieldsForLocale = ({ locale }: { locale: string }) => (
+const ApartmentTranslationFieldsForLocale = ({
+  locale,
+}: {
+  locale: string;
+}) => (
   <>
     <Form.Item name={['translations', locale, 'title']} label="Title">
       <Input />

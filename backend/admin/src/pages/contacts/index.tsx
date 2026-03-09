@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   List,
   Create,
@@ -7,8 +8,8 @@ import {
   EditButton,
 } from '@refinedev/antd';
 import { Form, Input, Table, Space } from 'antd';
-import { AddressField } from '../../components/AddressField';
-import { LinksField } from '../../components/LinksField';
+import { AddressField } from '../../components/AddressField.js';
+import { LinksField } from '../../components/LinksField.js';
 
 const contactColumns = [
   { title: 'Email', dataIndex: 'email', key: 'email' },
@@ -22,11 +23,12 @@ const contactColumns = [
     title: 'Actions',
     key: 'actions',
     width: 100,
-    render: (_, record: { id: string }) => (
-      <Space>
-        <EditButton size="small" recordItemId={record.id} />
-      </Space>
-    ),
+    render: (_: unknown, record: { id?: string | number }) =>
+      record?.id != null ? (
+        <Space>
+          <EditButton size="small" recordItemId={record.id} />
+        </Space>
+      ) : null,
   },
 ];
 

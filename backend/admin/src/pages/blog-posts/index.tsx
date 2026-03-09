@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
   List,
   Create,
@@ -30,12 +30,13 @@ const blogPostColumns = [
     title: 'Actions',
     key: 'actions',
     width: 150,
-    render: (_, record: { id: string }) => (
-      <Space>
-        <EditButton size="small" recordItemId={record.id} />
-        <DeleteButton size="small" recordItemId={record.id} />
-      </Space>
-    ),
+    render: (_: unknown, record: { id?: string | number }) =>
+      record?.id != null ? (
+        <Space>
+          <EditButton size="small" recordItemId={record.id} />
+          <DeleteButton size="small" recordItemId={record.id} />
+        </Space>
+      ) : null,
   },
 ];
 
