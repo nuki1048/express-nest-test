@@ -1,5 +1,5 @@
 import type { PrismaService } from '../prisma/prisma.service';
-import { slugActionHandlers, type SlugDelegate } from './slug-action-handlers';
+// import { slugActionHandlers, type SlugDelegate } from './slug-action-handlers';
 
 export type PrismaDmmfModel = {
   name: string;
