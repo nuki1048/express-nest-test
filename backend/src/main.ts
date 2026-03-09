@@ -99,7 +99,7 @@ async function getServer(): Promise<express.Express> {
     { logger: ['error', 'warn', 'log'] },
   );
   configureApp(app);
-  log('getServer: calling app.init()');
+  log('getServer: calling app.init()2');
   await app.init();
   log('getServer: ready');
   server = expressApp;
