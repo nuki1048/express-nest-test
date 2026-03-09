@@ -2,12 +2,14 @@ import {
   Controller,
   Delete,
   Post,
+  UseGuards,
   UseInterceptors,
   UploadedFile,
   BadRequestException,
   Query,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { AuthGuard } from '../auth/auth.guard';
 import { ALLOWED_MIMES, MAX_SIZE } from './constants';
 import { ImageCompressionService } from '../services/image-compression.service';
 import { PATH_REQUIRED_MESSAGE, sanitizePath } from './path.validation';
@@ -15,6 +17,7 @@ import type { MulterFile } from './upload.types';
 import { UploadService } from './upload.service';
 
 @Controller('upload')
+@UseGuards(AuthGuard)
 export class UploadController {
   constructor(
     private readonly uploadService: UploadService,

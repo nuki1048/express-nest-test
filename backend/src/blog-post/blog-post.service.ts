@@ -7,6 +7,8 @@ import {
   ensureUniqueSlug,
   getSlugForUpdate,
 } from '../utils/slug.utils';
+import { localizeBlogPost } from '../locale/locale.helper';
+import type { SupportedLocale } from '../locale/locale.types';
 
 type PrismaWithBlogPost = PrismaService & {
   blogPost: {
@@ -26,21 +28,28 @@ export class BlogPostService {
     return this.prisma as PrismaWithBlogPost;
   }
 
-  async getBlogPosts() {
-    return this.db.blogPost.findMany();
+  async getBlogPosts(locale: SupportedLocale = 'en') {
+    const posts = await this.db.blogPost.findMany();
+    return posts.map((p) =>
+      localizeBlogPost(p as Parameters<typeof localizeBlogPost>[0], locale),
+    );
   }
 
-  async getBlogPost(slug: string) {
+  async getBlogPost(slug: string, locale: SupportedLocale = 'en') {
     const post = await this.db.blogPost.findUnique({
       where: { slug },
     });
     if (!post) {
       throw new NotFoundException('Blog post not found');
     }
-    return this.db.blogPost.update({
+    const updated = await this.db.blogPost.update({
       where: { slug },
       data: { views: { increment: 1 } },
     });
+    return localizeBlogPost(
+      updated as Parameters<typeof localizeBlogPost>[0],
+      locale,
+    );
   }
 
   async createBlogPost(data: CreateBlogPostDto) {

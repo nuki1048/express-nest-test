@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Patch } from '@nestjs/common';
+import { Body, Controller, Get, Patch, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '../auth/auth.guard';
 import { ContactsService } from './contacts.service';
 import { UpdateContactDto } from './dto/update-contact.dto';
 
@@ -12,6 +13,7 @@ export class ContactsController {
   }
 
   @Patch()
+  @UseGuards(AuthGuard)
   updateContact(@Body() updateContactDto: UpdateContactDto) {
     return this.contactsService.updateContact(updateContactDto);
   }
