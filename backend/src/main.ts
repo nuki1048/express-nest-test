@@ -31,6 +31,16 @@ function configureApp(app: INestApplication): void {
   });
 }
 
+const FAVICON_SVG =
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" fill="#0ea5e9" rx="4"/><path fill="white" d="M16 8l-8 6v10h6v-6h4v6h6V14z"/></svg>';
+
+function serveFavicon(expressApp: express.Express): void {
+  expressApp.get('/favicon.ico', (_req, res) => {
+    res.setHeader('Content-Type', 'image/svg+xml');
+    res.send(FAVICON_SVG);
+  });
+}
+
 function serveAdminPanel(expressApp: express.Express): void {
   const adminPath = path.join(process.cwd(), 'admin', 'dist');
   expressApp.use('/admin', express.static(adminPath, { index: false }));
@@ -45,6 +55,7 @@ async function getServer(): Promise<express.Express> {
   if (server) return server;
   const expressApp = express();
   expressApp.get('/', (_req, res) => res.redirect(302, '/admin'));
+  serveFavicon(expressApp);
   serveAdminPanel(expressApp);
   const app = await NestFactory.create(
     AppModule,
@@ -60,6 +71,7 @@ async function getServer(): Promise<express.Express> {
 async function bootstrap(): Promise<void> {
   const expressApp = express();
   expressApp.get('/', (_req, res) => res.redirect(302, '/admin'));
+  serveFavicon(expressApp);
   serveAdminPanel(expressApp);
   const app = await NestFactory.create(
     AppModule,
