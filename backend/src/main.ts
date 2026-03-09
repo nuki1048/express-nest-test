@@ -39,13 +39,7 @@ function configureApp(app: INestApplication): void {
   });
 }
 
-const log = (msg: string) => {
-  const ts = new Date().toISOString();
-  console.log(`[${ts}] ${msg}`);
-};
-
 async function registerAdminJSAdapter(): Promise<void> {
-  log('registerAdminJSAdapter: start');
   const adminJSModule = await dynamicImport<{
     default: {
       registerAdapter: (adapter: {
@@ -63,7 +57,6 @@ async function registerAdminJSAdapter(): Promise<void> {
     Database: AdminJSPrisma.Database,
     Resource: AdminJSPrisma.Resource,
   });
-  log('registerAdminJSAdapter: done');
 }
 
 const baseImports = [
@@ -76,11 +69,8 @@ const baseImports = [
 ];
 
 async function getAppModule(): Promise<Type> {
-  log('getAppModule: start');
   await registerAdminJSAdapter();
-  log('getAppModule: awaiting adminModulePromise');
   const adminModule = await adminModulePromise;
-  log('getAppModule: adminModule ready');
   class AppModule {}
   Module({ imports: [...baseImports, adminModule] })(AppModule);
   return AppModule;
@@ -90,7 +80,6 @@ let server: express.Express | null = null;
 
 async function getServer(): Promise<express.Express> {
   if (server) return server;
-  log('getServer: creating Nest app');
   const AppModule = await getAppModule();
   const expressApp = express();
   const app = await NestFactory.create(
@@ -99,9 +88,7 @@ async function getServer(): Promise<express.Express> {
     { logger: ['error', 'warn', 'log'] },
   );
   configureApp(app);
-  log('getServer: calling app.init()2');
   await app.init();
-  log('getServer: ready');
   server = expressApp;
   return server;
 }

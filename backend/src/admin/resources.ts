@@ -62,75 +62,75 @@ export function buildAdminResources(
       },
       options: {},
     },
-    {
-      resource: {
-        model: getModel('Apartment'),
-        client,
-      },
-      options: {
-        actions: slugActionHandlers(
-          client.apartment as unknown as SlugDelegate,
-          'apartment-',
-        ),
-        properties: {
-          mainPhoto: {
-            components: {
-              edit: 'ImageUploadField',
-              show: 'ImageUploadField',
-              list: 'ImageUploadField',
-            },
-            custom: { uploadPathPrefix: 'apartments' },
-          },
-          photos: {
-            isArray: true,
-            components: {
-              edit: 'ImageUploadField',
-              show: 'ImageUploadField',
-              list: 'ImageUploadField',
-            },
-            custom: { uploadPathPrefix: 'apartments' },
-          },
-        },
-      },
-    },
-    {
-      resource: {
-        model: getModel('BlogPost'),
-        client,
-      },
-      options: {
-        actions: slugActionHandlers(
-          client.blogPost as unknown as SlugDelegate,
-          'blog-post-',
-        ),
-        properties: {
-          mainPhoto: {
-            components: {
-              edit: 'ImageUploadField',
-              show: 'ImageUploadField',
-              list: 'ImageUploadField',
-            },
-            custom: { uploadPathPrefix: 'blog-post' },
-          },
-          content: { type: 'richtext' },
-          views: {
-            isVisible: {
-              edit: false,
-              show: true,
-              list: true,
-              filter: true,
-            },
-          },
-          likes: {
-            isVisible: {
-              edit: false,
-              show: true,
-              list: true,
-              filter: true,
-            },
-          },
-        },
-      },
-    },
+    // {
+    //   resource: {
+    //     model: getModel('Apartment'),
+    //     client,
+    //   },
+    //   options: {
+    //     actions: slugActionHandlers(
+    //       client.apartment as unknown as SlugDelegate,
+    //       'apartment-',
+    //     ),
+    //     properties: {
+    //       mainPhoto: {
+    //         components: {
+    //           edit: 'ImageUploadField',
+    //           show: 'ImageUploadField',
+    //           list: 'ImageUploadField',
+    //         },
+    //         custom: { uploadPathPrefix: 'apartments' },
+    //       },
+    //       photos: {
+    //         isArray: true,
+    //         components: {
+    //           edit: 'ImageUploadField',
+    //           show: 'ImageUploadField',
+    //           list: 'ImageUploadField',
+    //         },
+    //         custom: { uploadPathPrefix: 'apartments' },
+    //       },
+    //     },
+    //   },
+    // },
+    // {
+    //   resource: {
+    //     model: getModel('BlogPost'),
+    //     client,
+    //   },
+    //   options: {
+    //     actions: slugActionHandlers(
+    //       client.blogPost as unknown as SlugDelegate,
+    //       'blog-post-',
+    //     ),
+    //     properties: {
+    //       mainPhoto: {
+    //         components: {
+    //           edit: 'ImageUploadField',
+    //           show: 'ImageUploadField',
+    //           list: 'ImageUploadField',
+    //         },
+    //         custom: { uploadPathPrefix: 'blog-post' },
+    //       },
+    //       content: { type: 'richtext' },
+    //       views: {
+    //         isVisible: {
+    //           edit: false,
+    //           show: true,
+    //           list: true,
+    //           filter: true,
+    //         },
+    //       },
+    //       likes: {
+    //         isVisible: {
+    //           edit: false,
+    //           show: true,
+    //           list: true,
+    //           filter: true,
+    //         },
+    //       },
+    //     },
+    //   },
+    // },
   ];
 }

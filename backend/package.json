@@ -7,8 +7,8 @@
   "license": "UNLICENSED",
   "scripts": {
     "postinstall": "prisma generate",
-    "build": "prisma generate && nest build",
-    "vercel-build": "prisma generate && nest build",
+    "build": "prisma generate && nest build && cp -r src/generated dist/",
+    "vercel-build": "prisma generate && nest build && cp -r src/generated dist/",
     "seed": "prisma db seed",
     "db:clear": "ts-node -P tsconfig.scripts.json scripts/clear-db.ts",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
