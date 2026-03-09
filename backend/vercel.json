@@ -12,6 +12,11 @@
       }
     }
   ],
+  "functions": {
+    "src/main.ts": {
+      "includeFiles": "admin/dist/**"
+    }
+  },
   "routes": [
     {
       "src": "/(.*)",
