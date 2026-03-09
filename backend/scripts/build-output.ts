@@ -83,12 +83,39 @@ function main() {
   delete apiDeps['react-dom'];
   delete apiDeps['react-dropzone'];
   delete apiDeps.prisma; // CLI not needed at runtime, only @prisma/client
+  if (process.platform === 'linux') {
+    apiDeps['@img/sharp-linux-x64'] = '0.33.5';
+  }
   const funcPkg = { name: pkg.name, dependencies: apiDeps };
   fs.writeFileSync(
     path.join(funcFinal, 'package.json'),
     JSON.stringify(funcPkg, null, 2),
   );
   execSync('npm prune --production', { cwd: funcFinal, stdio: 'inherit' });
+
+  // On Mac builds, sharp's Linux binary isn't installed. Fetch via npm pack + extract.
+  if (process.platform !== 'linux') {
+    const nm = path.join(funcFinal, 'node_modules');
+    mkdirp(path.join(nm, '@img'));
+    const packDir = path.join(ROOT, '.vercel', 'sharp-pack');
+    mkdirp(packDir);
+    execSync('npm pack @img/sharp-linux-x64@0.33.5', {
+      cwd: packDir,
+      stdio: 'inherit',
+    });
+    const tarball = path.join(
+      packDir,
+      fs.readdirSync(packDir).find((f) => f.endsWith('.tgz'))!,
+    );
+    execSync(`tar -xzf "${tarball}" -C "${packDir}"`, { stdio: 'inherit' });
+    const pkgDir = path.join(packDir, 'package');
+    if (fs.existsSync(pkgDir)) {
+      fs.cpSync(pkgDir, path.join(nm, '@img', 'sharp-linux-x64'), {
+        recursive: true,
+      });
+    }
+    rmrf(packDir);
+  }
 
   // 7. Create handler wrapper
   fs.writeFileSync(
