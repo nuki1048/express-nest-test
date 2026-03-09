@@ -77,7 +77,7 @@ export const adminModulePromise: Promise<DynamicModule> = dynamicImport<{
 
     const authConfig = getAuthConfig();
 
-    log('calling AdminModule.createAdminAsync');
+    log('calling AdminModule.createAdminAsyn2');
     const assetsCDN = process.env.ADMIN_JS_ASSETS_CDN;
     const mod = await Promise.resolve(
       AdminModule.createAdminAsync({
