@@ -48,9 +48,16 @@ function main() {
   if (!fs.existsSync(path.join(adminDist, 'index.html'))) {
     throw new Error('Admin build not found at admin/dist');
   }
-  execSync(`cp -r ${adminDist}/* ${path.join(OUTPUT, 'static', 'admin')}`, {
-    shell: true,
-  });
+  const staticAdmin = path.join(OUTPUT, 'static', 'admin');
+  for (const name of fs.readdirSync(adminDist)) {
+    const src = path.join(adminDist, name);
+    const dest = path.join(staticAdmin, name);
+    if (fs.statSync(src).isDirectory()) {
+      fs.cpSync(src, dest, { recursive: true });
+    } else {
+      fs.copyFileSync(src, dest);
+    }
+  }
 
   // 5. Create favicon
   fs.writeFileSync(path.join(OUTPUT, 'static', 'favicon.svg'), FAVICON_SVG);
@@ -69,13 +76,16 @@ function main() {
   if (fs.existsSync(funcFinal)) rmrf(funcFinal);
   fs.renameSync(funcOutput, funcFinal);
 
-  // 8. Create .vc-config.json
+  // 8. Create .vc-config.json (ncc outputs index.js)
+  const handlerFile = fs.existsSync(path.join(funcFinal, 'index.js'))
+    ? 'index.js'
+    : 'main.js';
   fs.writeFileSync(
     path.join(funcFinal, '.vc-config.json'),
     JSON.stringify(
       {
         runtime: 'nodejs22.x',
-        handler: 'index.js',
+        handler: handlerFile,
         maxDuration: 300,
         launcherType: 'Nodejs',
       },
