@@ -30,51 +30,74 @@ export interface AdminModuleFactoryOptions {
   };
 }
 
+const log = (msg: string) => {
+  const ts = new Date().toISOString();
+  console.log(`[${ts}] admin.module: ${msg}`);
+};
+
 export const adminModulePromise: Promise<DynamicModule> = dynamicImport<{
   AdminModule: { createAdminAsync: (config: unknown) => DynamicModule };
-}>('@adminjs/nestjs').then(async ({ AdminModule }) => {
-  const AdminJSPrisma = await dynamicImport<{
-    getModelByName: (name: string) => PrismaDmmfModel;
-  }>('@adminjs/prisma');
-  const adminjs = await dynamicImport<{
-    ComponentLoader: new () => {
-      add: (name: string, filePath: string) => string;
-    };
-  }>('adminjs');
-  const componentLoader = new adminjs.ComponentLoader();
-  // Use __dirname so paths work in both dev (ts-node) and prod (dist/)
-  const adminDir = __dirname;
+}>('@adminjs/nestjs')
+  .then((mod) => {
+    log('@adminjs/nestjs loaded');
+    return mod;
+  })
+  .then(async ({ AdminModule }) => {
+    log('loading @adminjs/prisma');
+    const AdminJSPrisma = await dynamicImport<{
+      getModelByName: (name: string) => PrismaDmmfModel;
+    }>('@adminjs/prisma');
+    log('@adminjs/prisma loaded');
+    log('loading adminjs');
+    const adminjs = await dynamicImport<{
+      ComponentLoader: new () => {
+        add: (name: string, filePath: string) => string;
+      };
+    }>('adminjs');
+    log('adminjs loaded');
+    const componentLoader = new adminjs.ComponentLoader();
+    // Use __dirname so paths work in both dev (ts-node) and prod (dist/)
+    const adminDir = __dirname;
 
-  componentLoader.add(
-    'LinksField',
-    path.join(adminDir, 'components', 'LinksField.tsx'),
-  );
-  componentLoader.add(
-    'AddressField',
-    path.join(adminDir, 'components', 'AddressField.tsx'),
-  );
-  componentLoader.add(
-    'ImageUploadField',
-    path.join(adminDir, 'components', 'ImageUpload', 'ImageUploadField'),
-  );
+    componentLoader.add(
+      'LinksField',
+      path.join(adminDir, 'components', 'LinksField.tsx'),
+    );
+    componentLoader.add(
+      'AddressField',
+      path.join(adminDir, 'components', 'AddressField.tsx'),
+    );
+    componentLoader.add(
+      'ImageUploadField',
+      path.join(adminDir, 'components', 'ImageUpload', 'ImageUploadField'),
+    );
 
-  const getModel = (name: string) =>
-    modelWithIdForAdminJS(AdminJSPrisma.getModelByName, name);
+    const getModel = (name: string) =>
+      modelWithIdForAdminJS(AdminJSPrisma.getModelByName, name);
 
-  const authConfig = getAuthConfig();
+    const authConfig = getAuthConfig();
 
-  return AdminModule.createAdminAsync({
-    useFactory: (prisma: PrismaService): AdminModuleFactoryOptions => ({
-      adminJsOptions: {
-        rootPath: '/admin',
-        componentLoader,
-        resources: buildAdminResources(getModel, prisma),
-        ...(Object.keys(adminConfig.branding).length > 0 && {
-          branding: adminConfig.branding,
+    log('calling AdminModule.createAdminAsync');
+    const assetsCDN = process.env.ADMIN_JS_ASSETS_CDN;
+    const mod = await Promise.resolve(
+      AdminModule.createAdminAsync({
+        useFactory: (prisma: PrismaService): AdminModuleFactoryOptions => ({
+          adminJsOptions: {
+            rootPath: '/admin',
+            componentLoader,
+            resources: buildAdminResources(getModel, prisma),
+            ...(assetsCDN && {
+              assetsCDN: assetsCDN.endsWith('/') ? assetsCDN : `${assetsCDN}/`,
+            }),
+            ...(Object.keys(adminConfig.branding).length > 0 && {
+              branding: adminConfig.branding,
+            }),
+          },
+          ...authConfig,
         }),
-      },
-      ...authConfig,
-    }),
-    inject: [PrismaService],
+        inject: [PrismaService],
+      }),
+    );
+    log('createAdminAsync done');
+    return mod;
   });
-});
