@@ -58,11 +58,15 @@ function getAdminPath(): string {
 }
 
 function serveAdminPanel(expressApp: express.Express): void {
-  const adminPath = getAdminPath();
-  expressApp.use('/admin', express.static(adminPath, { index: false }));
-  expressApp.get(/^\/admin(?:\/.*)?$/, (_req, res) => {
-    res.sendFile(path.join(adminPath, 'index.html'));
-  });
+  try {
+    const adminPath = getAdminPath();
+    expressApp.use('/admin', express.static(adminPath, { index: false }));
+    expressApp.get(/^\/admin(?:\/.*)?$/, (_req, res) => {
+      res.sendFile(path.join(adminPath, 'index.html'));
+    });
+  } catch {
+    // On Vercel, admin is served by static files; API function only handles /api/*
+  }
 }
 
 let server: express.Express | null = null;
@@ -70,7 +74,9 @@ let server: express.Express | null = null;
 async function getServer(): Promise<express.Express> {
   if (server) return server;
   const expressApp = express();
-  expressApp.get('/', (_req, res) => res.redirect(302, '/admin'));
+  if (!process.env.VERCEL) {
+    expressApp.get('/', (_req, res) => res.redirect(302, '/admin'));
+  }
   serveFavicon(expressApp);
   serveAdminPanel(expressApp);
   const app = await NestFactory.create(
