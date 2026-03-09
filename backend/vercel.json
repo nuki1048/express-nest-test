@@ -8,7 +8,7 @@
       "src": "dist/main.js",
       "use": "@vercel/node",
       "config": {
-        "includeFiles": ["dist/**/*", "node_modules/**/*"]
+        "includeFiles": ["dist/**/*"]
       }
     }
   ],
