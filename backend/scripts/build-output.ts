@@ -7,61 +7,72 @@ import { execSync } from 'child_process';
 
 const ROOT = path.join(__dirname, '..');
 const OUTPUT = path.join(ROOT, '.vercel', 'output');
+const SHARP_VERSION = '0.33.5';
 
 const FAVICON_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" fill="#0ea5e9" rx="4"/><path fill="white" d="M16 8l-8 6v10h6v-6h4v6h6V14z"/></svg>`;
 
 function rmrf(dir: string) {
-  if (fs.existsSync(dir)) {
-    fs.rmSync(dir, { recursive: true });
-  }
+  if (fs.existsSync(dir)) fs.rmSync(dir, { recursive: true });
 }
 
 function mkdirp(dir: string) {
   fs.mkdirSync(dir, { recursive: true });
 }
 
+function ensureSharpLinuxBinary(funcDir: string): void {
+  if (process.platform === 'linux') return;
+  const nm = path.join(funcDir, 'node_modules');
+  mkdirp(path.join(nm, '@img'));
+  const packDir = path.join(ROOT, '.vercel', 'sharp-pack');
+  mkdirp(packDir);
+  execSync(`npm pack @img/sharp-linux-x64@${SHARP_VERSION}`, {
+    cwd: packDir,
+    stdio: 'inherit',
+  });
+  const tarball = fs.readdirSync(packDir).find((f) => f.endsWith('.tgz'))!;
+  execSync(`tar -xzf "${path.join(packDir, tarball)}" -C "${packDir}"`, {
+    stdio: 'inherit',
+  });
+  fs.cpSync(
+    path.join(packDir, 'package'),
+    path.join(nm, '@img', 'sharp-linux-x64'),
+    { recursive: true },
+  );
+  rmrf(packDir);
+}
+
 function main() {
   console.log('Building for Vercel Build Output API v3...');
 
-  // 1. Build admin
+  // Phase 1: Build admin SPA
   console.log('Building admin...');
   execSync('yarn workspace admin run build:skip-check', {
     cwd: ROOT,
     stdio: 'inherit',
   });
 
-  // 2. Build Nest
+  // Phase 2: Build Nest API
   console.log('Building Nest...');
   execSync('prisma generate && nest build && cp -r src/generated dist/', {
     cwd: ROOT,
     stdio: 'inherit',
   });
 
-  // 3. Clean and create output structure
+  // Phase 3: Static output (admin + favicon)
   rmrf(OUTPUT);
   mkdirp(path.join(OUTPUT, 'static', 'admin'));
 
-  // 4. Copy admin to static
-  console.log('Copying admin to static...');
   const adminDist = path.join(ROOT, 'admin', 'dist');
   if (!fs.existsSync(path.join(adminDist, 'index.html'))) {
     throw new Error('Admin build not found at admin/dist');
   }
-  const staticAdmin = path.join(OUTPUT, 'static', 'admin');
-  for (const name of fs.readdirSync(adminDist)) {
-    const src = path.join(adminDist, name);
-    const dest = path.join(staticAdmin, name);
-    if (fs.statSync(src).isDirectory()) {
-      fs.cpSync(src, dest, { recursive: true });
-    } else {
-      fs.copyFileSync(src, dest);
-    }
-  }
+  fs.cpSync(adminDist, path.join(OUTPUT, 'static', 'admin'), {
+    recursive: true,
+  });
 
-  // 5. Create favicon
   fs.writeFileSync(path.join(OUTPUT, 'static', 'favicon.svg'), FAVICON_SVG);
 
-  // 6. Create function: copy dist + node_modules (ncc breaks sharp native binaries)
+  // Phase 4: API function (dist + node_modules + sharp)
   console.log('Creating API function...');
   const funcFinal = path.join(OUTPUT, 'functions', 'api.func');
   if (fs.existsSync(funcFinal)) rmrf(funcFinal);
@@ -75,49 +86,27 @@ function main() {
     path.join(funcFinal, 'node_modules'),
     { recursive: true },
   );
+
   const pkg = JSON.parse(
     fs.readFileSync(path.join(ROOT, 'package.json'), 'utf-8'),
+  ) as { name: string; dependencies: Record<string, string> };
+  const apiDeps: Record<string, string> = { ...pkg.dependencies };
+  ['react', 'react-dom', 'react-dropzone', 'prisma'].forEach(
+    (k) => delete apiDeps[k],
   );
-  const apiDeps = { ...pkg.dependencies };
-  delete apiDeps.react;
-  delete apiDeps['react-dom'];
-  delete apiDeps['react-dropzone'];
-  delete apiDeps.prisma; // CLI not needed at runtime, only @prisma/client
   if (process.platform === 'linux') {
-    apiDeps['@img/sharp-linux-x64'] = '0.33.5';
+    apiDeps['@img/sharp-linux-x64'] = SHARP_VERSION;
   }
-  const funcPkg = { name: pkg.name, dependencies: apiDeps };
+
   fs.writeFileSync(
     path.join(funcFinal, 'package.json'),
-    JSON.stringify(funcPkg, null, 2),
+    JSON.stringify({ name: pkg.name, dependencies: apiDeps }, null, 2),
   );
   execSync('npm prune --production', { cwd: funcFinal, stdio: 'inherit' });
 
-  // On Mac builds, sharp's Linux binary isn't installed. Fetch via npm pack + extract.
-  if (process.platform !== 'linux') {
-    const nm = path.join(funcFinal, 'node_modules');
-    mkdirp(path.join(nm, '@img'));
-    const packDir = path.join(ROOT, '.vercel', 'sharp-pack');
-    mkdirp(packDir);
-    execSync('npm pack @img/sharp-linux-x64@0.33.5', {
-      cwd: packDir,
-      stdio: 'inherit',
-    });
-    const tarball = path.join(
-      packDir,
-      fs.readdirSync(packDir).find((f) => f.endsWith('.tgz'))!,
-    );
-    execSync(`tar -xzf "${tarball}" -C "${packDir}"`, { stdio: 'inherit' });
-    const pkgDir = path.join(packDir, 'package');
-    if (fs.existsSync(pkgDir)) {
-      fs.cpSync(pkgDir, path.join(nm, '@img', 'sharp-linux-x64'), {
-        recursive: true,
-      });
-    }
-    rmrf(packDir);
-  }
+  ensureSharpLinuxBinary(funcFinal);
 
-  // 7. Create handler wrapper
+  // Phase 5: Function config (handler, vc-config, routes)
   fs.writeFileSync(
     path.join(funcFinal, 'index.js'),
     `const m = require('./dist/main.js');
@@ -125,7 +114,6 @@ module.exports = m.default || m;
 `,
   );
 
-  // 8. Create .vc-config.json
   fs.writeFileSync(
     path.join(funcFinal, '.vc-config.json'),
     JSON.stringify(
@@ -140,33 +128,22 @@ module.exports = m.default || m;
     ),
   );
 
-  // 9. Create config.json
-  const config = {
-    version: 3,
-    routes: [
-      { handle: 'filesystem' },
-      { src: '/', dest: '/admin/index.html' },
-      { src: '/admin', dest: '/admin/index.html' },
-      { src: '/admin/', dest: '/admin/index.html' },
-      { src: '/admin/login', dest: '/admin/index.html' },
-      { src: '/admin/apartments', dest: '/admin/index.html' },
-      { src: '/admin/apartments/(.*)', dest: '/admin/index.html' },
-      { src: '/admin/blog-posts', dest: '/admin/index.html' },
-      { src: '/admin/blog-posts/(.*)', dest: '/admin/index.html' },
-      { src: '/admin/contacts', dest: '/admin/index.html' },
-      { src: '/admin/contact-form-submissions', dest: '/admin/index.html' },
-      {
-        src: '/admin/contact-form-submissions/(.*)',
-        dest: '/admin/index.html',
-      },
-      { src: '/favicon.ico', dest: '/favicon.svg' },
-      { src: '/api/(.*)', dest: '/api' },
-    ],
-  };
-
   fs.writeFileSync(
     path.join(OUTPUT, 'config.json'),
-    JSON.stringify(config, null, 2),
+    JSON.stringify(
+      {
+        version: 3,
+        routes: [
+          { handle: 'filesystem' },
+          { src: '/', dest: '/admin/index.html' },
+          { src: '/admin(.*)', dest: '/admin/index.html' },
+          { src: '/favicon.ico', dest: '/favicon.svg' },
+          { src: '/api/(.*)', dest: '/api' },
+        ],
+      },
+      null,
+      2,
+    ),
   );
 
   console.log('Build complete. Output at .vercel/output');

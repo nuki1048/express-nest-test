@@ -49,12 +49,13 @@ function getAdminPath(): string {
     path.join(process.cwd(), 'admin', 'dist'),
     path.join(__dirname, 'admin'),
   ];
-  for (const p of candidates) {
-    if (fs.existsSync(path.join(p, 'index.html'))) return p;
-  }
-  throw new Error(
-    `Admin build not found. Tried: ${candidates.join(', ')}. cwd=${process.cwd()}, __dirname=${__dirname}`,
+  const found = candidates.find((p) =>
+    fs.existsSync(path.join(p, 'index.html')),
   );
+  if (!found) {
+    throw new Error(`Admin build not found. Tried: ${candidates.join(', ')}`);
+  }
+  return found;
 }
 
 function serveAdminPanel(expressApp: express.Express): void {
@@ -90,21 +91,6 @@ async function getServer(): Promise<express.Express> {
   return server;
 }
 
-async function bootstrap(): Promise<void> {
-  const expressApp = express();
-  expressApp.get('/', (_req, res) => res.redirect(302, '/admin'));
-  serveFavicon(expressApp);
-  serveAdminPanel(expressApp);
-  const app = await NestFactory.create(
-    AppModule,
-    new ExpressAdapter(expressApp),
-    { logger: ['error', 'warn', 'log'] },
-  );
-  configureApp(app);
-  await app.init();
-  await app.listen(process.env.PORT ?? 3000);
-}
-
 export default async function handler(
   req: IncomingMessage,
   res: ServerResponse,
@@ -114,5 +100,5 @@ export default async function handler(
 }
 
 if (!process.env.VERCEL) {
-  void bootstrap();
+  void getServer().then((app) => app.listen(process.env.PORT ?? 3000));
 }
