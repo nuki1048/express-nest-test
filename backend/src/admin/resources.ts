@@ -30,31 +30,31 @@ export function buildAdminResources(
   client: PrismaService,
 ): AdminResource[] {
   return [
-    {
-      resource: {
-        model: getModel('Contact'),
-        client,
-      },
-      options: {
-        properties: {
-          phoneNumbers: { isArray: true },
-          address: {
-            type: 'json',
-            components: {
-              edit: 'AddressField',
-              show: 'AddressField',
-            },
-          },
-          links: {
-            type: 'json',
-            components: {
-              edit: 'LinksField',
-              show: 'LinksField',
-            },
-          },
-        },
-      },
-    },
+    // {
+    //   resource: {
+    //     model: getModel('Contact'),
+    //     client,
+    //   },
+    //   options: {
+    //     properties: {
+    //       phoneNumbers: { isArray: true },
+    //       address: {
+    //         type: 'json',
+    //         components: {
+    //           edit: 'AddressField',
+    //           show: 'AddressField',
+    //         },
+    //       },
+    //       links: {
+    //         type: 'json',
+    //         components: {
+    //           edit: 'LinksField',
+    //           show: 'LinksField',
+    //         },
+    //       },
+    //     },
+    //   },
+    // },
     {
       resource: {
         model: getModel('ContactFormSubmission'),
