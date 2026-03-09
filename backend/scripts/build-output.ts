@@ -40,7 +40,6 @@ function main() {
   // 3. Clean and create output structure
   rmrf(OUTPUT);
   mkdirp(path.join(OUTPUT, 'static', 'admin'));
-  mkdirp(path.join(OUTPUT, 'functions', 'api'));
 
   // 4. Copy admin to static
   console.log('Copying admin to static...');
@@ -62,30 +61,50 @@ function main() {
   // 5. Create favicon
   fs.writeFileSync(path.join(OUTPUT, 'static', 'favicon.svg'), FAVICON_SVG);
 
-  // 6. Bundle Nest with ncc
-  console.log('Bundling Nest with ncc...');
-  const funcDir = path.join(OUTPUT, 'functions', 'api');
-  execSync(`npx @vercel/ncc build dist/main.js -o ${funcDir} --no-cache`, {
-    cwd: ROOT,
-    stdio: 'inherit',
-  });
-
-  // 7. Rename to .func (ncc outputs to the dir, we need api.func)
-  const funcOutput = path.join(OUTPUT, 'functions', 'api');
+  // 6. Create function: copy dist + node_modules (ncc breaks sharp native binaries)
+  console.log('Creating API function...');
   const funcFinal = path.join(OUTPUT, 'functions', 'api.func');
   if (fs.existsSync(funcFinal)) rmrf(funcFinal);
-  fs.renameSync(funcOutput, funcFinal);
+  mkdirp(funcFinal);
 
-  // 8. Create .vc-config.json (ncc outputs index.js)
-  const handlerFile = fs.existsSync(path.join(funcFinal, 'index.js'))
-    ? 'index.js'
-    : 'main.js';
+  fs.cpSync(path.join(ROOT, 'dist'), path.join(funcFinal, 'dist'), {
+    recursive: true,
+  });
+  fs.cpSync(
+    path.join(ROOT, 'node_modules'),
+    path.join(funcFinal, 'node_modules'),
+    { recursive: true },
+  );
+  const pkg = JSON.parse(
+    fs.readFileSync(path.join(ROOT, 'package.json'), 'utf-8'),
+  );
+  const apiDeps = { ...pkg.dependencies };
+  delete apiDeps.react;
+  delete apiDeps['react-dom'];
+  delete apiDeps['react-dropzone'];
+  delete apiDeps.prisma; // CLI not needed at runtime, only @prisma/client
+  const funcPkg = { name: pkg.name, dependencies: apiDeps };
+  fs.writeFileSync(
+    path.join(funcFinal, 'package.json'),
+    JSON.stringify(funcPkg, null, 2),
+  );
+  execSync('npm prune --production', { cwd: funcFinal, stdio: 'inherit' });
+
+  // 7. Create handler wrapper
+  fs.writeFileSync(
+    path.join(funcFinal, 'index.js'),
+    `const m = require('./dist/main.js');
+module.exports = m.default || m;
+`,
+  );
+
+  // 8. Create .vc-config.json
   fs.writeFileSync(
     path.join(funcFinal, '.vc-config.json'),
     JSON.stringify(
       {
         runtime: 'nodejs22.x',
-        handler: handlerFile,
+        handler: 'index.js',
         maxDuration: 300,
         launcherType: 'Nodejs',
       },
