@@ -1,3 +1,4 @@
+import fs from 'fs';
 import path from 'path';
 import type { IncomingMessage, ServerResponse } from 'http';
 import {
@@ -41,8 +42,20 @@ function serveFavicon(expressApp: express.Express): void {
   });
 }
 
+function getAdminPath(): string {
+  const candidates = [
+    path.join(__dirname, 'admin'),
+    path.join(process.cwd(), 'dist', 'admin'),
+    path.join(process.cwd(), 'admin', 'dist'),
+  ];
+  for (const p of candidates) {
+    if (fs.existsSync(path.join(p, 'index.html'))) return p;
+  }
+  return candidates[0];
+}
+
 function serveAdminPanel(expressApp: express.Express): void {
-  const adminPath = path.join(process.cwd(), 'admin', 'dist');
+  const adminPath = getAdminPath();
   expressApp.use('/admin', express.static(adminPath, { index: false }));
   expressApp.get(/^\/admin(?:\/.*)?$/, (_req, res) => {
     res.sendFile(path.join(adminPath, 'index.html'));
@@ -54,8 +67,9 @@ let server: express.Express | null = null;
 async function getServer(): Promise<express.Express> {
   if (server) return server;
   const expressApp = express();
-  // Vercel: only /api/* and /favicon.ico hit this handler; admin is served by @vercel/static
+  expressApp.get('/', (_req, res) => res.redirect(302, '/admin'));
   serveFavicon(expressApp);
+  serveAdminPanel(expressApp);
   const app = await NestFactory.create(
     AppModule,
     new ExpressAdapter(expressApp),

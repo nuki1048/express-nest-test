@@ -13,7 +13,7 @@
     "admin:dev": "yarn workspace admin dev",
     "admin:build": "yarn workspace admin build",
     "build": "yarn admin:build && prisma generate && nest build && cp -r src/generated dist/",
-    "vercel-build": "yarn workspace admin run build:skip-check && mkdir -p public && cp -r admin/dist public/admin && prisma generate && nest build && cp -r src/generated dist/",
+    "vercel-build": "yarn workspace admin run build:skip-check && prisma generate && nest build && cp -r src/generated dist/ && cp -r admin/dist dist/admin",
     "seed": "prisma db seed",
     "db:clear": "ts-node -P tsconfig.scripts.json scripts/clear-db.ts",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",

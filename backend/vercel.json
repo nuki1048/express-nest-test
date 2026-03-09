@@ -5,10 +5,6 @@
   "framework": null,
   "builds": [
     {
-      "src": "public/**",
-      "use": "@vercel/static"
-    },
-    {
       "src": "src/main.ts",
       "use": "@vercel/node",
       "config": {
@@ -16,49 +12,11 @@
       }
     }
   ],
-  "rewrites": [
-    { "source": "/", "destination": "/admin/index.html" },
-    { "source": "/admin", "destination": "/admin/index.html" },
-    { "source": "/admin/", "destination": "/admin/index.html" },
-    { "source": "/admin/login", "destination": "/admin/index.html" },
-    {
-      "source": "/admin/apartments",
-      "destination": "/admin/index.html"
-    },
-    {
-      "source": "/admin/apartments/:path*",
-      "destination": "/admin/index.html"
-    },
-    { "source": "/admin/blog-posts", "destination": "/admin/index.html" },
-    {
-      "source": "/admin/blog-posts/:path*",
-      "destination": "/admin/index.html"
-    },
-    { "source": "/admin/contacts", "destination": "/admin/index.html" },
-    {
-      "source": "/admin/contact-form-submissions",
-      "destination": "/admin/index.html"
-    },
-    {
-      "source": "/admin/contact-form-submissions/:path*",
-      "destination": "/admin/index.html"
-    }
-  ],
   "routes": [
     {
-      "src": "/favicon.ico",
-      "dest": "src/main.ts",
-      "methods": ["GET", "HEAD"]
-    },
-    {
-      "src": "/api/(.*)",
+      "src": "/(.*)",
       "dest": "src/main.ts",
       "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD"]
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1",
-      "methods": ["GET", "HEAD"]
     }
   ]
 }
