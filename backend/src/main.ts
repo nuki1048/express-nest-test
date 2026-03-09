@@ -43,15 +43,19 @@ function serveFavicon(expressApp: express.Express): void {
 }
 
 function getAdminPath(): string {
+  // Vercel: dist/admin (includeFiles) or process.cwd()/admin; local: admin/dist
   const candidates = [
-    path.join(__dirname, 'admin'),
     path.join(process.cwd(), 'dist', 'admin'),
+    path.join(process.cwd(), 'admin'),
     path.join(process.cwd(), 'admin', 'dist'),
+    path.join(__dirname, 'admin'),
   ];
   for (const p of candidates) {
     if (fs.existsSync(path.join(p, 'index.html'))) return p;
   }
-  return candidates[0];
+  throw new Error(
+    `Admin build not found. Tried: ${candidates.join(', ')}. cwd=${process.cwd()}, __dirname=${__dirname}`,
+  );
 }
 
 function serveAdminPanel(expressApp: express.Express): void {

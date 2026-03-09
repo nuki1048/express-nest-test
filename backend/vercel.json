@@ -8,7 +8,8 @@
       "src": "src/main.ts",
       "use": "@vercel/node",
       "config": {
-        "maxLambdaSize": "50mb"
+        "maxLambdaSize": "50mb",
+        "includeFiles": ["dist/admin/**"]
       }
     }
   ],
