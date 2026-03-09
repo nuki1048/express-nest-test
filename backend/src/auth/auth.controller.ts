@@ -27,20 +27,11 @@ export class AuthController {
 
   @Get('me')
   async me(@Headers('authorization') authHeader?: string) {
-    try {
-      const token = authHeader?.replace(/^Bearer\s+/i, '');
-      if (!token) {
-        throw new UnauthorizedException('No token');
-      }
-      const user = this.authService.verifyToken(token);
-      if (!user) {
-        throw new UnauthorizedException('Invalid token');
-      }
-      return { email: user.email };
-    } catch (err) {
-      if (err instanceof UnauthorizedException) throw err;
-      throw new UnauthorizedException('Invalid token');
-    }
+    const token = authHeader?.replace(/^Bearer\s+/i, '');
+    if (!token) throw new UnauthorizedException('No token');
+    const user = this.authService.verifyToken(token);
+    if (!user) throw new UnauthorizedException('Invalid token');
+    return { email: user.email };
   }
 
   @Post('logout')

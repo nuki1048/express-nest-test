@@ -1,4 +1,11 @@
-import { List, Create, Edit, useForm, useTable, EditButton } from '@refinedev/antd';
+import {
+  List,
+  Create,
+  Edit,
+  useForm,
+  useTable,
+  EditButton,
+} from '@refinedev/antd';
 import { Form, Input, Table, Space } from 'antd';
 import { AddressField } from '../../components/AddressField';
 import { LinksField } from '../../components/LinksField';
@@ -57,7 +64,12 @@ export function ContactList() {
   const { tableProps } = useTable();
   return (
     <List createButtonProps={{ children: 'Create Contact' }}>
-      <Table {...tableProps} columns={contactColumns} rowKey="id" pagination={false} />
+      <Table
+        {...tableProps}
+        columns={contactColumns}
+        rowKey="id"
+        pagination={false}
+      />
     </List>
   );
 }

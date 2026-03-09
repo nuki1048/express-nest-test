@@ -11,6 +11,7 @@ import { ExpressAdapter } from '@nestjs/platform-express';
 import express from 'express';
 import 'dotenv/config';
 import { AppModule } from './app.module';
+import { FAVICON_SVG } from './constants/favicon';
 
 const corsOptions = {
   origin: process.env.CORS_ORIGIN?.split(',') ?? true,
@@ -32,16 +33,6 @@ function configureApp(app: INestApplication): void {
   });
 }
 
-const FAVICON_SVG =
-  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" fill="#0ea5e9" rx="4"/><path fill="white" d="M16 8l-8 6v10h6v-6h4v6h6V14z"/></svg>';
-
-function serveFavicon(expressApp: express.Express): void {
-  expressApp.get('/favicon.ico', (_req, res) => {
-    res.setHeader('Content-Type', 'image/svg+xml');
-    res.send(FAVICON_SVG);
-  });
-}
-
 function getAdminPath(): string {
   const candidates = [
     path.join(process.cwd(), 'dist', 'admin'),
@@ -58,13 +49,17 @@ function getAdminPath(): string {
   return found;
 }
 
-function serveAdminPanel(expressApp: express.Express): void {
+function setupStaticRoutes(expressApp: express.Express): void {
+  expressApp.get('/favicon.ico', (_req, res) => {
+    res.setHeader('Content-Type', 'image/svg+xml');
+    res.send(FAVICON_SVG);
+  });
   try {
     const adminPath = getAdminPath();
     expressApp.use('/admin', express.static(adminPath, { index: false }));
-    expressApp.get(/^\/admin(?:\/.*)?$/, (_req, res) => {
-      res.sendFile(path.join(adminPath, 'index.html'));
-    });
+    expressApp.get(/^\/admin(?:\/.*)?$/, (_req, res) =>
+      res.sendFile(path.join(adminPath, 'index.html')),
+    );
   } catch {
     // On Vercel, admin is served by static files; API function only handles /api/*
   }
@@ -78,8 +73,7 @@ async function getServer(): Promise<express.Express> {
   if (!process.env.VERCEL) {
     expressApp.get('/', (_req, res) => res.redirect(302, '/admin'));
   }
-  serveFavicon(expressApp);
-  serveAdminPanel(expressApp);
+  setupStaticRoutes(expressApp);
   const app = await NestFactory.create(
     AppModule,
     new ExpressAdapter(expressApp),

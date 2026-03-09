@@ -4,12 +4,11 @@
 import fs from 'fs';
 import path from 'path';
 import { execSync } from 'child_process';
+import { FAVICON_SVG } from '../src/constants/favicon';
 
 const ROOT = path.join(__dirname, '..');
 const OUTPUT = path.join(ROOT, '.vercel', 'output');
 const SHARP_VERSION = '0.33.5';
-
-const FAVICON_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" fill="#0ea5e9" rx="4"/><path fill="white" d="M16 8l-8 6v10h6v-6h4v6h6V14z"/></svg>`;
 
 function rmrf(dir: string) {
   if (fs.existsSync(dir)) fs.rmSync(dir, { recursive: true });
