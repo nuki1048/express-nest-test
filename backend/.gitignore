@@ -2,6 +2,7 @@
 /dist
 /node_modules
 /build
+/public
 
 # Generated Prisma client (created by `prisma generate` at build time)
 /src/generated
