@@ -8,9 +8,10 @@ import {
   EditButton,
   DeleteButton,
 } from '@refinedev/antd';
-import { Form, Input, Switch, Table, Space } from 'antd';
+import { Form, Input, Switch, Table, Space, Tabs } from 'antd';
 import { ImageUploadField } from '../../components/ImageUploadField';
 import { LocaleSwitch } from '../../components/LocaleSwitch';
+import { MarkdownPreview } from '../../components/MarkdownPreview';
 import { DEFAULT_LOCALE, TRANSLATION_LOCALES } from '../../constants/locales';
 
 type LocaleCode = (typeof TRANSLATION_LOCALES)[number]['code'] | 'en';
@@ -40,6 +41,57 @@ const blogPostColumns = [
   },
 ];
 
+interface ContentEditorProps {
+  value?: string;
+  onChange?: (value: string) => void;
+}
+
+const ContentEditor = ({ value = '', onChange }: ContentEditorProps) => {
+  const [activeTab, setActiveTab] = useState('edit');
+  return (
+    <Tabs
+      activeKey={activeTab}
+      onChange={setActiveTab}
+      items={[
+        {
+          key: 'edit',
+          label: 'Edit',
+          children: (
+            <Input.TextArea
+              rows={12}
+              value={value}
+              onChange={(e) => onChange?.(e.target.value)}
+            />
+          ),
+        },
+        {
+          key: 'preview',
+          label: 'Preview',
+          children: <MarkdownPreview content={value} />,
+        },
+      ]}
+    />
+  );
+};
+
+const ContentFieldWithPreview = ({
+  name,
+  label = 'Content',
+  required = true,
+}: {
+  name: string | [string, string, string];
+  label?: string;
+  required?: boolean;
+}) => (
+  <Form.Item
+    name={name}
+    label={label}
+    rules={required ? [{ required: true }] : undefined}
+  >
+    <ContentEditor />
+  </Form.Item>
+);
+
 const BlogPostMainFields = () => (
   <>
     <Form.Item name="title" label="Title" rules={[{ required: true }]}>
@@ -52,9 +104,7 @@ const BlogPostMainFields = () => (
     >
       <Input.TextArea rows={3} />
     </Form.Item>
-    <Form.Item name="content" label="Content" rules={[{ required: true }]}>
-      <Input.TextArea rows={12} />
-    </Form.Item>
+    <ContentFieldWithPreview name="content" />
     <Form.Item name="mainPhoto" label="Main Photo" rules={[{ required: true }]}>
       <ImageUploadField pathPrefix="blog-post" />
     </Form.Item>
@@ -75,9 +125,10 @@ const BlogPostTranslationFieldsForLocale = ({ locale }: { locale: string }) => (
     >
       <Input.TextArea rows={3} />
     </Form.Item>
-    <Form.Item name={['translations', locale, 'content']} label="Content">
-      <Input.TextArea rows={12} />
-    </Form.Item>
+    <ContentFieldWithPreview
+      name={['translations', locale, 'content']}
+      required={false}
+    />
   </>
 );
 
