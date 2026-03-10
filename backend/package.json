@@ -5,10 +5,15 @@
   "author": "",
   "private": true,
   "license": "UNLICENSED",
+  "workspaces": [
+    "admin"
+  ],
   "scripts": {
     "postinstall": "prisma generate",
-    "build": "prisma generate && nest build && cp -r src/generated dist/",
-    "vercel-build": "prisma generate && nest build && cp -r src/generated dist/",
+    "admin:dev": "yarn workspace admin dev",
+    "admin:build": "yarn workspace admin build",
+    "build": "yarn admin:build && prisma generate && nest build && cp -r src/generated dist/",
+    "vercel-build": "ts-node -P tsconfig.scripts.json scripts/build-output.ts",
     "seed": "prisma db seed",
     "db:clear": "ts-node -P tsconfig.scripts.json scripts/clear-db.ts",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -27,10 +32,6 @@
     "seed": "ts-node prisma/seed.ts"
   },
   "dependencies": {
-    "@adminjs/design-system": "^4.1.1",
-    "@adminjs/express": "^6.1.1",
-    "@adminjs/nestjs": "^7.0.0",
-    "@adminjs/prisma": "^5.0.4",
     "@emailjs/nodejs": "^5.0.2",
     "@nestjs/common": "^11.0.1",
     "@nestjs/core": "^11.0.1",
@@ -38,12 +39,12 @@
     "@prisma/adapter-pg": "^7.4.1",
     "@prisma/client": "^7.4.1",
     "@supabase/supabase-js": "^2.98.0",
-    "adminjs": "^7.8.17",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "dotenv": "^17.3.1",
     "express-formidable": "^1.2.0",
     "express-session": "^1.19.0",
+    "marked": "^17.0.4",
     "prisma": "^7.4.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",

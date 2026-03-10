@@ -7,6 +7,8 @@ import {
   ensureUniqueSlug,
   getSlugForUpdate,
 } from '../utils/slug.utils';
+import { localizeApartment } from '../locale/locale.helper';
+import type { SupportedLocale } from '../locale/locale.types';
 
 type PrismaWithApartment = PrismaService & {
   apartment: {
@@ -26,27 +28,49 @@ export class ApartmentsService {
     return this.prisma as PrismaWithApartment;
   }
 
-  async getApartments() {
+  async getApartments(
+    locale: SupportedLocale = 'en',
+    includeTranslations = false,
+  ) {
     const apartments = await this.db.apartment.findMany();
-    return apartments;
+    if (includeTranslations) {
+      return apartments;
+    }
+    return apartments.map((a) =>
+      localizeApartment(a as Parameters<typeof localizeApartment>[0], locale),
+    );
   }
 
-  async getApartment(slug: string) {
+  async getApartment(
+    slug: string,
+    locale: SupportedLocale = 'en',
+    includeTranslations = false,
+  ) {
     const apartment = await this.db.apartment.findUnique({
       where: { slug },
     });
     if (!apartment) {
       throw new NotFoundException('Apartment not found');
     }
-    return apartment;
+    if (includeTranslations) {
+      return apartment;
+    }
+    return localizeApartment(
+      apartment as Parameters<typeof localizeApartment>[0],
+      locale,
+    );
   }
 
   async createApartment(data: CreateApartmentDto) {
     const baseSlug =
-      titleToSlug(data.title) || `apartment-${Date.now().toString(36)}`;
+      titleToSlug(data?.title) || `apartment-${Date.now().toString(36)}`;
     const slug = await ensureUniqueSlug(this.db.apartment, baseSlug);
     return this.db.apartment.create({
-      data: { ...data, slug },
+      data: {
+        ...data,
+        slug,
+        photos: data.photos ?? [],
+      },
     });
   }
 

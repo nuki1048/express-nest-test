@@ -32,7 +32,7 @@ model ContactFormSubmission {
 
 model Apartment {
   id             String   @id @default(cuid())
-  slug           String?   @unique
+  slug           String?  @unique
   title          String
   description    String   @db.Text
   bedrooms       Int
@@ -43,17 +43,19 @@ model Apartment {
   hasAc          Boolean  @default(false)
   mainPhoto      String
   photos         String[]
+  translations   Json? 
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }
 
 model BlogPost {
   id            String   @id @default(cuid())
-  slug          String?   @unique
+  slug          String?  @unique
   title         String
   description   String   @db.Text
   content       String   @db.Text
   mainPhoto     String
+  translations  Json?   
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
   views         Int      @default(0)

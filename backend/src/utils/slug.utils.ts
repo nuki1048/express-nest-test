@@ -4,8 +4,9 @@ type SlugDelegate = {
   findUnique: (args: { where: { slug: string } }) => Promise<unknown>;
 };
 
-export function titleToSlug(title: string): string {
-  /* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call */
+export function titleToSlug(title: string | undefined | null): string {
+  if (title == null || typeof title !== 'string') return '';
+
   const slug = slugify(title, {
     lower: true,
     strict: true,

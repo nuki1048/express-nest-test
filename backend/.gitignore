@@ -1,7 +1,13 @@
+# Vercel build output
+.vercel
+
 # compiled output
 /dist
+prisma.config.js
+prisma.config.js.map
 /node_modules
 /build
+/public
 
 # Generated Prisma client (created by `prisma generate` at build time)
 /src/generated

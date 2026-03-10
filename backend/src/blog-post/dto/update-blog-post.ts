@@ -1,5 +1,13 @@
 import { Type } from 'class-transformer';
-import { IsNumber, IsOptional, IsString, Min } from 'class-validator';
+import {
+  IsBoolean,
+  IsNumber,
+  IsObject,
+  IsOptional,
+  IsString,
+  Min,
+} from 'class-validator';
+import type { BlogPostTranslations } from '../../locale/locale.types';
 
 export class UpdateBlogPostDto {
   @IsOptional()
@@ -19,6 +27,10 @@ export class UpdateBlogPostDto {
   mainPhoto?: string;
 
   @IsOptional()
+  @IsBoolean()
+  isPublished?: boolean;
+
+  @IsOptional()
   @Type(() => Number)
   @IsNumber()
   @Min(0)
@@ -29,4 +41,8 @@ export class UpdateBlogPostDto {
   @IsNumber()
   @Min(0)
   likes?: number;
+
+  @IsOptional()
+  @IsObject()
+  translations?: Record<string, BlogPostTranslations>;
 }
