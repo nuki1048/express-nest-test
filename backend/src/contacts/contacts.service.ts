@@ -31,8 +31,9 @@ export class ContactsService {
   }
 
   async updateContact(data: UpdateContactDto) {
+    const phoneNumbers = (data.phoneNumbers ?? []).filter(Boolean);
     const createPayload = {
-      phoneNumbers: data.phoneNumbers ?? [],
+      phoneNumbers,
       email: data.email ?? '',
       address: data.address ?? { label: '', url: '' },
       links: data.links,

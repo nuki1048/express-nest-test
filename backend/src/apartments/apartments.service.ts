@@ -28,19 +28,32 @@ export class ApartmentsService {
     return this.prisma as PrismaWithApartment;
   }
 
-  async getApartments(locale: SupportedLocale = 'en') {
+  async getApartments(
+    locale: SupportedLocale = 'en',
+    includeTranslations = false,
+  ) {
     const apartments = await this.db.apartment.findMany();
+    if (includeTranslations) {
+      return apartments;
+    }
     return apartments.map((a) =>
       localizeApartment(a as Parameters<typeof localizeApartment>[0], locale),
     );
   }
 
-  async getApartment(slug: string, locale: SupportedLocale = 'en') {
+  async getApartment(
+    slug: string,
+    locale: SupportedLocale = 'en',
+    includeTranslations = false,
+  ) {
     const apartment = await this.db.apartment.findUnique({
       where: { slug },
     });
     if (!apartment) {
       throw new NotFoundException('Apartment not found');
+    }
+    if (includeTranslations) {
+      return apartment;
     }
     return localizeApartment(
       apartment as Parameters<typeof localizeApartment>[0],

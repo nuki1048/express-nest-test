@@ -28,24 +28,39 @@ export class BlogPostService {
     return this.prisma as PrismaWithBlogPost;
   }
 
-  async getBlogPosts(locale: SupportedLocale = 'en') {
+  async getBlogPosts(
+    locale: SupportedLocale = 'en',
+    includeTranslations = false,
+  ) {
     const posts = await this.db.blogPost.findMany();
+    if (includeTranslations) {
+      return posts;
+    }
     return posts.map((p) =>
       localizeBlogPost(p as Parameters<typeof localizeBlogPost>[0], locale),
     );
   }
 
-  async getBlogPost(slug: string, locale: SupportedLocale = 'en') {
+  async getBlogPost(
+    slug: string,
+    locale: SupportedLocale = 'en',
+    options?: { includeTranslations?: boolean; skipViewIncrement?: boolean },
+  ) {
     const post = await this.db.blogPost.findUnique({
       where: { slug },
     });
     if (!post) {
       throw new NotFoundException('Blog post not found');
     }
-    const updated = await this.db.blogPost.update({
-      where: { slug },
-      data: { views: { increment: 1 } },
-    });
+    if (options?.includeTranslations) {
+      return post;
+    }
+    const updated = options?.skipViewIncrement
+      ? post
+      : await this.db.blogPost.update({
+          where: { slug },
+          data: { views: { increment: 1 } },
+        });
     return localizeBlogPost(
       updated as Parameters<typeof localizeBlogPost>[0],
       locale,

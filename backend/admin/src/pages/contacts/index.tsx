@@ -17,7 +17,7 @@ const contactColumns = [
     title: 'Phone Numbers',
     dataIndex: 'phoneNumbers',
     key: 'phoneNumbers',
-    render: (v: string[]) => v?.join(', ') ?? '-',
+    render: (v: string[]) => v?.join(',') ?? '-',
   },
   {
     title: 'Actions',
@@ -42,12 +42,7 @@ const ContactForm = () => (
       label="Phone Numbers"
       getValueFromEvent={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const val = e.target.value;
-        return val
-          ? val
-              .split('\n')
-              .map((s) => s.trim())
-              .filter(Boolean)
-          : [];
+        return val ? val.split('\n').map((s) => s.trim()) : [];
       }}
       getValueProps={(value: string[]) => ({ value: value?.join('\n') ?? '' })}
     >

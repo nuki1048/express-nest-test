@@ -11,6 +11,7 @@ import {
 } from '@nestjs/common';
 import { Request } from 'express';
 import { AuthGuard } from '../auth/auth.guard';
+import { AuthService } from '../auth/auth.service';
 import { ApartmentsService } from './apartments.service';
 import { CreateApartmentDto } from './dto/create-apartment';
 import { UpdateApartmentDto } from './dto/update-apartment';
@@ -18,11 +19,23 @@ import type { SupportedLocale } from '../locale/locale.types';
 
 @Controller('apartments')
 export class ApartmentsController {
-  constructor(private readonly apartmentsService: ApartmentsService) {}
+  constructor(
+    private readonly apartmentsService: ApartmentsService,
+    private readonly authService: AuthService,
+  ) {}
+
+  private isAdmin(req: Request): boolean {
+    const token = (req.headers?.authorization ?? '').replace(/^Bearer\s+/i, '');
+    return !!token && !!this.authService.verifyToken(token);
+  }
 
   @Get()
   getApartments(@Req() req: Request & { locale?: SupportedLocale }) {
-    return this.apartmentsService.getApartments(req.locale ?? 'en');
+    const includeTranslations = this.isAdmin(req);
+    return this.apartmentsService.getApartments(
+      req.locale ?? 'en',
+      includeTranslations,
+    );
   }
 
   @Get(':slug')
@@ -30,7 +43,12 @@ export class ApartmentsController {
     @Param('slug') slug: string,
     @Req() req: Request & { locale?: SupportedLocale },
   ) {
-    return this.apartmentsService.getApartment(slug, req.locale ?? 'en');
+    const includeTranslations = this.isAdmin(req);
+    return this.apartmentsService.getApartment(
+      slug,
+      req.locale ?? 'en',
+      includeTranslations,
+    );
   }
 
   @Post()
