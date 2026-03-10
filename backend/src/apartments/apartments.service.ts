@@ -30,7 +30,7 @@ export class ApartmentsService {
 
   async getApartments(
     locale: SupportedLocale = 'en',
-    includeTranslations = false,
+    includeTranslations = true,
   ) {
     const apartments = await this.db.apartment.findMany();
     if (includeTranslations) {
