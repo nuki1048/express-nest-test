@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react'
 import Image from 'next/image'
 import { notFound, useParams } from 'next/navigation'
+import ReactMarkdown from 'react-markdown'
 import { useTranslations } from 'next-intl'
 import { Eye } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -94,10 +95,11 @@ export const BlogPost: React.FC<Props> = ({ className }) => {
 						/>
 					</div>
 				</div>
-				<div
-					className="blog-content text-[18px] max-sm:text-[16px] leading-[1.8] text-gray-700 prose prose-neutral max-w-none"
-					dangerouslySetInnerHTML={{ __html: post.content }}
-				/>
+				<div className="blog-content text-[18px] max-sm:text-[16px] leading-[1.8] text-gray-700 prose prose-neutral max-w-none">
+					<ReactMarkdown>
+						{post.content}
+					</ReactMarkdown>
+				</div>
 				<div className="clear-both" />
 			</div>
 			<div className="mt-16 max-sm:mt-10 pt-6">
