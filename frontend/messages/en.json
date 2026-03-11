@@ -26,7 +26,7 @@
 		"subtitle": "Open Malta with us",
 		"description": {
 			"highlight": "Sun, sea, history, adventure — all on one island.",
-			"mainText": "With crystal-clear waters, over 300 days of sunshine, vibrant coastal towns and 7,000 years of history, Malta attracts millions of visitors each year and inspires many to return not only as tourists, but as investors and future residents.",
+			"mainText": "With crystal-clear waters, over 300 days of sunshine, vibrant coastal towns and 7,000 years of history, Malta attracts millions of visitors each year and inspires many to return not only as tourists, but as <investorsLink>investors</investorsLink>, <studentsLink>students</studentsLink> and <residentsLink>future residents</residentsLink>.",
 			"footer": "Malta makes every stay unforgettable."
 		}
 	},

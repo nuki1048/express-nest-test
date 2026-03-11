@@ -2,6 +2,8 @@ import React from 'react'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import Link from 'next/link'
+import { DASHBOARD_PAGES } from '@/config/pages-url.config'
 
 interface Props {
 	className?: string
@@ -37,8 +39,24 @@ export const IntroSection: React.FC<Props> = ({ className }) => {
 						<p className="font-bold text-center">
 							{t('description.highlight')}
 						</p>
-						<p className="text-center">
-							{t('description.mainText')}
+						<p className='text-center'>
+							{t.rich('description.mainText', {
+								investorsLink: (chunks) => (
+									<Link href={DASHBOARD_PAGES.YOUR_FUTURE_HOME} className="inline text-secondary hover:underline font-bold">
+										{chunks}
+									</Link>
+								),
+								studentsLink: (chunks) => (
+									<Link href={DASHBOARD_PAGES.STUDYING_IN_MALTA} className="inline text-secondary hover:underline font-bold">
+										{chunks}
+									</Link>
+								),
+								residentsLink: (chunks) => (
+									<Link href={DASHBOARD_PAGES.RESIDENCE} className="inline text-secondary hover:underline font-bold">
+										{chunks}
+									</Link>
+								),
+							})}
 						</p>
 						<p className="text-center">
 							{t('description.footer')}

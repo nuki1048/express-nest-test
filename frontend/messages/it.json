@@ -26,7 +26,7 @@
 		"subtitle": "Scopri Malta con noi",
 		"description": {
 			"highlight": "Sole, mare, storia, avventura — tutto su un'unica isola.",
-			"mainText": "Con acque cristalline, oltre 300 giorni di sole all'anno, vivaci città costiere e 7.000 anni di storia, Malta attira milioni di visitatori ogni anno e spinge molti a tornare non solo come turisti, ma anche come investitori e futuri residenti.",
+			"mainText": "Con acque cristalline, oltre 300 giorni di sole all'anno, vivaci città costiere e 7.000 anni di storia, Malta attira milioni di visitatori ogni anno e spinge molti a tornare non solo come turisti, ma come <investorsLink>investitori</investorsLink>, <studentsLink>studenti</studentsLink> e <residentsLink>futuri residenti</residentsLink>.",
 			"footer": "Malta rende ogni soggiorno indimenticabile."
 		}
 	},
