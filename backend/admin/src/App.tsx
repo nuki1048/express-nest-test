@@ -13,15 +13,16 @@ import { dataProvider } from './dataProvider';
 import { authProvider } from './authProvider';
 import { Login } from './pages/Login';
 import {
-  ApartmentList,
-  ApartmentCreate,
-  ApartmentEdit,
-} from './pages/apartments';
+  HolidayRentalList,
+  HolidayRentalCreate,
+  HolidayRentalEdit,
+} from './pages/holiday-rentals';
 import {
-  BlogPostList,
-  BlogPostCreate,
-  BlogPostEdit,
-} from './pages/blog-posts';
+  YourFutureHomeList,
+  YourFutureHomeCreate,
+  YourFutureHomeEdit,
+} from './pages/your-future-home';
+import { BlogPostList, BlogPostCreate, BlogPostEdit } from './pages/blog-posts';
 import { ContactList, ContactCreate, ContactEdit } from './pages/contacts';
 import {
   ContactFormSubmissionList,
@@ -38,10 +39,18 @@ function App() {
           routerProvider={routerProvider}
           resources={[
             {
-              name: 'apartments',
-              list: '/apartments',
-              create: '/apartments/create',
-              edit: '/apartments/edit/:id',
+              name: 'holiday-rentals',
+              list: '/holiday-rentals',
+              create: '/holiday-rentals/create',
+              edit: '/holiday-rentals/edit/:id',
+              meta: { label: 'Holiday Rentals' },
+            },
+            {
+              name: 'your-future-home',
+              list: '/your-future-home',
+              create: '/your-future-home/create',
+              edit: '/your-future-home/edit/:id',
+              meta: { label: 'Your Future Home' },
             },
             {
               name: 'blog-posts',
@@ -77,11 +86,19 @@ function App() {
                 </Authenticated>
               }
             >
-              <Route index element={<Navigate to="/apartments" replace />} />
-              <Route path="apartments">
-                <Route index element={<ApartmentList />} />
-                <Route path="create" element={<ApartmentCreate />} />
-                <Route path="edit/:id" element={<ApartmentEdit />} />
+              <Route
+                index
+                element={<Navigate to="/holiday-rentals" replace />}
+              />
+              <Route path="holiday-rentals">
+                <Route index element={<HolidayRentalList />} />
+                <Route path="create" element={<HolidayRentalCreate />} />
+                <Route path="edit/:id" element={<HolidayRentalEdit />} />
+              </Route>
+              <Route path="your-future-home">
+                <Route index element={<YourFutureHomeList />} />
+                <Route path="create" element={<YourFutureHomeCreate />} />
+                <Route path="edit/:id" element={<YourFutureHomeEdit />} />
               </Route>
               <Route path="blog-posts">
                 <Route index element={<BlogPostList />} />

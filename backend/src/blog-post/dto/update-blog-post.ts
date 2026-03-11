@@ -27,6 +27,10 @@ export class UpdateBlogPostDto {
   mainPhoto?: string;
 
   @IsOptional()
+  @IsString()
+  readTime?: string;
+
+  @IsOptional()
   @IsBoolean()
   isPublished?: boolean;
 

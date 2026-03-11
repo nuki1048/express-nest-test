@@ -14,6 +14,10 @@ export class CreateBlogPostDto {
   mainPhoto: string;
 
   @IsOptional()
+  @IsString()
+  readTime?: string;
+
+  @IsOptional()
   @IsBoolean()
   isPublished?: boolean;
 }

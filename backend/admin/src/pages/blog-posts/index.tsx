@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   List,
   Create,
@@ -19,6 +19,7 @@ type LocaleCode = (typeof TRANSLATION_LOCALES)[number]['code'] | 'en';
 const blogPostColumns = [
   { title: 'Title', dataIndex: 'title', key: 'title' },
   { title: 'Slug', dataIndex: 'slug', key: 'slug' },
+  { title: 'Read Time', dataIndex: 'readTime', key: 'readTime', width: 100 },
   {
     title: 'Published',
     dataIndex: 'isPublished',
@@ -107,6 +108,9 @@ const BlogPostMainFields = () => (
     <ContentFieldWithPreview name="content" />
     <Form.Item name="mainPhoto" label="Main Photo" rules={[{ required: true }]}>
       <ImageUploadField pathPrefix="blog-post" />
+    </Form.Item>
+    <Form.Item name="readTime" label="Read Time (e.g. 5 min)">
+      <Input placeholder="e.g. 5 min" />
     </Form.Item>
     <Form.Item name="isPublished" label="Published" valuePropName="checked">
       <Switch />

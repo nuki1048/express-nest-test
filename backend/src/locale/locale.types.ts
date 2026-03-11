@@ -6,6 +6,18 @@ export const DEFAULT_LOCALE: SupportedLocale = 'en';
 export type ApartmentTranslations = {
   title?: string;
   description?: string;
+};
+
+export type ApartmentVariantTranslations = {
+  viewFromWindow?: string;
+};
+
+export type RentalTranslations = {
+  title?: string;
+  description?: string;
+};
+
+export type RentalVariantTranslations = {
   viewFromWindow?: string;
 };
 

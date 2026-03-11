@@ -58,8 +58,9 @@ export const dataProvider: DataProvider = {
     const list = Array.isArray(data) ? data : (data.data ?? []);
     const total = data.total ?? list.length;
 
+    const slugResources = ['holiday-rentals', 'your-future-home', 'blog-posts'];
     const normalized = list.map((item: Record<string, unknown>) => {
-      if (resource === 'apartments' || resource === 'blog-posts') {
+      if (slugResources.includes(resource)) {
         return { ...item, id: item.slug ?? item.id };
       }
       if (resource === 'contact-form-submissions') {
@@ -84,15 +85,14 @@ export const dataProvider: DataProvider = {
       return { data };
     }
 
-    const identifier =
-      resource === 'apartments' || resource === 'blog-posts' ? id : id;
+    const slugResources = ['holiday-rentals', 'your-future-home', 'blog-posts'];
+    const identifier = slugResources.includes(resource) ? id : id;
     const res = await fetchApi(`${API_URL}/${resource}/${identifier}`);
     const data = await res.json();
 
-    const normalized =
-      resource === 'apartments' || resource === 'blog-posts'
-        ? { ...data, id: data.slug ?? data.id }
-        : data;
+    const normalized = slugResources.includes(resource)
+      ? { ...data, id: data.slug ?? data.id }
+      : data;
 
     return { data: normalized };
   },
@@ -113,10 +113,10 @@ export const dataProvider: DataProvider = {
     });
     const data = await res.json();
 
-    const normalized =
-      resource === 'apartments' || resource === 'blog-posts'
-        ? { ...data, id: data.slug ?? data.id }
-        : data;
+    const slugResources = ['holiday-rentals', 'your-future-home', 'blog-posts'];
+    const normalized = slugResources.includes(resource)
+      ? { ...data, id: data.slug ?? data.id }
+      : data;
 
     return { data: normalized };
   },
@@ -131,25 +131,24 @@ export const dataProvider: DataProvider = {
       return { data: { ...data, id: data.id ?? 'contact' } };
     }
 
-    const identifier =
-      resource === 'apartments' || resource === 'blog-posts' ? id : id;
+    const slugResources = ['holiday-rentals', 'your-future-home', 'blog-posts'];
+    const identifier = slugResources.includes(resource) ? id : id;
     const res = await fetchApi(`${API_URL}/${resource}/${identifier}`, {
       method: 'PATCH',
       body: JSON.stringify(variables),
     });
     const data = await res.json();
 
-    const normalized =
-      resource === 'apartments' || resource === 'blog-posts'
-        ? { ...data, id: data.slug ?? data.id }
-        : data;
+    const normalized = slugResources.includes(resource)
+      ? { ...data, id: data.slug ?? data.id }
+      : data;
 
     return { data: normalized };
   },
 
   deleteOne: async ({ resource, id }) => {
-    const identifier =
-      resource === 'apartments' || resource === 'blog-posts' ? id : id;
+    const slugResources = ['holiday-rentals', 'your-future-home', 'blog-posts'];
+    const identifier = slugResources.includes(resource) ? id : id;
     await fetchApi(`${API_URL}/${resource}/${identifier}`, {
       method: 'DELETE',
     });
