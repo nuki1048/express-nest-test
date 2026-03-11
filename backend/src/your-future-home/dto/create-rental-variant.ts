@@ -7,13 +7,7 @@ import {
   IsString,
 } from 'class-validator';
 
-export class CreateApartmentDto {
-  @IsString()
-  title: string;
-
-  @IsString()
-  description: string;
-
+export class CreateYourFutureHomeVariantDto {
   @Type(() => Number)
   @IsNumber()
   bedrooms: number;
@@ -35,9 +29,6 @@ export class CreateApartmentDto {
 
   @IsBoolean()
   hasAc: boolean;
-
-  @IsString()
-  mainPhoto: string;
 
   @IsOptional()
   @IsArray()

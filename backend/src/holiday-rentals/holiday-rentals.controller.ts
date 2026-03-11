@@ -12,15 +12,15 @@ import {
 import { Request } from 'express';
 import { AuthGuard } from '../auth/auth.guard';
 import { AuthService } from '../auth/auth.service';
-import { ApartmentsService } from './apartments.service';
-import { CreateApartmentDto } from './dto/create-apartment';
-import { UpdateApartmentDto } from './dto/update-apartment';
+import { HolidayRentalsService } from './holiday-rentals.service';
+import { CreateHolidayRentalDto } from './dto/create-holiday-rental';
+import { UpdateHolidayRentalDto } from './dto/update-holiday-rental';
 import type { SupportedLocale } from '../locale/locale.types';
 
-@Controller('apartments')
-export class ApartmentsController {
+@Controller('holiday-rentals')
+export class HolidayRentalsController {
   constructor(
-    private readonly apartmentsService: ApartmentsService,
+    private readonly holidayRentalsService: HolidayRentalsService,
     private readonly authService: AuthService,
   ) {}
 
@@ -30,21 +30,21 @@ export class ApartmentsController {
   }
 
   @Get()
-  getApartments(@Req() req: Request & { locale?: SupportedLocale }) {
+  getHolidayRentals(@Req() req: Request & { locale?: SupportedLocale }) {
     const includeTranslations = this.isAdmin(req);
-    return this.apartmentsService.getApartments(
+    return this.holidayRentalsService.getHolidayRentals(
       req.locale ?? 'en',
       includeTranslations,
     );
   }
 
   @Get(':slug')
-  getApartment(
+  getHolidayRental(
     @Param('slug') slug: string,
     @Req() req: Request & { locale?: SupportedLocale },
   ) {
     const includeTranslations = this.isAdmin(req);
-    return this.apartmentsService.getApartment(
+    return this.holidayRentalsService.getHolidayRental(
       slug,
       req.locale ?? 'en',
       includeTranslations,
@@ -53,22 +53,22 @@ export class ApartmentsController {
 
   @Post()
   @UseGuards(AuthGuard)
-  createApartment(@Body() createApartmentDto: CreateApartmentDto) {
-    return this.apartmentsService.createApartment(createApartmentDto);
+  createHolidayRental(@Body() createDto: CreateHolidayRentalDto) {
+    return this.holidayRentalsService.createHolidayRental(createDto);
   }
 
   @Patch(':slug')
   @UseGuards(AuthGuard)
-  updateApartment(
+  updateHolidayRental(
     @Param('slug') slug: string,
-    @Body() updateApartmentDto: UpdateApartmentDto,
+    @Body() updateDto: UpdateHolidayRentalDto,
   ) {
-    return this.apartmentsService.updateApartment(slug, updateApartmentDto);
+    return this.holidayRentalsService.updateHolidayRental(slug, updateDto);
   }
 
   @Delete(':slug')
   @UseGuards(AuthGuard)
-  deleteApartment(@Param('slug') slug: string) {
-    return this.apartmentsService.deleteApartment(slug);
+  deleteHolidayRental(@Param('slug') slug: string) {
+    return this.holidayRentalsService.deleteHolidayRental(slug);
   }
 }

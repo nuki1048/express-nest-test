@@ -30,22 +30,68 @@ model ContactFormSubmission {
   createdAt   DateTime @default(now())
 }
 
-model Apartment {
-  id             String   @id @default(cuid())
-  slug           String?  @unique
-  title          String
-  description    String   @db.Text
-  bedrooms       Int
-  maxPeople      Int
-  couches        Int
-  showers        Int
-  viewFromWindow String
-  hasAc          Boolean  @default(false)
-  mainPhoto      String
-  photos         String[]
-  translations   Json? 
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+model HolidayRental {
+  id           String               @id @default(cuid())
+  slug         String?              @unique
+  title        String
+  description  String                @db.Text
+  mainPhoto    String
+  airbnb       String?
+  booking      String?
+  translations Json?
+  variants     HolidayRentalVariant[]
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+}
+
+model HolidayRentalVariant {
+  id               String        @id @default(cuid())
+  holidayRentalId  String
+  holidayRental    HolidayRental  @relation(fields: [holidayRentalId], references: [id], onDelete: Cascade)
+  bedrooms         Int
+  maxPeople        Int
+  couches          Int
+  showers          Int
+  viewFromWindow   String
+  hasAc            Boolean       @default(false)
+  photos           String[]
+  translations     Json?
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  @@index([holidayRentalId])
+}
+
+model YourFutureHome {
+  id           String                  @id @default(cuid())
+  slug         String?                 @unique
+  title        String
+  description  String                   @db.Text
+  mainPhoto    String
+  airbnb       String?
+  booking      String?
+  translations Json?
+  variants     YourFutureHomeVariant[]
+  createdAt    DateTime                @default(now())
+  updatedAt    DateTime                @updatedAt
+}
+
+model YourFutureHomeVariant {
+  id                 String          @id @default(cuid())
+  yourFutureHomeId   String
+  yourFutureHome     YourFutureHome  @relation(fields: [yourFutureHomeId], references: [id], onDelete: Cascade)
+  bedrooms           Int
+  maxPeople          Int
+  couches            Int
+  showers            Int
+  viewFromWindow     String
+  hasAc              Boolean         @default(false)
+  photos             String[]
+  translations       Json?
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+
+  @@index([yourFutureHomeId])
 }
 
 model BlogPost {
@@ -55,6 +101,7 @@ model BlogPost {
   description   String   @db.Text
   content       String   @db.Text
   mainPhoto     String
+  readTime      String?
   translations  Json?   
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
