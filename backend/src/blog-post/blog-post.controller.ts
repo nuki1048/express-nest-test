@@ -11,7 +11,7 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { Request } from 'express';
+import * as express from 'express';
 import { AuthGuard } from '../auth/auth.guard';
 import { AuthService } from '../auth/auth.service';
 import { BlogPostService } from './blog-post.service';
@@ -28,7 +28,7 @@ export class BlogPostController {
   ) {}
 
   @Get()
-  async getBlogPosts(@Req() req: Request, @Locale() locale: SupportedLocale) {
+  async getBlogPosts(@Req() req: express.Request, @Locale() locale: SupportedLocale) {
     const includeTranslations = this.authService.isAdmin(req);
     return this.blogPostService.getBlogPosts(locale, includeTranslations);
   }
@@ -36,7 +36,7 @@ export class BlogPostController {
   @Get(':slug')
   async getBlogPost(
     @Param('slug') slug: string,
-    @Req() req: Request,
+    @Req() req: express.Request,
     @Locale() locale: SupportedLocale,
   ) {
     const includeTranslations = this.authService.isAdmin(req);

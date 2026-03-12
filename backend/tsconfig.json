@@ -23,5 +23,13 @@
     "noFallthroughCasesInSwitch": false,
     "jsx": "react-jsx"
   },
-  "exclude": ["node_modules", "dist", "scripts", "src/admin", "admin"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "scripts",
+    "src/admin",
+    "admin",
+    "prisma.config.ts",
+    "prisma"
+  ]
 }

@@ -9,7 +9,7 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
-import { Request } from 'express';
+import * as express from 'express';
 import { AuthGuard } from '../auth/auth.guard';
 import { AuthService } from '../auth/auth.service';
 import { HolidayRentalsService } from './holiday-rentals.service';
@@ -28,7 +28,10 @@ export class HolidayRentalsController {
   ) {}
 
   @Get()
-  getHolidayRentals(@Req() req: Request, @Locale() locale: SupportedLocale) {
+  getHolidayRentals(
+    @Req() req: express.Request,
+    @Locale() locale: SupportedLocale,
+  ) {
     const includeTranslations = this.authService.isAdmin(req);
     return this.holidayRentalsService.getHolidayRentals(
       locale,
@@ -39,7 +42,7 @@ export class HolidayRentalsController {
   @Get(':slug')
   getHolidayRental(
     @Param('slug') slug: string,
-    @Req() req: Request,
+    @Req() req: express.Request,
     @Locale() locale: SupportedLocale,
   ) {
     const includeTranslations = this.authService.isAdmin(req);

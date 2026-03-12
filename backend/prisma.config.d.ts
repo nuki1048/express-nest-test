@@ -1,12 +1,3 @@
 import 'dotenv/config';
-declare const _default: {
-    schema: string;
-    migrations: {
-        path: string;
-        seed: string;
-    };
-    datasource: {
-        url: string;
-    };
-};
+declare const _default: import("@prisma/config").PrismaConfigInternal;
 export default _default;

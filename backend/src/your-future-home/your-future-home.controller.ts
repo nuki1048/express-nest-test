@@ -9,7 +9,7 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
-import { Request } from 'express';
+import * as express from 'express';
 import { AuthGuard } from '../auth/auth.guard';
 import { AuthService } from '../auth/auth.service';
 import { YourFutureHomeService } from './your-future-home.service';
@@ -26,7 +26,10 @@ export class YourFutureHomeController {
   ) {}
 
   @Get()
-  getYourFutureHomes(@Req() req: Request, @Locale() locale: SupportedLocale) {
+  getYourFutureHomes(
+    @Req() req: express.Request,
+    @Locale() locale: SupportedLocale,
+  ) {
     const includeTranslations = this.authService.isAdmin(req);
     return this.yourFutureHomeService.getYourFutureHomes(
       locale,
@@ -37,7 +40,7 @@ export class YourFutureHomeController {
   @Get(':slug')
   getYourFutureHome(
     @Param('slug') slug: string,
-    @Req() req: Request,
+    @Req() req: express.Request,
     @Locale() locale: SupportedLocale,
   ) {
     const includeTranslations = this.authService.isAdmin(req);
