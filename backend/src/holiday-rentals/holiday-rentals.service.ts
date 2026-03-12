@@ -33,6 +33,7 @@ export class HolidayRentalsService {
   private get db(): PrismaWithHolidayRental {
     return this.prisma as PrismaWithHolidayRental;
   }
+  // test
 
   private readonly includeVariants = {
     include: {
