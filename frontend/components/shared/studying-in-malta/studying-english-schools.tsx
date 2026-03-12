@@ -71,6 +71,7 @@ export const StudyingEnglishSchools: React.FC<Props> = ({ className }) => {
 						</ul>
 						<Link
 							href={data?.links.whatsapp || ''}
+							target='_blank'
 							className="flex items-center gap-4 text-primary font-bold uppercase text-xs max-xl:text-[10px] tracking-widest transition-colors duration-300 hover:text-secondary"
 						>
 							<Send size={24} className="shrink-0 max-xl:w-5 max-xl:h-5" />
