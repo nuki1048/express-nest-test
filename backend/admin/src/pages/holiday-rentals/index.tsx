@@ -27,20 +27,8 @@ type LocaleCode = (typeof TRANSLATION_LOCALES)[number]['code'] | 'en';
 
 const columns = [
   { title: 'Title', dataIndex: 'title', key: 'title' },
-  {
-    title: 'Bedrooms',
-    key: 'bedrooms',
-    width: 100,
-    render: (_: unknown, record: Record<string, unknown>) =>
-      (record.variants as { bedrooms?: number }[])?.[0]?.bedrooms ?? '—',
-  },
-  {
-    title: 'Max People',
-    key: 'maxPeople',
-    width: 100,
-    render: (_: unknown, record: Record<string, unknown>) =>
-      (record.variants as { maxPeople?: number }[])?.[0]?.maxPeople ?? '—',
-  },
+  { title: 'Bedrooms', dataIndex: 'bedrooms', key: 'bedrooms', width: 100 },
+  { title: 'Max People', dataIndex: 'maxPeople', key: 'maxPeople', width: 100 },
   { title: 'Slug', dataIndex: 'slug', key: 'slug' },
   {
     title: 'Actions',
@@ -61,27 +49,61 @@ const RootFields = () => (
     <Form.Item name="title" label="Title" rules={[{ required: true }]}>
       <Input />
     </Form.Item>
-    <Form.Item
-      name="description"
-      label="Description"
-      rules={[{ required: true }]}
-    >
-      <Input.TextArea rows={4} />
-    </Form.Item>
     <Form.Item name="mainPhoto" label="Main Photo" rules={[{ required: true }]}>
       <ImageUploadField pathPrefix="holiday-rentals" />
     </Form.Item>
-    <Form.Item name="airbnb" label="Airbnb Link">
-      <Input placeholder="https://airbnb.com/..." />
+    <Form.Item name="bedrooms" label="Bedrooms" rules={[{ required: true }]}>
+      <InputNumber min={1} style={{ width: '100%' }} />
     </Form.Item>
-    <Form.Item name="booking" label="Booking.com Link">
-      <Input placeholder="https://booking.com/..." />
+    <Form.Item name="maxPeople" label="Max People" rules={[{ required: true }]}>
+      <InputNumber min={1} style={{ width: '100%' }} />
+    </Form.Item>
+    <Form.Item name="couches" label="Couches" rules={[{ required: true }]}>
+      <InputNumber min={0} style={{ width: '100%' }} />
+    </Form.Item>
+    <Form.Item name="showers" label="Showers" rules={[{ required: true }]}>
+      <InputNumber min={1} style={{ width: '100%' }} />
+    </Form.Item>
+    <Form.Item
+      name="viewFromWindow"
+      label="View From Window"
+      rules={[{ required: true }]}
+    >
+      <Input />
+    </Form.Item>
+    <Form.Item
+      name="hasAc"
+      label="Has AC"
+      valuePropName="checked"
+      initialValue={false}
+    >
+      <Switch />
     </Form.Item>
   </>
 );
 
 const VariantFields = ({ name }: { name: number }) => (
   <Card size="small" style={{ marginBottom: 16 }}>
+    <Form.Item
+      name={[name, 'title']}
+      label="Title"
+      rules={[{ required: true }]}
+    >
+      <Input />
+    </Form.Item>
+    <Form.Item
+      name={[name, 'description']}
+      label="Description"
+      rules={[{ required: true }]}
+    >
+      <Input.TextArea rows={4} />
+    </Form.Item>
+    <Form.Item name={[name, 'airbnb']} label="Airbnb Link">
+      <Input placeholder="https://airbnb.com/..." />
+    </Form.Item>
+    <Form.Item name={[name, 'booking']} label="Booking.com Link">
+      <Input placeholder="https://booking.com/..." />
+    </Form.Item>
     <Form.Item
       name={[name, 'bedrooms']}
       label="Bedrooms"
@@ -102,13 +124,6 @@ const VariantFields = ({ name }: { name: number }) => (
       rules={[{ required: true }]}
     >
       <InputNumber min={0} style={{ width: '100%' }} />
-    </Form.Item>
-    <Form.Item
-      name={[name, 'showers']}
-      label="Showers"
-      rules={[{ required: true }]}
-    >
-      <InputNumber min={1} style={{ width: '100%' }} />
     </Form.Item>
     <Form.Item
       name={[name, 'viewFromWindow']}
@@ -184,17 +199,49 @@ const MainFields = () => (
   </>
 );
 
-const TranslationFieldsForLocale = ({ locale }: { locale: string }) => (
+const TranslationFieldsForLocale = ({
+  locale,
+  variants,
+}: {
+  locale: string;
+  variants?: { title?: string }[];
+}) => (
   <>
     <Form.Item name={['translations', locale, 'title']} label="Title">
       <Input />
     </Form.Item>
     <Form.Item
-      name={['translations', locale, 'description']}
-      label="Description"
+      name={['translations', locale, 'viewFromWindow']}
+      label="View From Window"
     >
-      <Input.TextArea rows={4} />
+      <Input />
     </Form.Item>
+    {(variants ?? []).map((v, idx) => {
+      const variantLabel = v?.title?.trim() || `Variant ${idx + 1}`;
+      return (
+        <div key={idx} style={{ marginTop: 16 }}>
+          <div style={{ fontWeight: 600, marginBottom: 8 }}>{variantLabel}</div>
+          <Form.Item
+            name={['variants', idx, 'translations', locale, 'title']}
+            label="Title"
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name={['variants', idx, 'translations', locale, 'description']}
+            label="Description"
+          >
+            <Input.TextArea rows={4} />
+          </Form.Item>
+          <Form.Item
+            name={['variants', idx, 'translations', locale, 'viewFromWindow']}
+            label="View From Window"
+          >
+            <Input />
+          </Form.Item>
+        </div>
+      );
+    })}
   </>
 );
 
@@ -202,6 +249,7 @@ const FormWithLocale = () => {
   const [activeLocale, setActiveLocale] = useState<LocaleCode>(
     DEFAULT_LOCALE.code,
   );
+  const variants = Form.useWatch('variants');
 
   return (
     <>
@@ -219,7 +267,7 @@ const FormWithLocale = () => {
           key={l.code}
           style={{ display: activeLocale === l.code ? 'block' : 'none' }}
         >
-          <TranslationFieldsForLocale locale={l.code} />
+          <TranslationFieldsForLocale locale={l.code} variants={variants} />
         </div>
       ))}
     </>

@@ -6,6 +6,8 @@ import type { RentalVariantTranslations } from './locale.types';
 import type { BlogPostTranslations } from './locale.types';
 
 type RentalVariantRecord = {
+  title: string;
+  description: string;
   viewFromWindow: string;
   translations?: unknown;
   [key: string]: unknown;
@@ -13,7 +15,7 @@ type RentalVariantRecord = {
 
 type RentalRecord = {
   title: string;
-  description: string;
+  viewFromWindow: string;
   translations?: unknown;
   variants?: RentalVariantRecord[];
   [key: string]: unknown;
@@ -101,6 +103,8 @@ function localizeRentalVariant(
   const t = translationsMap[locale];
   return {
     ...rest,
+    title: t.title ?? variant.title,
+    description: t.description ?? variant.description,
     viewFromWindow: t.viewFromWindow ?? variant.viewFromWindow,
   } as RentalVariantRecord;
 }
@@ -127,7 +131,7 @@ export function localizeRental(
   return {
     ...rest,
     title: t.title ?? record.title,
-    description: t.description ?? record.description,
+    viewFromWindow: t.viewFromWindow ?? record.viewFromWindow,
     variants: variants?.map((v) => localizeRentalVariant(v, locale)),
   } as RentalRecord;
 }

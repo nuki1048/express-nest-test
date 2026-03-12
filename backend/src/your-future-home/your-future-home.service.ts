@@ -58,10 +58,7 @@ export class YourFutureHomeService {
     if (includeTranslations) {
       return item;
     }
-    return localizeRental(
-      item as Parameters<typeof localizeRental>[0],
-      locale,
-    );
+    return localizeRental(item as Parameters<typeof localizeRental>[0], locale);
   }
 
   async createYourFutureHome(data: CreateYourFutureHomeDto) {
@@ -73,17 +70,20 @@ export class YourFutureHomeService {
       data: {
         ...root,
         slug,
-        airbnb: root.airbnb ?? null,
-        booking: root.booking ?? null,
+        hasAc: root.hasAc ?? false,
         variants: {
           create: variants.map((v) => ({
+            title: v.title,
+            description: v.description,
+            airbnb: v.airbnb ?? null,
+            booking: v.booking ?? null,
             bedrooms: v.bedrooms,
             maxPeople: v.maxPeople,
             couches: v.couches,
-            showers: v.showers,
             viewFromWindow: v.viewFromWindow,
             hasAc: v.hasAc ?? false,
             photos: v.photos ?? [],
+            translations: v.translations ?? undefined,
           })),
         },
       },
@@ -104,24 +104,26 @@ export class YourFutureHomeService {
       ...root,
       ...slugData,
     };
+    if (root.hasAc !== undefined) updateData.hasAc = root.hasAc ?? false;
 
     if (variants !== undefined && variants.length > 0) {
       updateData.variants = {
         deleteMany: {},
         create: variants.map((v) => ({
+          title: v.title,
+          description: v.description,
+          airbnb: v.airbnb ?? null,
+          booking: v.booking ?? null,
           bedrooms: v.bedrooms,
           maxPeople: v.maxPeople,
           couches: v.couches,
-          showers: v.showers,
           viewFromWindow: v.viewFromWindow,
           hasAc: v.hasAc ?? false,
           photos: v.photos ?? [],
+          translations: v.translations ?? undefined,
         })),
       };
     }
-
-    if (root.airbnb !== undefined) updateData.airbnb = root.airbnb ?? null;
-    if (root.booking !== undefined) updateData.booking = root.booking ?? null;
 
     return this.db.yourFutureHome.update({
       where: { slug },

@@ -14,10 +14,12 @@ export type ApartmentVariantTranslations = {
 
 export type RentalTranslations = {
   title?: string;
-  description?: string;
+  viewFromWindow?: string;
 };
 
 export type RentalVariantTranslations = {
+  title?: string;
+  description?: string;
   viewFromWindow?: string;
 };
 

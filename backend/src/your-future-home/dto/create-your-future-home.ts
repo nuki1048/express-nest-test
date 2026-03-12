@@ -2,6 +2,8 @@ import { Type } from 'class-transformer';
 import {
   ArrayMinSize,
   IsArray,
+  IsBoolean,
+  IsNumber,
   IsOptional,
   IsString,
   ValidateNested,
@@ -13,18 +15,29 @@ export class CreateYourFutureHomeDto {
   title: string;
 
   @IsString()
-  description: string;
-
-  @IsString()
   mainPhoto: string;
 
-  @IsOptional()
-  @IsString()
-  airbnb?: string;
+  @Type(() => Number)
+  @IsNumber()
+  bedrooms: number;
 
-  @IsOptional()
+  @Type(() => Number)
+  @IsNumber()
+  maxPeople: number;
+
+  @Type(() => Number)
+  @IsNumber()
+  couches: number;
+
+  @Type(() => Number)
+  @IsNumber()
+  showers: number;
+
   @IsString()
-  booking?: string;
+  viewFromWindow: string;
+
+  @IsBoolean()
+  hasAc: boolean;
 
   @IsArray()
   @ArrayMinSize(1)

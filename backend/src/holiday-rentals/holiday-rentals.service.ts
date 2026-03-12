@@ -73,17 +73,20 @@ export class HolidayRentalsService {
       data: {
         ...root,
         slug,
-        airbnb: root.airbnb ?? null,
-        booking: root.booking ?? null,
+        hasAc: root.hasAc ?? false,
         variants: {
           create: variants.map((v) => ({
+            title: v.title,
+            description: v.description,
+            airbnb: v.airbnb ?? null,
+            booking: v.booking ?? null,
             bedrooms: v.bedrooms,
             maxPeople: v.maxPeople,
             couches: v.couches,
-            showers: v.showers,
             viewFromWindow: v.viewFromWindow,
             hasAc: v.hasAc ?? false,
             photos: v.photos ?? [],
+            translations: v.translations ?? undefined,
           })),
         },
       },
@@ -104,24 +107,20 @@ export class HolidayRentalsService {
       ...root,
       ...slugData,
     };
+    if (root.hasAc !== undefined) updateData.hasAc = root.hasAc ?? false;
 
     if (variants !== undefined && variants.length > 0) {
       updateData.variants = {
         deleteMany: {},
         create: variants.map((v) => ({
-          bedrooms: v.bedrooms,
-          maxPeople: v.maxPeople,
-          couches: v.couches,
-          showers: v.showers,
-          viewFromWindow: v.viewFromWindow,
-          hasAc: v.hasAc ?? false,
-          photos: v.photos ?? [],
+          title: v.title,
+          description: v.description,
+          airbnb: v.airbnb ?? null,
+          booking: v.booking ?? null,
+          translations: v.translations ?? undefined,
         })),
       };
     }
-
-    if (root.airbnb !== undefined) updateData.airbnb = root.airbnb ?? null;
-    if (root.booking !== undefined) updateData.booking = root.booking ?? null;
 
     return this.db.holidayRental.update({
       where: { slug },

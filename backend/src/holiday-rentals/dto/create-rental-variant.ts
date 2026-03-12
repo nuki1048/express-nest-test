@@ -3,11 +3,27 @@ import {
   IsArray,
   IsBoolean,
   IsNumber,
+  IsObject,
   IsOptional,
   IsString,
 } from 'class-validator';
+import type { RentalVariantTranslations } from '../../locale/locale.types';
 
 export class CreateRentalVariantDto {
+  @IsString()
+  title: string;
+
+  @IsString()
+  description: string;
+
+  @IsOptional()
+  @IsString()
+  airbnb?: string;
+
+  @IsOptional()
+  @IsString()
+  booking?: string;
+
   @Type(() => Number)
   @IsNumber()
   bedrooms: number;
@@ -20,10 +36,6 @@ export class CreateRentalVariantDto {
   @IsNumber()
   couches: number;
 
-  @Type(() => Number)
-  @IsNumber()
-  showers: number;
-
   @IsString()
   viewFromWindow: string;
 
@@ -34,4 +46,8 @@ export class CreateRentalVariantDto {
   @IsArray()
   @IsString({ each: true })
   photos?: string[];
+
+  @IsOptional()
+  @IsObject()
+  translations?: Record<string, RentalVariantTranslations>;
 }
