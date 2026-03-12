@@ -14,6 +14,12 @@
 		"rentals": "Holiday Rentals",
 		"future_home": "Your Future Home",
 		"residence": "Residence",
+		"all_residence_programs": "All residence programs",
+		"mprp": "Malta Permanent Residence Programme (MPRP)",
+		"nomad": "Nomad Residence Permit",
+		"grp": "Global Residence Programme (GRP)",
+		"trp": "The Malta Tax Residence Programme (TRP)",
+		"citizenship": "Maltese Citizenship By Merits",
 		"studying": "Studying in Malta",
 		"blog": "Blog"
 	},
@@ -115,6 +121,156 @@
 			"successMessage": "Message sent successfully!",
 			"errorMessage": "Something went wrong. Please try again."
 		}
+	},
+	"Residence": {
+		"Main": {
+			"title": "Residence in Malta",
+			"description": "Malta offers one of the most attractive residency destinations in Europe. With its Mediterranean climate, English-speaking environment, and high quality of life, the island continues to attract individuals and families seeking stability, opportunity, and international connectivity.",
+			"benefits_title": "Key benefits",
+			"benefits": [
+				"EU member state with freedom of movement within the Schengen Area",
+				"English as an official language",
+				"Being politically neutral it is safe and stable ",
+				"Favorable tax framework for residents",
+				"Future for 4 generations",
+				"Excellent healthcare system",
+				"International schools and universities",
+				"Over 300 days of sunshine per year",
+				"Strong property market and investment opportunitiess"
+			],
+			"available_programmes": "Available Programmes",
+			"explore_programme": "Explore Programme",
+			"footer_text": "Whether you are looking for a second home, relocation opportunities, or a strategic European base, Malta provides a welcoming environment for building your future.",
+			"cta_text": "Our team can assist you with property selection, residency applications, and relocation support to make your transition smooth and secure."
+		},
+		"mprp": {
+			"title": "Malta Permanent Residence Programme (MPRP)",
+			"description": "A popular program for non-EU nationals allowing permanent residence in Malta through property investment and government contributions.",
+			"benefits_title": "Benefits",
+			"benefits": [
+				"Visa-free travel - Maltese permanent residents can visit other Schengen countries without visas. The visa-free stay is up to 90 out of 180 days.",
+				"Long-term status - Investors obtain permanent residency that is valid for life. Only an ID card must be renewed every 5 years.",
+				"May include up to 4 generations - Investors’ spouses, children, parents, and grandparents can become Maltese permanent residency under one application.",
+				"Tax residency - Spending over 183 days a year in Malta makes investors tax residents. The tax system may be attractive, but permanent residency alone offers no special tax benefits.",
+				"Backup Plan - Investors become Maltese residents without the need to live in the country. They can buy or rent property, open a bank account, study, get treated, and use Malta as a safe haven."
+			],
+			"requirements_title": "Requirements",
+			"requirements": [
+				"Main applicant must proove assets of 500 000 euros out of which 150 000 in finance  or 650 000 euros with 75 000 in finance",
+				"Make real estate investment in the form either ",
+				"Purchasing property with minimum value of 300 000     OR",
+				"Renting property with minimum annual value of 10 000",
+				"Property must be held for a minimum period of 5 years. Those who buy property can rent it out when they are not in Malta.",
+				"Make a non-refundable contribution of 37 000  to Maltese government",
+				"Make donation  of 2000  to local NGO registered with the Commissioner for Voluntary Organisations",
+				"Administration fees of 60 000 includes spouse and minor dependants. For each additional adult dependant is 7 500 paid"
+			],
+			"requirements_footer": "Successful applicants will be required to finish the qualifying investments, after passing rigorous due diligence tests in order to receiving a residency permit."
+		},
+		"nomad": {
+			"title": "Nomad Residence Permit",
+			"description": "Designed for remote workers who wish to live in Malta while working for employers or clients outside the country. Valid for 1 year and renewable up to 3 times",
+			"benefits_title": "Benefits",
+			"benefits": [
+				"Visa free travel",
+				"Tax optimisation - Nomads get a 12-month income tax exemption. After that, a flat 10% rate applies to authorised work",
+				"EU benefits - Nomads and their families can study and receive treatment in Malta or other Schengen states for up to 90 days."
+			],
+			"requirements_title": "Requirements",
+			"requirements": [
+				"No criminal records",
+				"Non-EU and non-EEA citizen",
+				"Not a citizen of a restricted country, such as Afghanistan, Iran, or Syria",
+				"Remote work: an employee of a foreign company, a director of a company registered outside Malta, a freelancer, or a self-employed",
+				"Income of at least €3,500 per month, or €42,000 per year",
+				"Have a residential property in Malta",
+				"Have valid health insurance covering Malta"
+			]
+		},
+		"grp": {
+			"title": "Global Residence Programme (GRP)",
+			"description": "A Tax Residence Programme for non-EU, non- EEA and non- Swiss nationals. Initially valid for one year, renewable every two years.",
+			"benefits_title": "Benefits",
+			"benefits": [
+				"Visa free travel",
+				"Living, working and doing business in Malta -   Have a special permit to work or open a company in the country.",
+				"Tax optimisation  - A flat tax rate of 15% for all income remitted to Malta.",
+				"No tax in Malta will be charged on income from outside Malta that is not received in Malta.",
+				"No tax in Malta for capital gains realised outside Malta even if received in Malta.",
+				"No inheritance taxes.",
+				"Double taxation relief where applicable on income arising outside of Malta."
+			],
+			"requirements_title": "Requirements",
+			"requirements": [
+				"Maintain the qualifying property - Purchase minimum €275,000 (Malta)  or €220,000 (Gozo, South Malta)",
+				"Property Rental  minimum €9,600 per year (Malta) or  €8,750 per year (Gozo, South Malta)",
+				"Application fee: approximately €6,000 (or €5,500 for property in Gozo/South Malta)",
+				"Keep health insurance",
+				"Pay the minimum annual tax of €15,000",
+				"Not spend more than 183 days per year in another single country",
+				"Continue to meet the financial and program requirements "
+			]
+		},
+		"trp": {
+			"title": "The Malta Tax Residence Programme (TRP)",
+			"description": "The Malta Tax Residence Programme is designed for EU, EEA, and Swiss nationals who wish to establish tax residence in Malta Validity The special tax status can be maintained annually, provided the applicant continues to meet the programme requirements and pays the minimum tax.",
+			"benefits_title": "Benefits",
+			"benefits": [
+				"15% flat tax rate on foreign income remitted to Malta",
+				"No tax will be charged for income that has been generated and received outside of Malta ",
+				"In regards to capital gains, no tax would be chargeable in Malta even if the capital gains are received in Malta, and realized outside.",
+				"Access to Malta’s extensive double taxation treaty network"
+			],
+			"requirements_title": "Requirements",
+			"requirements": [
+				"Applicants must be EU, EEA, or Swiss nationals",
+				"Purchase or rent qualifying property in Malta - Purchase  of at least: €275,000 in Malta or €220,000 in Gozo, South Malta",
+				"Rent  with a minimum annual  of: €9,600 in Malta or €8,750 in Gozo, South Malta",
+				"Application fee of €5,500 will be payable for properties in Gozo or the South of Malta or €6,000 in Malta",
+				"Minimum annual tax payment of €15,000",
+				"Holding health insurance covering Malta",
+				"Demonstrating stable financial resources",
+				"Not spending more than 183 days per year in another country"
+			]
+		},
+		"citizenship": {
+			"title": "Maltese Citizenship By Merits",
+			"description": "It is granted to individuals whose skills, achievements, or contributions are considered to be of exceptional national interest. Their contribution has clear value to Malta’s public interest or international positioning, concrete outcomes or well-defined plans with measurable KPIs.",
+			"benefits_title": "Areas for contribution",
+			"benefits": [
+				"Entrepreneurship projects and job creation",
+				"Innovation, digital transformation, and science",
+				"Education and healthcare",
+				"Culture and sports",
+				"Philanthropy, social impact, and national security",
+				"strategic projects supporting Malta Vision 2050"
+			]
+		}
+	},
+	"OurServices": {
+		"title": "Our Services",
+		"services": [
+			{
+				"title": "Real Estate",
+				"description": "Discover your ideal home or investment property with the guidance of our experienced real estate specialists."
+			},
+			{
+				"title": "Residency & Incorporation",
+				"description": "Migration and company formation through our trusted professional partners."
+			},
+			{
+				"title": "Legal & Notary Services",
+				"description": "Reliable legal and notarial support to ensure every transaction is handled smoothly and securely."
+			},
+			{
+				"title": "Interior Design & Furnishing",
+				"description": "Enhance your property with complete design, furnishing, and installation solutions tailored to your space."
+			},
+			{
+				"title": "Full Property Management",
+				"description": "Comprehensive rental and management services for both short- and long-term lets, designed for convenience and peace of mind."
+			}
+		]
 	},
 	"Studying": {
 		"hero": {

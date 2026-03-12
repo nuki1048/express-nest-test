@@ -14,6 +14,12 @@
 		"rentals": "Case Vacanze",
 		"future_home": "La tua futura casa",
 		"residence": "Residenza",
+		"all_residence_programs": "Cittadinanza maltese per meriti",
+		"mprp": "Programma di residenza permanente a Malta (MPRP)",
+		"nomad": "Permesso di soggiorno nomade",
+		"grp": "Programma di residenza globale (GRP)",
+		"trp": "Il programma di residenza fiscale di Malta (TRP)",
+		"citizenship": "Cittadinanza maltese per meriti",
 		"studying": "Studiare a Malta",
 		"blog": "Blog"
 	},
@@ -115,6 +121,156 @@
 			"successMessage": "Messaggio inviato con successo!",
 			"errorMessage": "Si è verificato un errore. Riprova."
 		}
+	},
+	"Residence": {
+		"Main": {
+			"title": "Residenza a Malta",
+			"description": "Malta offre una delle destinazioni di residenza più attraenti d'Europa. Grazie al suo clima mediterraneo, all'ambiente anglofono e all'elevata qualità della vita, l'isola continua ad attrarre individui e famiglie in cerca di stabilità, opportunità e connettività internazionale.",
+			"benefits_title": "Vantaggi principali",
+			"benefits": [
+				"Stato membro dell'UE con libertà di movimento all'interno dell'Area Schengen",
+				"L'inglese come lingua ufficiale",
+				"Politicamente neutrale, sicura e stabile",
+				"Quadro fiscale favorevole per i residenti",
+				"Futuro garantito per 4 generazioni",
+				"Eccellente sistema sanitario",
+				"Scuole e università internazionali",
+				"Oltre 300 giorni di sole all'anno",
+				"Mercato immobiliare solido e opportunità di investimento"
+			],
+			"available_programmes": "Programmi Disponibili",
+			"explore_programme": "Scopri il Programma",
+			"footer_text": "Che tu stia cercando una seconda casa, opportunità di trasferimento o una base strategica in Europa, Malta offre un ambiente accogliente per costruire il tuo futuro.",
+			"cta_text": "Il nostro team può assisterti nella selezione degli immobili, nelle domande di residenza e nel supporto al trasferimento per rendere la tua transizione fluida e sicura."
+		},
+		"mprp": {
+			"title": "Malta Permanent Residence Programme (MPRP)",
+			"description": "Un programma popolare per i cittadini extra-UE che consente la residenza permanente a Malta attraverso investimenti immobiliari e contributi governativi.",
+			"benefits_title": "Vantaggi",
+			"benefits": [
+				"Viaggi senza visto - I residenti permanenti maltesi possono visitare altri paesi Schengen senza visto. Il soggiorno senza visto è fino a 90 giorni su 180.",
+				"Status a lungo termine - Gli investitori ottengono una residenza permanente valida a vita. Solo la carta d'identità deve essere rinnovata ogni 5 anni.",
+				"Può includere fino a 4 generazioni - Coniugi, figli, genitori e nonni degli investitori possono ottenere la residenza permanente maltese con un'unica domanda.",
+				"Residenza fiscale - Trascorrere più di 183 giorni all'anno a Malta rende gli investitori residenti fiscali. Il sistema fiscale può essere interessante, ma la sola residenza permanente non offre vantaggi fiscali speciali.",
+				"Piano di riserva - Gli investitori diventano residenti maltesi senza l'obbligo di vivere nel paese. Possono acquistare o affittare immobili, aprire un conto bancario, studiare, curarsi e usare Malta come rifugio sicuro."
+			],
+			"requirements_title": "Requisiti",
+			"requirements": [
+				"Il richiedente principale deve dimostrare un patrimonio di 500.000 euro, di cui 150.000 in attività finanziarie, oppure 650.000 euro con 75.000 in attività finanziarie.",
+				"Effettuare un investimento immobiliare sotto forma di:",
+				"Acquisto di un immobile con valore minimo di 300.000 euro OPPURE",
+				"Affitto di un immobile con valore annuo minimo di 10.000 euro",
+				"L'immobile deve essere mantenuto per un periodo minimo di 5 anni. Chi acquista può affittare l'immobile quando non si trova a Malta.",
+				"Versare un contributo non rimborsabile di 37.000 euro al governo maltese",
+				"Effettuare una donazione di 2.000 euro a una ONG locale registrata presso il Commissario per le Organizzazioni di Volontariato",
+				"Le spese amministrative di 60.000 euro includono coniuge e figli minori a carico. Per ogni ulteriore adulto a carico è previsto il pagamento di 7.500 euro"
+			],
+			"requirements_footer": "I candidati idonei saranno tenuti a completare gli investimenti qualificanti dopo aver superato rigorosi test di due diligence per ricevere il permesso di soggiorno."
+		},
+		"nomad": {
+			"title": "Nomad Residence Permit",
+			"description": "Progettato per i lavoratori da remoto che desiderano vivere a Malta lavorando per datori di lavoro o clienti fuori dal paese. Valido per 1 anno e rinnovabile fino a 3 volte.",
+			"benefits_title": "Vantaggi",
+			"benefits": [
+				"Viaggi senza visto",
+				"Ottimizzazione fiscale - I nomadi ottengono un'esenzione dall'imposta sul reddito per 12 mesi. Successivamente, si applica un'aliquota fissa del 10% sul lavoro autorizzato",
+				"Vantaggi UE - I nomadi e le loro famiglie possono studiare e ricevere cure a Malta o in altri stati Schengen per un massimo di 90 giorni."
+			],
+			"requirements_title": "Requisiti",
+			"requirements": [
+				"Nessun precedente penale",
+				"Cittadino extra-UE ed extra-SEE",
+				"Non essere cittadino di un paese con restrizioni, come Afghanistan, Iran o Siria",
+				"Lavoro da remoto: dipendente di una società straniera, direttore di una società registrata fuori Malta, freelancer o lavoratore autonomo",
+				"Reddito di almeno €3.500 al mese, o €42.000 all'anno",
+				"Disporre di una proprietà residenziale a Malta",
+				"Avere un'assicurazione sanitaria valida che copra Malta"
+			]
+		},
+		"grp": {
+			"title": "Global Residence Programme (GRP)",
+			"description": "Un programma di residenza fiscale per cittadini non UE, non SEE e non svizzeri. Inizialmente valido per un anno, rinnovabile ogni due anni.",
+			"benefits_title": "Vantaggi",
+			"benefits": [
+				"Viaggi senza visto",
+				"Vivere, lavorare e fare affari a Malta - Possibilità di avere un permesso speciale per lavorare o aprire una società nel paese.",
+				"Ottimizzazione fiscale - Un'aliquota fiscale fissa del 15% su tutti i redditi rimessi a Malta.",
+				"Nessuna imposta a Malta sarà addebitata sui redditi prodotti fuori Malta e non ricevuti a Malta.",
+				"Nessuna imposta a Malta per le plusvalenze realizzate fuori Malta, anche se ricevute a Malta.",
+				"Nessuna tassa di successione.",
+				"Sgravio dalla doppia imposizione, ove applicabile, sui redditi prodotti fuori da Malta."
+			],
+			"requirements_title": "Requisiti",
+			"requirements": [
+				"Mantenere la proprietà qualificante - Acquisto minimo €275.000 (Malta) o €220.000 (Gozo, Sud di Malta)",
+				"Affitto immobiliare minimo €9.600 all'anno (Malta) o €8.750 all'anno (Gozo, Sud di Malta)",
+				"Spese di istruttoria: circa €6.000 (o €5.500 per proprietà a Gozo/Sud di Malta)",
+				"Mantenere l'assicurazione sanitaria",
+				"Pagare l'imposta minima annuale di €15.000",
+				"Non trascorrere più di 183 giorni all'anno in un altro singolo paese",
+				"Continuare a soddisfare i requisiti finanziari e del programma"
+			]
+		},
+		"trp": {
+			"title": "The Malta Tax Residence Programme (TRP)",
+			"description": "Il Malta Tax Residence Programme è destinato ai cittadini UE, SEE e svizzeri che desiderano stabilire la residenza fiscale a Malta. Lo status fiscale speciale può essere mantenuto annualmente, a condizione che il richiedente continui a soddisfare i requisiti del programma e paghi l'imposta minima.",
+			"benefits_title": "Vantaggi",
+			"benefits": [
+				"Aliquota fiscale fissa del 15% sul reddito estero rimesso a Malta",
+				"Nessuna imposta sarà addebitata per il reddito generato e ricevuto al di fuori di Malta",
+				"Per quanto riguarda le plusvalenze, nessuna imposta sarebbe esigibile a Malta anche se le plusvalenze sono ricevute a Malta, ma realizzate all'esterno.",
+				"Accesso alla vasta rete di trattati contro la doppia imposizione di Malta"
+			],
+			"requirements_title": "Requisiti",
+			"requirements": [
+				"I richiedenti devono essere cittadini UE, SEE o svizzeri",
+				"Acquistare o affittare una proprietà qualificante a Malta - Acquisto di almeno: €275.000 a Malta o €220.000 a Gozo, Sud di Malta",
+				"Affitto con un minimo annuo di: €9.600 a Malta o €8.750 a Gozo, Sud di Malta",
+				"Spese di istruttoria di €5.500 per proprietà a Gozo o nel Sud di Malta o €6.000 a Malta",
+				"Pagamento dell'imposta minima annuale di €15.000",
+				"Possesso di un'assicurazione sanitaria che copra Malta",
+				"Dimostrazione di risorse finanziarie stabili",
+				"Non trascorrere più di 183 giorni all'anno in un altro paese"
+			]
+		},
+		"citizenship": {
+			"title": "Cittadinanza Maltese per Meriti",
+			"description": "Viene concessa a individui le cui competenze, risultati o contributi sono considerati di eccezionale interesse nazionale. Il loro contributo deve avere un chiaro valore per l'interesse pubblico di Malta o per il suo posizionamento internazionale, con risultati concreti o piani ben definiti e KPI misurabili.",
+			"benefits_title": "Settori di contributo",
+			"benefits": [
+				"Progetti di imprenditorialità e creazione di posti di lavoro",
+				"Innovazione, trasformazione digitale e scienza",
+				"Istruzione e sanità",
+				"Cultura e sport",
+				"Filantropia, impatto sociale e sicurezza nazionale",
+				"Progetti strategici a supporto di Malta Vision 2050"
+			]
+		}
+	},
+	"OurServices": {
+		"title": "I nostri servizi",
+		"services": [
+			{
+				"title": "Immobiliare",
+				"description": "Scoprite la vostra casa ideale o l'immobile da investimento con la guida dei nostri esperti specialisti immobiliari."
+			},
+			{
+				"title": "Residenza e costituzione di società",
+				"description": "Migrazione e costituzione di società tramite i nostri partner professionali di fiducia."
+			},
+			{
+				"title": "Servizi legali e notarili",
+				"description": "Assistenza legale e notarile affidabile per garantire che ogni transazione sia gestita in modo fluido e sicuro."
+			},
+			{
+				"title": "Interior Design & Arredamento",
+				"description": "Valorizza la tua proprietà con soluzioni complete di progettazione, arredamento e installazione su misura per il tuo spazio."
+			},
+			{
+				"title": "Gestione completa della proprietà",
+				"description": "Servizi completi di affitto e gestione per locazioni a breve e lungo termine, progettati per garantire comodità e tranquillità."
+			}
+		]
 	},
 	"Studying": {
 		"hero": {

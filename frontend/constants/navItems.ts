@@ -8,3 +8,11 @@ export const NAV_ITEMS = [
   { label: 'studying', path: DASHBOARD_PAGES.STUDYING_IN_MALTA },
   { label: 'blog', path: DASHBOARD_PAGES.BLOG },
 ] as const;
+
+export const RESIDENCE_SUB_ITEMS = [
+  { label: 'mprp', path: '/residence/mprp' },
+  { label: 'nomad', path: '/residence/nomad' },
+  { label: 'grp', path: '/residence/grp' },
+  { label: 'trp', path: '/residence/trp' },
+  { label: 'citizenship', path: '/residence/citizenship' },
+] as const;
