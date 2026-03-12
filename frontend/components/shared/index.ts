@@ -15,3 +15,4 @@ export * from "./recent-posts";
 export * from "./recent-card";
 export * from "./skeletons";
 export * from "./sections";
+export * from './studying-in-malta'

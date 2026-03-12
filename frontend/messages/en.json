@@ -116,6 +116,63 @@
 			"errorMessage": "Something went wrong. Please try again."
 		}
 	},
+	"Studying": {
+		"hero": {
+			"title": "Studying in Malta",
+			"subtitle": "Malta provides diverse educational opportunities for students from around the world, from English language courses to undergraduate and postgraduate degrees and specialised professional programmes."
+		},
+		"benefits": {
+			"title": "Benefits",
+			"items": [
+				"English as an official language",
+				"EU member state qualifications",
+				"Safe and welcoming environment",
+				"Affordable tuition and living costs",
+				"Multicultural student community",
+				"300+ sunny days per year"
+			]
+		},
+		"schools": {
+			"title": "English Language Schools",
+			"description": "Malta is one of the top destinations in Europe for learning English, attracting thousands of students every year. There is  a wide range of courses suitable for students of all levels — from beginner (A1) to advanced proficiency (C2) according to the Common European Framework of Reference for Languages (CEFR), accredited by Cambridge English and  State councils. Courses are designed to suit different needs and schedules. Students can choose from:",
+			"durationInfo": "Course durations are flexible, ranging from one week to several months, allowing students to improve their English at their own pace.",
+			"courses": [
+				"General English courses",
+				"Intensive language programmes",
+				"Business English",
+				"Exam preparation courses such as IELTS and Cambridge, exam center for an FCE, CAE, CPE,  PET",
+				"Junior English",
+				"Parent and child English"
+			],
+			"pricing": {
+				"label": "Starting from",
+				"price": "€200",
+				"period": "/ per week",
+				"details": [
+					"20 lessons per week (3 hours/day)",
+					"+35€ book",
+					"+45€ registration fee",
+					"+35€ (if hot season from 31 may - 30 Aaugust)"
+				],
+				"cta": "To have a quote message us specifying the type of course, dates, and duration of stay."
+			}
+		},
+		"education": {
+			"higher": {
+				"title": "Higher Education",
+				"subtitle": "Beyond language studies, Malta also offers a variety of opportunities for Further and Higher education.",
+				"description": "Universities provide undergraduate and postgraduate degree programmes in fields such as business, technology, medicine, and the arts. Colleges and institutes offer practical and career-oriented education, preparing students for specific professions through diploma and vocational programmes.  Numerous private institutes provide specialised courses in areas such as hospitality, finance, information technology, law, project management, health and care and many others."
+			},
+			"residence": {
+				"title": "Residence & Work",
+				"description": "International students studying in Malta for longer than three months must apply for a <bold>student residence permit.</bold> This permit allows students to live in Malta during their studies and may be renewed for the duration of the academic program.",
+				"workInfo": "* Many students also work part-time while studying, gaining valuable international experience."
+			}
+		},
+		"support": {
+			"description": "We assist students with the entire process — from choosing educational institutions to arranging accommodation and relocation support."
+		}
+	},
 	"Blog": {
 		"allPosts": "All Posts",
 		"updated": "Updated",
