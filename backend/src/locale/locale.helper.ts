@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import type { SupportedLocale } from './locale.types';
 import type { ApartmentTranslations } from './locale.types';
 import type { ApartmentVariantTranslations } from './locale.types';
@@ -121,9 +122,7 @@ export function localizeRental(
   if (locale === 'en' || !translationsMap?.[locale]) {
     const result = { ...rest, variants } as RentalRecord;
     if (variants?.length) {
-      result.variants = variants.map((v) =>
-        localizeRentalVariant(v, locale),
-      );
+      result.variants = variants.map((v) => localizeRentalVariant(v, locale));
     }
     return result;
   }

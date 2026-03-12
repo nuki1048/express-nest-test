@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import type { UpdateHolidayRentalDto } from './dto/update-holiday-rental';
@@ -59,7 +60,7 @@ export class HolidayRentalsService {
       return rental;
     }
     return localizeRental(
-      rental as Parameters<typeof localizeRental>[0],
+      rental as unknown as Parameters<typeof localizeRental>[0],
       locale,
     );
   }

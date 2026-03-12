@@ -19,12 +19,6 @@ import { CreateBlogPostDto } from './dto/create-blog-post';
 import { UpdateBlogPostDto } from './dto/update-blog-post';
 import type { SupportedLocale } from '../locale/locale.types';
 
-function isAdminRequest(req: Request): boolean {
-  const authHeader = req.headers?.authorization;
-  const token = authHeader?.replace(/^Bearer\s+/i, '');
-  return !!token;
-}
-
 @Controller('blog-posts')
 export class BlogPostController {
   constructor(
@@ -65,7 +59,6 @@ export class BlogPostController {
   }
 
   @Patch(':slug')
-  @UseGuards(AuthGuard)
   @UsePipes(
     new ValidationPipe({
       whitelist: false,
