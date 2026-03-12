@@ -1,22 +1,19 @@
-import React from 'react';
-import { Upload } from 'antd';
+import { useState, useEffect } from 'react';
 import type { UploadFile, UploadProps } from 'antd';
-import { InboxOutlined } from '@ant-design/icons';
-import { useEffect, useState } from 'react';
 
-interface ImageUploadFieldProps {
+type Props = {
   value?: string | string[];
   onChange?: (value: string | string[]) => void;
   pathPrefix: string;
   multiple?: boolean;
-}
+};
 
-export function ImageUploadField({
+export function useImageUpload({
   value,
   onChange,
   pathPrefix,
   multiple = false,
-}: ImageUploadFieldProps) {
+}: Props) {
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const token =
     typeof window !== 'undefined' ? localStorage.getItem('admin_token') : null;
@@ -59,22 +56,12 @@ export function ImageUploadField({
     setFileList(info.fileList);
   };
 
-  return (
-    <Upload.Dragger
-      name="file"
-      action={action}
-      listType="picture"
-      fileList={fileList}
-      onChange={handleChange}
-      headers={token ? { Authorization: `Bearer ${token}` } : {}}
-      maxCount={multiple ? 20 : 1}
-      multiple={multiple}
-      accept="image/*"
-    >
-      <p className="ant-upload-drag-icon">
-        <InboxOutlined />
-      </p>
-      <p className="ant-upload-text">Click or drag image to upload</p>
-    </Upload.Dragger>
-  );
+  return {
+    fileList,
+    handleChange,
+    action,
+    headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+    maxCount: multiple ? 20 : 1,
+    multiple,
+  };
 }

@@ -16,6 +16,7 @@ import { YourFutureHomeService } from './your-future-home.service';
 import { CreateYourFutureHomeDto } from './dto/create-your-future-home';
 import { UpdateYourFutureHomeDto } from './dto/update-your-future-home';
 import type { SupportedLocale } from '../locale/locale.types';
+import { Locale } from '../locale/locale.decorator';
 
 @Controller('your-future-home')
 export class YourFutureHomeController {
@@ -24,16 +25,11 @@ export class YourFutureHomeController {
     private readonly authService: AuthService,
   ) {}
 
-  private isAdmin(req: Request): boolean {
-    const token = (req.headers?.authorization ?? '').replace(/^Bearer\s+/i, '');
-    return !!token && !!this.authService.verifyToken(token);
-  }
-
   @Get()
-  getYourFutureHomes(@Req() req: Request & { locale?: SupportedLocale }) {
-    const includeTranslations = this.isAdmin(req);
+  getYourFutureHomes(@Req() req: Request, @Locale() locale: SupportedLocale) {
+    const includeTranslations = this.authService.isAdmin(req);
     return this.yourFutureHomeService.getYourFutureHomes(
-      req.locale ?? 'en',
+      locale,
       includeTranslations,
     );
   }
@@ -41,12 +37,13 @@ export class YourFutureHomeController {
   @Get(':slug')
   getYourFutureHome(
     @Param('slug') slug: string,
-    @Req() req: Request & { locale?: SupportedLocale },
+    @Req() req: Request,
+    @Locale() locale: SupportedLocale,
   ) {
-    const includeTranslations = this.isAdmin(req);
+    const includeTranslations = this.authService.isAdmin(req);
     return this.yourFutureHomeService.getYourFutureHome(
       slug,
-      req.locale ?? 'en',
+      locale,
       includeTranslations,
     );
   }

@@ -10,6 +10,10 @@ import {
 import type { RentalVariantTranslations } from '../../locale/locale.types';
 
 export class CreateRentalVariantDto {
+  @IsOptional()
+  @IsString()
+  id?: string;
+
   @IsString()
   title: string;
 

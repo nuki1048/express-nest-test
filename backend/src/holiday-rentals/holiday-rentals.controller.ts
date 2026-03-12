@@ -15,7 +15,10 @@ import { AuthService } from '../auth/auth.service';
 import { HolidayRentalsService } from './holiday-rentals.service';
 import { CreateHolidayRentalDto } from './dto/create-holiday-rental';
 import { UpdateHolidayRentalDto } from './dto/update-holiday-rental';
+import { CreateBookingDto } from './dto/create-booking.dto';
+import { UpdateBookingDto } from './dto/update-booking.dto';
 import type { SupportedLocale } from '../locale/locale.types';
+import { Locale } from '../locale/locale.decorator';
 
 @Controller('holiday-rentals')
 export class HolidayRentalsController {
@@ -24,16 +27,11 @@ export class HolidayRentalsController {
     private readonly authService: AuthService,
   ) {}
 
-  private isAdmin(req: Request): boolean {
-    const token = (req.headers?.authorization ?? '').replace(/^Bearer\s+/i, '');
-    return !!token && !!this.authService.verifyToken(token);
-  }
-
   @Get()
-  getHolidayRentals(@Req() req: Request & { locale?: SupportedLocale }) {
-    const includeTranslations = this.isAdmin(req);
+  getHolidayRentals(@Req() req: Request, @Locale() locale: SupportedLocale) {
+    const includeTranslations = this.authService.isAdmin(req);
     return this.holidayRentalsService.getHolidayRentals(
-      req.locale ?? 'en',
+      locale,
       includeTranslations,
     );
   }
@@ -41,12 +39,13 @@ export class HolidayRentalsController {
   @Get(':slug')
   getHolidayRental(
     @Param('slug') slug: string,
-    @Req() req: Request & { locale?: SupportedLocale },
+    @Req() req: Request,
+    @Locale() locale: SupportedLocale,
   ) {
-    const includeTranslations = this.isAdmin(req);
+    const includeTranslations = this.authService.isAdmin(req);
     return this.holidayRentalsService.getHolidayRental(
       slug,
-      req.locale ?? 'en',
+      locale,
       includeTranslations,
     );
   }
@@ -70,5 +69,30 @@ export class HolidayRentalsController {
   @UseGuards(AuthGuard)
   deleteHolidayRental(@Param('slug') slug: string) {
     return this.holidayRentalsService.deleteHolidayRental(slug);
+  }
+
+  @Post(':slug/bookings')
+  @UseGuards(AuthGuard)
+  createBooking(@Param('slug') slug: string, @Body() body: CreateBookingDto) {
+    return this.holidayRentalsService.createBooking(slug, body);
+  }
+
+  @Patch(':slug/bookings/:bookingId')
+  @UseGuards(AuthGuard)
+  updateBooking(
+    @Param('slug') slug: string,
+    @Param('bookingId') bookingId: string,
+    @Body() body: UpdateBookingDto,
+  ) {
+    return this.holidayRentalsService.updateBooking(slug, bookingId, body);
+  }
+
+  @Delete(':slug/bookings/:bookingId')
+  @UseGuards(AuthGuard)
+  deleteBooking(
+    @Param('slug') slug: string,
+    @Param('bookingId') bookingId: string,
+  ) {
+    return this.holidayRentalsService.deleteBooking(slug, bookingId);
   }
 }

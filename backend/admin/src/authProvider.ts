@@ -51,5 +51,5 @@ export const authProvider: AuthProvider = {
     return { id: 1, name: data.email ?? 'Admin', email: data.email };
   },
 
-  onError: () => ({ logout: false }),
+  onError: () => Promise.resolve({ logout: false }),
 };

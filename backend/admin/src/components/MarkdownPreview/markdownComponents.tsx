@@ -1,7 +1,6 @@
-import ReactMarkdown from 'react-markdown';
 import type { Components } from 'react-markdown';
 
-const components: Components = {
+export const markdownComponents: Components = {
   h1: ({ children }) => (
     <h1 style={{ fontSize: 24, fontWeight: 600, margin: '16px 0 8px' }}>
       {children}
@@ -27,7 +26,12 @@ const components: Components = {
     <ol style={{ marginBottom: 12, paddingLeft: 24 }}>{children}</ol>
   ),
   a: ({ href, children }) => (
-    <a href={href} target="_blank" rel="noopener noreferrer" style={{ color: '#1677ff' }}>
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{ color: '#1677ff' }}
+    >
       {children}
     </a>
   ),
@@ -60,29 +64,3 @@ const components: Components = {
     </pre>
   ),
 };
-
-interface MarkdownPreviewProps {
-  content: string;
-  className?: string;
-}
-
-export function MarkdownPreview({ content, className }: MarkdownPreviewProps) {
-  return (
-    <div
-      className={className}
-      style={{
-        padding: 16,
-        border: '1px solid #d9d9d9',
-        borderRadius: 6,
-        minHeight: 200,
-        background: '#fff',
-      }}
-    >
-      {content ? (
-        <ReactMarkdown components={components}>{content}</ReactMarkdown>
-      ) : (
-        <span style={{ color: '#bfbfbf' }}>Nothing to preview</span>
-      )}
-    </div>
-  );
-}

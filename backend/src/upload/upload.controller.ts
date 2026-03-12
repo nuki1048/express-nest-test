@@ -2,18 +2,18 @@ import {
   Controller,
   Delete,
   Post,
+  Query,
   UseGuards,
   UseInterceptors,
   UploadedFile,
-  BadRequestException,
-  Query,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { AuthGuard } from '../auth/auth.guard';
-import { ALLOWED_MIMES, MAX_SIZE } from './constants';
 import { ImageCompressionService } from '../services/image-compression.service';
-import { PATH_REQUIRED_MESSAGE, sanitizePath } from './path.validation';
+import { MAX_SIZE } from './constants';
 import type { MulterFile } from './upload.types';
+import { UploadFilePipe } from './upload-file.pipe';
+import { UploadPathPipe } from './upload-path.pipe';
 import { UploadService } from './upload.service';
 
 @Controller('upload')
@@ -31,36 +31,20 @@ export class UploadController {
     }),
   )
   async upload(
-    @UploadedFile() file: MulterFile | undefined,
-    @Query('path') path?: string,
+    @UploadedFile(UploadFilePipe) file: MulterFile,
+    @Query('path', UploadPathPipe) path: string,
   ): Promise<{ url: string }> {
-    if (!file?.buffer) {
-      throw new BadRequestException('No file uploaded');
-    }
-    if (!(ALLOWED_MIMES as readonly string[]).includes(file.mimetype ?? '')) {
-      throw new BadRequestException(
-        `Invalid file type. Allowed: ${ALLOWED_MIMES.join(', ')}`,
-      );
-    }
-    const pathPrefix = sanitizePath(path);
-    if (!pathPrefix) {
-      throw new BadRequestException(PATH_REQUIRED_MESSAGE);
-    }
     const payload = await this.imageCompression.compress(
       file.buffer,
       file.mimetype,
       file.originalname ?? 'image',
     );
-    const url = await this.uploadService.uploadFile(payload, pathPrefix);
+    const url = await this.uploadService.uploadFile(payload, path);
     return { url };
   }
 
   @Delete()
-  async delete(@Query('path') path?: string): Promise<void> {
-    const storageKey = sanitizePath(path);
-    if (!storageKey) {
-      throw new BadRequestException(PATH_REQUIRED_MESSAGE);
-    }
-    await this.uploadService.deleteFile(storageKey);
+  async delete(@Query('path', UploadPathPipe) path: string): Promise<void> {
+    await this.uploadService.deleteFile(path);
   }
 }

@@ -7,17 +7,15 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { LoginDto } from './dto/login.dto';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('login')
-  async login(@Body() body: { email?: string; password?: string }) {
-    const { email, password } = body;
-    if (!email || !password) {
-      throw new UnauthorizedException('Email and password required');
-    }
+  async login(@Body() dto: LoginDto) {
+    const { email, password } = dto;
     if (!this.authService.validateCredentials(email, password)) {
       throw new UnauthorizedException('Invalid credentials');
     }

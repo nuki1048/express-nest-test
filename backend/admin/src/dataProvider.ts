@@ -1,4 +1,4 @@
-import type { DataProvider } from '@refinedev/core';
+import type { BaseRecord, DataProvider } from '@refinedev/core';
 
 const API_URL = '/api';
 
@@ -32,7 +32,7 @@ async function fetchApi(
 }
 
 export const dataProvider: DataProvider = {
-  getList: async ({ resource, pagination, filters }) => {
+  getList: async ({ resource, pagination }) => {
     const { current = 1, pageSize = 10 } = pagination ?? {};
     const params = new URLSearchParams();
     params.set('page', String(current));
@@ -146,13 +146,19 @@ export const dataProvider: DataProvider = {
     return { data: normalized };
   },
 
-  deleteOne: async ({ resource, id }) => {
+  deleteOne: async <TData extends BaseRecord = BaseRecord>({
+    resource,
+    id,
+  }: {
+    resource: string;
+    id: string | number;
+  }) => {
     const slugResources = ['holiday-rentals', 'your-future-home', 'blog-posts'];
     const identifier = slugResources.includes(resource) ? id : id;
     await fetchApi(`${API_URL}/${resource}/${identifier}`, {
       method: 'DELETE',
     });
-    return { data: { id } };
+    return { data: { id } } as { data: TData };
   },
 
   getApiUrl: () => API_URL,

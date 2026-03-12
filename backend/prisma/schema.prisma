@@ -62,10 +62,26 @@ model HolidayRentalVariant {
   hasAc            Boolean       @default(false)
   photos           String[]
   translations     Json?
+  bookings         Booking[]
   createdAt        DateTime      @default(now())
   updatedAt        DateTime      @updatedAt
 
   @@index([holidayRentalId])
+}
+
+model Booking {
+  id                    String               @id @default(cuid())
+  holidayRentalVariantId String
+  holidayRentalVariant   HolidayRentalVariant @relation(fields: [holidayRentalVariantId], references: [id], onDelete: Cascade)
+  startDate              DateTime
+  endDate                DateTime
+  guestName              String?
+  notes                  String?
+  createdAt              DateTime             @default(now())
+  updatedAt              DateTime             @updatedAt
+
+  @@index([holidayRentalVariantId])
+  @@index([startDate, endDate])
 }
 
 model YourFutureHome {

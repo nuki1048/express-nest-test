@@ -18,6 +18,7 @@ import { BlogPostService } from './blog-post.service';
 import { CreateBlogPostDto } from './dto/create-blog-post';
 import { UpdateBlogPostDto } from './dto/update-blog-post';
 import type { SupportedLocale } from '../locale/locale.types';
+import { Locale } from '../locale/locale.decorator';
 
 @Controller('blog-posts')
 export class BlogPostController {
@@ -26,27 +27,20 @@ export class BlogPostController {
     private readonly authService: AuthService,
   ) {}
 
-  private isAdmin(req: Request): boolean {
-    const token = (req.headers?.authorization ?? '').replace(/^Bearer\s+/i, '');
-    return !!token && !!this.authService.verifyToken(token);
-  }
-
   @Get()
-  async getBlogPosts(@Req() req: Request & { locale?: SupportedLocale }) {
-    const includeTranslations = this.isAdmin(req);
-    return this.blogPostService.getBlogPosts(
-      req.locale ?? 'en',
-      includeTranslations,
-    );
+  async getBlogPosts(@Req() req: Request, @Locale() locale: SupportedLocale) {
+    const includeTranslations = this.authService.isAdmin(req);
+    return this.blogPostService.getBlogPosts(locale, includeTranslations);
   }
 
   @Get(':slug')
   async getBlogPost(
     @Param('slug') slug: string,
-    @Req() req: Request & { locale?: SupportedLocale },
+    @Req() req: Request,
+    @Locale() locale: SupportedLocale,
   ) {
-    const includeTranslations = this.isAdmin(req);
-    return this.blogPostService.getBlogPost(slug, req.locale ?? 'en', {
+    const includeTranslations = this.authService.isAdmin(req);
+    return this.blogPostService.getBlogPost(slug, locale, {
       includeTranslations,
       skipViewIncrement: includeTranslations,
     });

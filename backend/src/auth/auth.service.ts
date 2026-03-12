@@ -1,4 +1,5 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import type { Request } from 'express';
 import * as crypto from 'crypto';
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
@@ -7,6 +8,11 @@ const ADMIN_SESSION_SECRET = process.env.ADMIN_SESSION_SECRET ?? 'change-me';
 
 @Injectable()
 export class AuthService {
+  isAdmin(req: Request): boolean {
+    const token = (req.headers?.authorization ?? '').replace(/^Bearer\s+/i, '');
+    return !!token && !!this.verifyToken(token);
+  }
+
   validateCredentials(email: string, password: string): boolean {
     return email === ADMIN_EMAIL && password === ADMIN_PASSWORD;
   }
