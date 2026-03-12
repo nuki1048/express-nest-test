@@ -40,6 +40,46 @@ function ensureSharpLinuxBinary(funcDir: string): void {
   rmrf(packDir);
 }
 
+/** Keep only sharp-linux-x64; remove all other platform binaries to save ~150MB+ */
+function pruneSharpPlatformBinaries(funcDir: string): void {
+  const imgDir = path.join(funcDir, 'node_modules', '@img');
+  if (!fs.existsSync(imgDir)) return;
+  const keep = new Set(['sharp-linux-x64', 'sharp-libvips-linux-x64']);
+  for (const name of fs.readdirSync(imgDir)) {
+    if (!keep.has(name)) {
+      rmrf(path.join(imgDir, name));
+    }
+  }
+}
+
+/** Remove unnecessary files from node_modules to reduce bundle size */
+function pruneNodeModules(funcDir: string): void {
+  const nm = path.join(funcDir, 'node_modules');
+  if (!fs.existsSync(nm)) return;
+  const dirsToDelete = ['docs', 'doc', 'test', 'tests', 'example', 'examples'];
+  function walk(dir: string) {
+    if (!fs.existsSync(dir)) return;
+    for (const name of fs.readdirSync(dir)) {
+      const full = path.join(dir, name);
+      try {
+        const stat = fs.statSync(full);
+        if (stat.isDirectory()) {
+          if (dirsToDelete.some((d) => name.toLowerCase() === d)) {
+            rmrf(full);
+          } else {
+            walk(full);
+          }
+        } else if (stat.isFile() && name.endsWith('.map')) {
+          fs.unlinkSync(full);
+        }
+      } catch {
+        /* ignore */
+      }
+    }
+  }
+  walk(nm);
+}
+
 function main() {
   console.log('Building for Vercel Build Output API v3...');
 
@@ -104,6 +144,8 @@ function main() {
   execSync('npm prune --production', { cwd: funcFinal, stdio: 'inherit' });
 
   ensureSharpLinuxBinary(funcFinal);
+  pruneSharpPlatformBinaries(funcFinal);
+  pruneNodeModules(funcFinal);
 
   // Phase 5: Function config (handler, vc-config, routes)
   fs.writeFileSync(
